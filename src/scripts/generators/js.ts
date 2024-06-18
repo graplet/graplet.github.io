@@ -1,0 +1,13 @@
+import { Block } from "blockly";
+import { JavascriptGenerator, Order, javascriptGenerator } from "blockly/javascript";
+
+javascriptGenerator.forBlock['console'] = function(block:Block,generator:JavascriptGenerator) {
+  const input: string = generator.valueToCode(block, 'INPUT', Order.ATOMIC);
+  const type: string = block.getFieldValue('TYPE');
+  return `console.${type.toLocaleLowerCase()}(${input})\n`;
+}
+
+javascriptGenerator.forBlock['alert'] = function(block:Block,generator:JavascriptGenerator) {
+  const question: string = generator.valueToCode(block, 'TEXT', Order.ATOMIC);
+  return `alert(${question})\n`;
+}

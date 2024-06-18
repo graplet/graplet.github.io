@@ -1,0 +1,157 @@
+.blocklyTreeLabel,.blocklyFlyoutButton .blocklyText{
+    color: var(--default-text);
+}
+
+.zelos-renderer.graplet-theme .blocklyFlyoutLabelText, .zelos-renderer.graplet-theme .blocklyText, .zelos-renderer.graplet-theme .blocklyFlyoutLabelText{
+    fill: var(--default-text);
+    font-family: 'Fredoka';
+    font-weight: 400;
+
+}
+
+.zelos-renderer.graplet-theme .blocklyDropdownText{
+  fill: var(--default-text) !important;
+}
+
+.zelos-renderer.graplet-theme .blocklyHtmlInput{
+    font-family: 'Fredoka';
+    font-weight: 400;
+    color: black;
+}
+
+.zelos-renderer.graplet-theme .blocklyHtmlInput::selection{
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.blocklyTreeSelected .blocklyTreeLabel{
+    color : rgb(var(--val), var(--val), var(--val));
+}
+
+.blocklyToolboxContents {
+    padding: 0.5em;
+}
+
+.blocklyTreeRow {
+    padding: 3px;
+    margin-bottom: 0.5em;
+    border-radius: 4px;
+}
+
+.blocklyToolboxDiv{
+    background-color: rgba(var(--val), var(--val), var(--val), 0.1);
+    backdrop-filter: blur(4px);
+}
+
+.blocklyMainBackground{
+    stroke: none;
+}
+
+.blocklySvg{
+    background-color: transparent;
+}
+.blocklyFlyout{
+    backdrop-filter: blur(4px);
+}
+.blocklyFlyoutBackground{
+    fill: rgba(var(--val), var(--val), var(--val), 0.1);
+}
+.blocklyFlyoutButton{
+    fill: transparent;
+    transition: 0.3s fill;
+}
+.blocklyFlyoutButton:hover,.blocklyScrollbarHandle,.blocklyScrollbarHandle:hover{
+  fill: rgba(var(--val), var(--val), var(--val), 0.2);
+  cursor: grab;
+}
+
+.blocklyScrollbarBackground:hover+.blocklyScrollbarHandle, .blocklyScrollbarHandle:hover{
+  fill: rgba(var(--val), var(--val), var(--val), 0.3);
+  cursor: grabbing;
+}
+.blocklyFlyoutButtonShadow{
+    fill: transparent;
+}
+.blocklyTreeSeparator {
+    border-bottom: solid var(--default-text) 1px;
+}
+
+
+.fieldColourSliderLabel span{
+  color: black
+}
+
+.blocklyDropDownDiv{
+  border-radius: 10px;
+}
+
+.fieldColourSlider{
+  margin: 0;
+}
+
+.fieldColourSliderContainer button{
+  padding: 0;
+}
+
+.blocklyMenuItemContent{
+  font-family: 'fredoka';
+}
+.zelos-renderer.graplet-theme.blocklyDropDownDiv .goog-menuitem-content{
+  color: var(--default-text);
+}
+.blocklyDraggable image{
+  filter: brightness(calc(1 - var(--val)));
+}
+
+.zelos-renderer.graplet-theme .blocklyNonEditableText>text, .zelos-renderer.graplet-theme .blocklyEditableText>text, .zelos-renderer.graplet-theme .blocklyNonEditableText>g>text, .zelos-renderer.graplet-theme .blocklyEditableText>g>text{
+  fill: black;
+}
+
+.blocklyMenuItemCheckbox{
+  filter: invert(calc(1 - var(--val)));
+}
+.blocklyTreeRowContentContainer input[type='search']{
+  background: transparent;
+  font-family: 'Fredoka';
+  font-weight: 400;
+  border: none;
+  margin-left: 0 !important;
+  width: 108px;
+  color: var(--default-text);
+}
+
+.blocklyTreeRowContentContainer input[type='search']::placeholder{
+  color: var(--default-text);
+}
+
+#blockly-d{
+  background-color: rgba(calc(225 - var(--val)), calc(225 - var(--val)), calc(225 - var(--val)), 0.1) !important;
+  padding: 0;
+  cursor: pointer;
+}
+
+
+#blockly-d:hover{
+  background-color: rgba(calc(225 - var(--val)), calc(225 - var(--val)), calc(225 - var(--val)), 0.2) !important;
+}
+
+g > .blocklyZoom {
+  filter: brightness(calc(2 - var(--val)));
+}
+
+.blocklyWidgetDiv .blocklyMenu{
+  background : rgba(var(--val), var(--val), var(--val), 0.2);
+  border: none;
+  box-shadow: none;
+  backdrop-filter: blur(6px);
+}
+
+.blocklyWidgetDiv .blocklyMenu.blocklyFocused{
+  box-shadow: none;
+}
+.blocklyMenuItemContent {
+  color: var(--default-text);
+}
+
+.blocklyMenuItemDisabled .blocklyMenuItemContent{
+  opacity: 0.5;
+}
