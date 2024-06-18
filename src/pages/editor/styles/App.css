@@ -4,7 +4,6 @@ body{
   color: rgb(var(--text-rgb));
 }
 
-
 .flexlayout__layout{
   top: 45px !important;
 }
