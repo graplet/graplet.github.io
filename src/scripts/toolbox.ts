@@ -367,6 +367,69 @@ export default {
           kind: 'block',
         },
         {
+          type: 'alert',
+          kind: 'block',
+          inputs: {
+            TEXT: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'abc',
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'console',
+          kind: 'block',
+          inputs: {
+             INPUT: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'Hello World!',
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'clearconsole',
+          kind: 'block',
+        },
+        {
+          type: 'confirm',
+          kind: 'block',
+          inputs: {
+            TEXT: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'Do you wish to proceed?',
+                },
+              },
+            },
+          }
+        },
+        {
+          type: 'text_prompt_ext',
+          kind: 'block',
+          fields: {
+            TYPE: 'TEXT',
+          },
+          inputs: {
+            TEXT: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'abc',
+                },
+              },
+            },
+          },
+        },
+        {
           type: 'text_append',
           kind: 'block',
           fields: {
@@ -572,51 +635,6 @@ export default {
                 type: 'text',
                 fields: {
                   TEXT: '',
-                },
-              },
-            },
-          },
-        },
-        {
-          type: 'console',
-          kind: 'block',
-          inputs: {
-             INPUT: {
-              shadow: {
-                type: 'text',
-                fields: {
-                  TEXT: 'Hello World!',
-                },
-              },
-            },
-          },
-        },
-        {
-          type: 'alert',
-          kind: 'block',
-          inputs: {
-            TEXT: {
-              shadow: {
-                type: 'text',
-                fields: {
-                  TEXT: 'abc',
-                },
-              },
-            },
-          },
-        },
-        {
-          type: 'text_prompt_ext',
-          kind: 'block',
-          fields: {
-            TYPE: 'TEXT',
-          },
-          inputs: {
-            TEXT: {
-              shadow: {
-                type: 'text',
-                fields: {
-                  TEXT: 'abc',
                 },
               },
             },

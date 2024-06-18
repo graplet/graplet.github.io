@@ -11,3 +11,12 @@ javascriptGenerator.forBlock['alert'] = function(block:Block,generator:Javascrip
   const question: string = generator.valueToCode(block, 'TEXT', Order.ATOMIC);
   return `alert(${question})\n`;
 }
+
+javascriptGenerator.forBlock['clearconsole'] = function() {
+  return `console.clear()\n`;
+}
+
+javascriptGenerator.forBlock['confirm'] = function(block:Block,generator:JavascriptGenerator) {
+  const question: string = generator.valueToCode(block, 'TEXT', Order.ATOMIC);
+  return [`confirm(${question})\n`,Order.FUNCTION_CALL];
+}
