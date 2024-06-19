@@ -1,4 +1,3 @@
-import { inputs } from 'blockly';
 import './blocks';
 import './generators/js';
 
