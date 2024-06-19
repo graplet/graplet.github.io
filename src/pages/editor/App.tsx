@@ -18,6 +18,12 @@ function App() {
   const {theme} = useContext(ThemeContext);
 
   useEffect(() => {
+    const CClear = console.clear;
+    console.clear =  function() {
+      CClear.apply(this, arguments as any);
+      setLogs([])
+    };
+    
     const hookedConsole = Hook(
       window.console,
       (log) => setLogs((currLogs) => [...currLogs, log as Message]),
