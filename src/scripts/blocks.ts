@@ -58,3 +58,17 @@ Blockly.Blocks['confirm'] = {
     this.setTooltip('Display a confirmation dialog');
   }
 }
+
+Blockly.Blocks['list_append'] = {
+  init: function(this:Blockly.Block) {
+    this.appendValueInput('LIST')
+        .setCheck('Array')
+        .appendField('to');
+    this.appendValueInput('ITEM')
+        .appendField('append');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(260);
+    this.setTooltip('Append an item to a list.');
+  }
+}

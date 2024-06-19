@@ -20,3 +20,9 @@ javascriptGenerator.forBlock['confirm'] = function(block:Block,generator:Javascr
   const question: string = generator.valueToCode(block, 'TEXT', Order.ATOMIC);
   return [`confirm(${question})\n`,Order.FUNCTION_CALL];
 }
+
+javascriptGenerator.forBlock['list_append'] = function(block:Block,generator:JavascriptGenerator) {
+  const list: string = generator.valueToCode(block, 'LIST', Order.ATOMIC);
+  const item: string = generator.valueToCode(block, 'ITEM', Order.ATOMIC);
+  return `${list}.push(${item})\n`;
+}

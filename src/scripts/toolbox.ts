@@ -1,3 +1,4 @@
+import { inputs } from 'blockly';
 import './blocks';
 import './generators/js';
 
@@ -652,8 +653,28 @@ export default {
           kind: 'block',
         },
         {
-          type: 'lists_create_with',
+          type: 'list_append',
           kind: 'block',
+          inputs: {
+            LIST: {
+              block: {
+                type: 'variables_get',
+                fields: {
+                  VAR: {
+                    name: 'fruits',
+                  },
+                },
+              },
+            },
+            ITEM: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'banana',
+                },
+              },
+            },
+          },
         },
         {
           type: 'lists_repeat',
