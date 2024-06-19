@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const hookedConsole = Hook(
       window.console,
-      (log) => setLogs((currLogs) => [...currLogs, structuredClone(log) as Message]),
+      (log) => setLogs((currLogs) => [...currLogs, log as Message]),
       false
     );
     return () => {
