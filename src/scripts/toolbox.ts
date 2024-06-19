@@ -432,9 +432,6 @@ export default {
         {
           type: 'text_append',
           kind: 'block',
-          fields: {
-            name: 'item',
-          },
           inputs: {
             TEXT: {
               shadow: {
@@ -655,16 +652,6 @@ export default {
           type: 'list_append',
           kind: 'block',
           inputs: {
-            LIST: {
-              block: {
-                type: 'variables_get',
-                fields: {
-                  VAR: {
-                    name: 'fruits',
-                  },
-                },
-              },
-            },
             ITEM: {
               shadow: {
                 type: 'text',
@@ -679,16 +666,6 @@ export default {
           type: 'list_remove',
           kind: 'block',
           inputs: {
-            LIST: {
-              block: {
-                type: 'variables_get',
-                fields: {
-                  VAR: {
-                    name: 'fruits',
-                  },
-                },
-              },
-            },
             ITEM: {
               shadow: {
                 type: 'text',
@@ -708,16 +685,6 @@ export default {
                 type: 'math_number',
                 fields: {
                   NUM: 1,
-                },
-              },
-            },
-            LIST: {
-              block: {
-                type: 'variables_get',
-                fields: {
-                  VAR: {
-                    name: 'fruits',
-                  },
                 },
               },
             },

@@ -63,7 +63,7 @@ Blockly.Blocks['list_append'] = {
   init: function(this:Blockly.Block) {
     this.appendValueInput('LIST')
         .setCheck('Array')
-        .appendField('to');
+        .appendField('to list');
     this.appendValueInput('ITEM')
         .appendField('append');
     this.setPreviousStatement(true);
@@ -77,7 +77,7 @@ Blockly.Blocks['list_remove'] = {
   init: function(this:Blockly.Block) {
     this.appendValueInput('LIST')
         .setCheck('Array')
-        .appendField('from');
+        .appendField('from list');
     this.appendValueInput('ITEM')
         .appendField('remove');
     this.setPreviousStatement(true);
@@ -91,7 +91,7 @@ Blockly.Blocks['list_remove_by_index'] = {
   init: function(this:Blockly.Block) {
     this.appendValueInput('LIST')
       .setCheck('Array')
-      .appendField('from');
+      .appendField('from list');
     this.appendValueInput('INDEX')
         .setCheck('Number')
         .appendField('remove item by index');
