@@ -7,8 +7,10 @@ import CodeOutputComponent from './components/code';
 import Navbar from './components/navbar';
 import './styles/layout.css';
 import { Message } from 'console-feed/lib/definitions/Component';
-import { Console, Hook, Unhook } from 'console-feed';
+import { Console, Unhook } from 'console-feed';
 import { ThemeContext } from '../../theme';
+import Hook from '../../scripts/monkey patches/hook';
+import NewTabComponent from './components/newtab';
 const model = Model.fromJson(layoutJsonConfig);
 
 function App() {
@@ -18,16 +20,12 @@ function App() {
   const {theme} = useContext(ThemeContext);
 
   useEffect(() => {
-    const CClear = console.clear;
-    console.clear =  function() {
-      CClear.apply(this, arguments as any);
-      setLogs([])
-    };
-    
     const hookedConsole = Hook(
       window.console,
-      (log) => setLogs((currLogs) => [...currLogs, log as Message]),
-      false
+      (log) => {
+        if (log.method == "clear") return setLogs([]);
+        setLogs((currLogs) => [...currLogs, log as Message])
+      }
     );
     return () => {
       Unhook(hookedConsole);
@@ -46,7 +44,7 @@ function App() {
       case "extensions":
           return <em>Extensions: work in progress</em>;
       case "newtab":
-          return <em>New tab: work in progress</em>;
+          return <NewTabComponent layoutRef={layoutRef}/>;
       default:
           return <p>{node.getName()}</p>;
     }
@@ -68,12 +66,11 @@ function App() {
   }
 
   function addNewTab(node: TabSetNode | BorderNode){
-      const addedTab = (layoutRef!.current!).addTabToTabSet(node.getId(), {
+      layoutRef!.current!.addTabToTabSet(node.getId(), {
           icon: "/outline.svg",
           component: "newtab",
           name: "New Tab"
       });
-      console.log("Added tab", addedTab);
   }
 
   return (

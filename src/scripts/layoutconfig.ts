@@ -16,13 +16,8 @@ export const layoutJsonConfig: IJsonModel = {
             name: "Blocks",
             icon: "/blocks.svg",
             component: "workspace",
+            enableClose: false,
           },
-          {
-            type: "tab",
-            name: "Extensions",
-            icon: "/extensions.svg",
-            component: "extensions",
-          }
         ],
       },
       {
