@@ -676,6 +676,54 @@ export default {
           },
         },
         {
+          type: 'list_remove',
+          kind: 'block',
+          inputs: {
+            LIST: {
+              block: {
+                type: 'variables_get',
+                fields: {
+                  VAR: {
+                    name: 'fruits',
+                  },
+                },
+              },
+            },
+            ITEM: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'banana',
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'list_remove_by_index',
+          kind: 'block',
+          inputs: {
+            INDEX: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 1,
+                },
+              },
+            },
+            LIST: {
+              block: {
+                type: 'variables_get',
+                fields: {
+                  VAR: {
+                    name: 'fruits',
+                  },
+                },
+              },
+            },
+          },
+        },
+        {
           type: 'lists_repeat',
           kind: 'block',
           inputs: {

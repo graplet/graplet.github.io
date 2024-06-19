@@ -72,3 +72,32 @@ Blockly.Blocks['list_append'] = {
     this.setTooltip('Append an item to a list.');
   }
 }
+
+Blockly.Blocks['list_remove'] = {
+  init: function(this:Blockly.Block) {
+    this.appendValueInput('LIST')
+        .setCheck('Array')
+        .appendField('from');
+    this.appendValueInput('ITEM')
+        .appendField('remove');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(260);
+    this.setTooltip('Remove an item from a list.');
+  }
+}
+
+Blockly.Blocks['list_remove_by_index'] = {
+  init: function(this:Blockly.Block) {
+    this.appendValueInput('LIST')
+      .setCheck('Array')
+      .appendField('from');
+    this.appendValueInput('INDEX')
+        .setCheck('Number')
+        .appendField('remove item by index');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(260);
+    this.setTooltip('Remove an item from a list at a specific index.');
+  }
+}

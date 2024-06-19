@@ -36,7 +36,7 @@ function App() {
       case "code":
           return <CodeOutputComponent code={code} setCode={setCode}/>
       case "console":
-          return <Console logs={logs} variant={theme == "dark" ? "dark": "light"} />;
+          return <Console logGrouping={false} logs={logs} variant={theme == "dark" ? "dark": "light"} />;
       case "extensions":
           return <em>Extensions: work in progress</em>;
       case "newtab":
