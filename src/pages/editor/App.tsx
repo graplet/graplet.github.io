@@ -78,7 +78,7 @@ function App() {
 
   return (
     <>
-      <Navbar code={code} />
+      <Navbar code={code} layoutRef={layoutRef}/>
       <Layout
         realtimeResize
         ref={layoutRef}

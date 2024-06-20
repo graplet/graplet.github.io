@@ -1,10 +1,22 @@
 import React, { useContext, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Graplet from '../../../scripts/graplet';
-import { faDownload, faPlay, faRotate, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faDownload, faPlay, faRotate, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { ThemeContext } from '../../../theme';
+import { Layout } from 'flexlayout-react';
 
-const Navbar = ({ code }: { code: string }) => {
+interface NavBarProps {
+  code: string 
+  layoutRef: React.MutableRefObject<Layout | null>
+}
+
+const settingsTab = {
+  icon: `/tabs/settings.svg`,
+  component: 'settings',
+  name: 'Settings'
+}
+
+const Navbar = ({ code, layoutRef }: NavBarProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { theme } = useContext(ThemeContext);
   const manager = Graplet.getInstance();
@@ -62,7 +74,7 @@ const Navbar = ({ code }: { code: string }) => {
         <h3 style={{ margin: 0 }}>Graplet</h3>
       </a>
       <input id='project-name' type="text" placeholder="name" />
-      <button onClick={uploadFile}><FontAwesomeIcon style={{marginRight:5}} icon={faUpload}/>upload</button>
+      <button onClick={uploadFile}><FontAwesomeIcon icon={faUpload}/>upload</button>
       <input
         style={{ display: 'none' }}
         type="file"
@@ -71,9 +83,12 @@ const Navbar = ({ code }: { code: string }) => {
         ref={fileInputRef}
         onChange={handleFileChange}
         />
-      <button onClick={downloadJson}><FontAwesomeIcon style={{marginRight:5}} icon={faDownload}/>download</button>
-      <button onClick={saveCode}><FontAwesomeIcon style={{marginRight:5}} icon={faRotate}/>save local</button>
-      <button style={{color:'#62db77'}} onClick={runCode}><FontAwesomeIcon style={{marginRight:5}} icon={faPlay}/>run</button>
+      <button onClick={downloadJson}><FontAwesomeIcon icon={faDownload}/>download</button>
+      <button onClick={saveCode}><FontAwesomeIcon icon={faRotate}/>save local</button>
+      <button onClick=
+      {() => layoutRef.current?.addTabToActiveTabSet(settingsTab) /* TODO: Handle Exception when there is no active tab*/}
+      ><FontAwesomeIcon icon={faCog}/>settings</button>
+      <button style={{color:'#62db77'}} onClick={runCode}><FontAwesomeIcon icon={faPlay}/>run</button>
     </nav>
   );
 };

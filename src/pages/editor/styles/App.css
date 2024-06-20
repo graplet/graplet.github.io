@@ -16,6 +16,10 @@ nav{
   gap: 10px;
 }
 
+nav svg{
+  margin-right: 5px;
+}
+
 html[data-theme="light"] .flexlayout__tab_button_leading img{
   filter: invert(1);
 }
