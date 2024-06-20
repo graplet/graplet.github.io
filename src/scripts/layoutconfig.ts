@@ -14,7 +14,7 @@ export const layoutJsonConfig: IJsonModel = {
           {
             type: "tab",
             name: "Blocks",
-            icon: "/blocks.svg",
+            icon: "/tabs/blocks.svg",
             component: "workspace",
             enableClose: false,
           },
@@ -31,7 +31,7 @@ export const layoutJsonConfig: IJsonModel = {
               {
                 type: "tab",
                 name: "Code",
-                icon: "/code.svg",
+                icon: "/tabs/code.svg",
                 component: "code",
               },
             ],
@@ -43,7 +43,7 @@ export const layoutJsonConfig: IJsonModel = {
               {
                 type: "tab",
                 name: "Console",
-                icon: "/console.svg",
+                icon: "/tabs/console.svg",
                 component: "console",
               },
             ],

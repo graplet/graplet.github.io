@@ -39,7 +39,6 @@ export default {
         {
           type: 'logic_null',
           kind: 'block',
-          enabled: false,
         },
         {
           type: 'logic_ternary',
@@ -120,7 +119,6 @@ export default {
         {
           type: 'controls_flow_statements',
           kind: 'block',
-          enabled: false,
           fields: {
             FLOW: 'BREAK',
           },

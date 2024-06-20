@@ -3,7 +3,7 @@ import { Layout } from 'flexlayout-react';
 const NewTabComponent = ({ layoutRef }: { layoutRef: React.MutableRefObject<Layout | null> }) => {
     function openTab(name: string) {
         layoutRef.current?.addTabToActiveTabSet({
-            icon: `/${name.toLocaleLowerCase()}.svg`,
+            icon: `/tabs/${name.toLocaleLowerCase()}.svg`,
             component: name.toLowerCase(),
             name: name
         });

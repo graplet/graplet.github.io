@@ -72,7 +72,12 @@ input{
   padding: 0.5em;
 }
 .blocklyTreeRow {
+  cursor: pointer;
   padding: 3px;
   margin-bottom: 0.5em;
   border-radius: 4px;
+}
+
+.flexlayout__tab_toolbar_button{
+  cursor: pointer;
 }

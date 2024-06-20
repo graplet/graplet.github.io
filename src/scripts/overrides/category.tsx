@@ -1,4 +1,24 @@
+import { IconDefinition, faCircleNodes, faCode, faCogs, faList, faSquareRootAlt, faSyncAlt, faTextWidth } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Blockly from 'blockly';
+import { renderToString } from 'react-dom/server';
+
+type CategoryName = 'Logic' | 'Loops' | 'Math' | 'Text' | 'List' | 'Variables' | 'Functions';
+
+const categoryIcons: Record<CategoryName, IconDefinition> = {
+  Logic: faCircleNodes,
+  Loops: faSyncAlt,
+  Math: faSquareRootAlt,
+  Text: faTextWidth,
+  List: faList,
+  Variables: faCode,
+  Functions: faCogs,
+};
+
+function isCategoryName(name: string): name is CategoryName {
+  return (categoryIcons as Record<string, IconDefinition>).hasOwnProperty(name);
+}
+
 class Category extends Blockly.ToolboxCategory {
   /**
    * Constructor for the customized toolbox.
@@ -27,15 +47,29 @@ class Category extends Blockly.ToolboxCategory {
     return null;
   }
 
+  createIconDom_(): HTMLElement {
+    const categoryName = this.name_;
+    const icon = isCategoryName(categoryName) ? categoryIcons[categoryName] : faCogs;
+    const iconString = renderToString(<FontAwesomeIcon icon={icon} />);
+    const span = document.createElement('span');
+    span.style.marginLeft = '5px';
+    span.style.color = this.colour_;
+    span.innerHTML = iconString;
+    return span;
+  }
+
   setSelected(isSelected: boolean): void {
     const labelDom = this.getLabelDom()
-    if (this.rowDiv_ && labelDom) {
+    const iconDom = this.iconDom_ as HTMLElement;
+    if (this.rowDiv_ && labelDom && iconDom) {
       if (isSelected) {
         this.rowDiv_.style.backgroundColor = this.colour_;
+        iconDom.style.color = 'rgb(var(--text-rgb))';
         labelDom.style.color = 'rgb(var(--text-rgb))';
       } else {
         this.rowDiv_.style.backgroundColor = 'var(--background-primary)';
         labelDom.style.color = this.colour_;
+        iconDom.style.color = this.colour_;
       }
     }
 
