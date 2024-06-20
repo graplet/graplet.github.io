@@ -9,7 +9,7 @@ import './styles/layout.css';
 import { Message } from 'console-feed/lib/definitions/Component';
 import { Console, Unhook } from 'console-feed';
 import { ThemeContext } from '../../theme';
-import Hook from '../../scripts/monkey patches/hook';
+import Hook from '../../scripts/overrides/hook';
 import NewTabComponent from './components/newtab';
 import SettingsComponent from './components/settings';
 const model = Model.fromJson(layoutJsonConfig);

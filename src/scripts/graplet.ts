@@ -2,6 +2,10 @@ import * as Blockly from 'blockly';
 import {CrossTabCopyPaste} from '@blockly/plugin-cross-tab-copy-paste';
 import toolbox from './toolbox';
 import * as En from 'blockly/msg/en';
+import './blocks';
+import './generators/js';
+import './overrides/category'
+
 
 Blockly.setLocale(En);
 Blockly.Scrollbar.scrollbarThickness = 15;

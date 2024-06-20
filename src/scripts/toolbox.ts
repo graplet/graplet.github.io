@@ -1,5 +1,3 @@
-import './blocks';
-import './generators/js';
 
 export default {
   kind: 'categoryToolbox',
@@ -824,9 +822,6 @@ export default {
           kind: 'block',
         },
       ],
-    },
-    {
-      kind: 'sep',
     },
     {
       kind: 'category',

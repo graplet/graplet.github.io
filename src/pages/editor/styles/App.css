@@ -68,6 +68,11 @@ input{
   border-radius: 5px;
 }
 
-.casual-tab{
-  padding: 20px;
+.blocklyToolboxContents {
+  padding: 0.5em;
+}
+.blocklyTreeRow {
+  padding: 3px;
+  margin-bottom: 0.5em;
+  border-radius: 4px;
 }
