@@ -1,28 +1,13 @@
-import React, { ChangeEvent, useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ThemeContext } from '../../../theme';
 import Graplet from '../../../scripts/graplet';
 import { faDownload, faPlay, faRotate, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { ThemeContext } from '../../../theme';
 
 const Navbar = ({ code }: { code: string }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { theme } = useContext(ThemeContext);
   const manager = Graplet.getInstance();
-  const { setTheme, theme } = useContext(ThemeContext);
-  const [localTheme, setLocalTheme] = useState<string | undefined>(localStorage.getItem('theme') || undefined);
-
-  useEffect(() => {
-    if (localTheme === 'system') {
-      const matchMediaDark = window.matchMedia('(prefers-color-scheme: dark)');
-      setTheme(matchMediaDark.matches ? 'dark' : 'light');
-    } else if (localTheme) {
-      setTheme(localTheme);
-    }
-  }, [localTheme, setTheme]);
-
-  const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedTheme = event.target.value;
-    setLocalTheme(selectedTheme);
-  };
 
   const runCode = () => {
     Function(code)();
@@ -89,12 +74,6 @@ const Navbar = ({ code }: { code: string }) => {
       <button onClick={downloadJson}><FontAwesomeIcon style={{marginRight:5}} icon={faDownload}/>download</button>
       <button onClick={saveCode}><FontAwesomeIcon style={{marginRight:5}} icon={faRotate}/>save local</button>
       <button style={{color:'#62db77'}} onClick={runCode}><FontAwesomeIcon style={{marginRight:5}} icon={faPlay}/>run</button>
-      <label htmlFor="theme-select">Theme: </label>
-      <select name='theme-select' value={localTheme} onChange={handleThemeChange}>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-        <option value="system">System</option>
-      </select>
     </nav>
   );
 };

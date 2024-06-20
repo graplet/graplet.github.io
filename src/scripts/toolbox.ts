@@ -840,10 +840,5 @@ export default {
       custom: 'PROCEDURE',
       categorystyle: 'procedure_category',
     },
-    {
-      'kind': 'search',
-      'name': 'Search',
-      'contents': [],
-    }
   ],
 };

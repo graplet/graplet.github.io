@@ -15,6 +15,7 @@ const NewTabComponent = ({ layoutRef }: { layoutRef: React.MutableRefObject<Layo
             <button onClick={() => openTab('Settings')}>Settings</button>
             <button onClick={() => openTab('Console')}>Console</button>
             <button onClick={() => openTab('Extensions')}>Extensions</button>
+            <button onClick={() => openTab('Settings')}>Settings</button>
         </>
     );
 };

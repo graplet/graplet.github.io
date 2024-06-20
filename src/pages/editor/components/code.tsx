@@ -6,7 +6,7 @@ import { ThemeContext } from "../../../theme";
 import { javascriptGenerator } from "blockly/javascript";
 
 const CodeOutputComponent = ({code,setCode} : {code:string,setCode: React.Dispatch<React.SetStateAction<string>>}) => {
-  const {theme } = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
 
   useEffect(() => {
     const manager = Graplet.getInstance();

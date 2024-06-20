@@ -11,6 +11,7 @@ import { Console, Unhook } from 'console-feed';
 import { ThemeContext } from '../../theme';
 import Hook from '../../scripts/monkey patches/hook';
 import NewTabComponent from './components/newtab';
+import SettingsComponent from './components/settings';
 const model = Model.fromJson(layoutJsonConfig);
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
           return <em>Extensions: work in progress</em>;
       case "newtab":
           return <NewTabComponent layoutRef={layoutRef}/>;
+      case "settings":
+          return <SettingsComponent />;
       default:
           return <p>{node.getName()}</p>;
     }

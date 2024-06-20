@@ -1,5 +1,4 @@
 import * as Blockly from 'blockly';
-import '@blockly/toolbox-search';
 import {CrossTabCopyPaste} from '@blockly/plugin-cross-tab-copy-paste';
 import toolbox from './toolbox';
 import * as En from 'blockly/msg/en';
