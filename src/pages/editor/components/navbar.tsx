@@ -67,6 +67,11 @@ const Navbar = ({ code, layoutRef }: NavBarProps) => {
     URL.revokeObjectURL(url);
   };
 
+  const openSettings = () => {
+      layoutRef.current?.addTabToActiveTabSet(settingsTab)
+      /* TODO FIX: Currently, when there is no active tab set, the settings tab won't be opened*/
+  }
+
   return (
     <nav>
       <a onClick={() => { window.location.href = '/' }} className='logo-sign'>
@@ -85,9 +90,7 @@ const Navbar = ({ code, layoutRef }: NavBarProps) => {
         />
       <button onClick={downloadJson}><FontAwesomeIcon icon={faDownload}/>download</button>
       <button onClick={saveCode}><FontAwesomeIcon icon={faRotate}/>save local</button>
-      <button onClick=
-      {() => layoutRef.current?.addTabToActiveTabSet(settingsTab) /* TODO: Handle Exception when there is no active tab*/}
-      ><FontAwesomeIcon icon={faCog}/>settings</button>
+      <button onClick={openSettings}><FontAwesomeIcon icon={faCog}/>settings</button>
       <button style={{color:'#62db77'}} onClick={runCode}><FontAwesomeIcon icon={faPlay}/>run</button>
     </nav>
   );
