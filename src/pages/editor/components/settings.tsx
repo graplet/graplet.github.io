@@ -20,14 +20,14 @@ const SettingsComponent = () => {
     setLocalTheme(selectedTheme);
   };
   return (
-    <div className="casual-tab">
-      <label htmlFor="theme-select">Theme: </label>
-      <select id="theme-select" name="theme" value={localTheme} onChange={handleThemeChange}>
+    <>
+      <p>Theme: </p>
+      <select value={localTheme} onChange={handleThemeChange}>
         <option value="light">Light</option>
         <option value="dark">Dark</option>
         <option value="system">System</option>
       </select>
-    </div>
+    </>
   );
 };
 

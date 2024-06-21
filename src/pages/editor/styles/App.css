@@ -85,3 +85,24 @@ input{
 .flexlayout__tab_toolbar_button{
   cursor: pointer;
 }
+
+
+.newtab-box{
+  cursor: pointer;
+  background: var(--background-primary);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.newtab-box p{
+  margin: 8px;
+}
+
+.tab-wrapper{
+  padding: 0 20px;
+}

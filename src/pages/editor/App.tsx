@@ -12,6 +12,7 @@ import { ThemeContext } from '../../theme';
 import Hook from '../../scripts/overrides/hook';
 import NewTabComponent from './components/newtab';
 import SettingsComponent from './components/settings';
+import ExtensionsComponent from './components/extensions';
 const model = Model.fromJson(layoutJsonConfig);
 
 function App() {
@@ -43,11 +44,11 @@ function App() {
       case "console":
           return <Console logGrouping={false} logs={logs} variant={theme == "dark" ? "dark": "light"} />;
       case "extensions":
-          return <em>Extensions: work in progress</em>;
+          return <div className='tab-wrapper'><ExtensionsComponent /></div>;
       case "newtab":
-          return <NewTabComponent layoutRef={layoutRef}/>;
+          return <div className='tab-wrapper'><NewTabComponent layoutRef={layoutRef}/></div>;
       case "settings":
-          return <SettingsComponent />;
+          return <div className='tab-wrapper'><SettingsComponent /></div>;
       default:
           return <p>{node.getName()}</p>;
     }

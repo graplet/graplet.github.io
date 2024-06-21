@@ -1,21 +1,39 @@
 import { Layout } from 'flexlayout-react';
 
-const NewTabComponent = ({ layoutRef }: { layoutRef: React.MutableRefObject<Layout | null> }) => {
-    function openTab(name: string) {
+interface LayoutRef {
+    layoutRef: React.MutableRefObject<Layout | null>
+    name?: string
+}
+
+const NewTabBox = ({ layoutRef, name }: LayoutRef) => {
+    const icon = `/tabs/${name?.toLocaleLowerCase()}.svg`;
+    const component = name?.toLowerCase();
+    function openTab() {
         layoutRef.current?.addTabToActiveTabSet({
-            icon: `/tabs/${name.toLocaleLowerCase()}.svg`,
-            component: name.toLowerCase(),
-            name: name
+            icon,
+            component,
+            name
         });
     }
     return (
-        // Will be replaced with a more complex UI in the future
+        <div className='newtab-box' onClick={openTab}>
+            <img style={{width:25}} src={icon} alt={name} />
+            <p>{name}</p>
+        </div>
+    );
+
+};
+
+const NewTabComponent = ({ layoutRef }: LayoutRef) => {
+    return (
         <>
-            <button onClick={() => openTab('Code')}>Code</button>
-            <button onClick={() => openTab('Settings')}>Settings</button>
-            <button onClick={() => openTab('Console')}>Console</button>
-            <button onClick={() => openTab('Extensions')}>Extensions</button>
-            <button onClick={() => openTab('Settings')}>Settings</button>
+            <p>Choose a tab to open</p>
+            <div style={{display:'flex', gap:10}}>
+                <NewTabBox layoutRef={layoutRef} name='Code' />
+                <NewTabBox layoutRef={layoutRef} name='Settings' />
+                <NewTabBox layoutRef={layoutRef} name='Console' />
+                <NewTabBox layoutRef={layoutRef} name='Extensions' />
+            </div>
         </>
     );
 };
