@@ -13,6 +13,7 @@ const SampleLoader = ({ samples }: SampleLoaderProps) => {
   const loadSample = async (path: string) => {
       const data = await import(`../../../samples/${path}.json`);
       Graplet.getInstance().load(data.default)
+      // TODO: use ref from ProjecName to update project name in the editor
       console.log('Loaded sample:', data);
   };
 
@@ -38,6 +39,7 @@ const SamplesComponent = () => {
         { name: 'Collatz Conjecture'},
         { name: 'Shopping Cart'},
         { name: 'Guess The Number'},
+        { name: 'Rock Paper Scissors'},
       ]}
     />
   );

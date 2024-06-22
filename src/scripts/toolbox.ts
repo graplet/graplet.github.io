@@ -645,48 +645,6 @@ export default {
           kind: 'block',
         },
         {
-          type: 'list_append',
-          kind: 'block',
-          inputs: {
-            ITEM: {
-              shadow: {
-                type: 'text',
-                fields: {
-                  TEXT: 'banana',
-                },
-              },
-            },
-          },
-        },
-        {
-          type: 'list_remove',
-          kind: 'block',
-          inputs: {
-            ITEM: {
-              shadow: {
-                type: 'text',
-                fields: {
-                  TEXT: 'banana',
-                },
-              },
-            },
-          },
-        },
-        {
-          type: 'list_remove_by_index',
-          kind: 'block',
-          inputs: {
-            INDEX: {
-              shadow: {
-                type: 'math_number',
-                fields: {
-                  NUM: 1,
-                },
-              },
-            },
-          },
-        },
-        {
           type: 'lists_repeat',
           kind: 'block',
           inputs: {
