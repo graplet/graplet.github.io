@@ -1,4 +1,6 @@
 import { Layout } from 'flexlayout-react';
+import { useContext } from 'react';
+import { ThemeContext } from '../../../theme';
 
 interface LayoutRef {
     layoutRef: React.MutableRefObject<Layout | null>
@@ -6,6 +8,8 @@ interface LayoutRef {
 }
 
 const NewTabBox = ({ layoutRef, name }: LayoutRef) => {
+    const {theme} = useContext(ThemeContext);
+
     const icon = `/tabs/${name?.toLocaleLowerCase()}.svg`;
     const component = name?.toLowerCase();
     function openTab() {
@@ -17,7 +21,7 @@ const NewTabBox = ({ layoutRef, name }: LayoutRef) => {
     }
     return (
         <div className='newtab-box' onClick={openTab}>
-            <img style={{width:25}} src={icon} alt={name} />
+            <img style={{width:25, filter: theme === 'light' ? 'invert(1)' : 'none'}} src={icon} alt={name} />
             <p>{name}</p>
         </div>
     );
