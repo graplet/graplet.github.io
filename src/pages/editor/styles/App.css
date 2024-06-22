@@ -53,8 +53,12 @@ html[data-theme="light"] .flexlayout__tab_button_leading img{
   cursor: pointer;
 }
 
-button{
+nav button{
   background-color: var(--background-secondary);
+}
+
+button{
+  background-color: var(--background-primary);
   font-family: 'fredoka';
   color: rgb(var(--text-rgb));
   border: none;
@@ -105,4 +109,9 @@ input{
 
 .tab-wrapper{
   padding: 0 20px;
+}
+
+nav a{
+  color: rgb(var(--text-rgb));
+  text-decoration: none;
 }

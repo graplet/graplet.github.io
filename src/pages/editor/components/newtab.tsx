@@ -30,9 +30,10 @@ const NewTabComponent = ({ layoutRef }: LayoutRef) => {
             <p>Choose a tab to open</p>
             <div style={{display:'flex', gap:10}}>
                 <NewTabBox layoutRef={layoutRef} name='Code' />
-                <NewTabBox layoutRef={layoutRef} name='Settings' />
                 <NewTabBox layoutRef={layoutRef} name='Console' />
                 <NewTabBox layoutRef={layoutRef} name='Extensions' />
+                <NewTabBox layoutRef={layoutRef} name='Samples' />
+                <NewTabBox layoutRef={layoutRef} name='Settings' />
             </div>
         </>
     );

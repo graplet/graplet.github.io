@@ -13,6 +13,7 @@ import Hook from '../../scripts/overrides/hook';
 import NewTabComponent from './components/newtab';
 import SettingsComponent from './components/settings';
 import ExtensionsComponent from './components/extensions';
+import SamplesComponent from './components/samples';
 const model = Model.fromJson(layoutJsonConfig);
 
 function App() {
@@ -49,8 +50,10 @@ function App() {
           return <div className='tab-wrapper'><NewTabComponent layoutRef={layoutRef}/></div>;
       case "settings":
           return <div className='tab-wrapper'><SettingsComponent /></div>;
+      case "samples":
+          return <div className='tab-wrapper'><SamplesComponent /></div>;
       default:
-          return <p>{node.getName()}</p>;
+          return <div className='tab-wrapper'><p>{node.getName()} are work in progress.</p></div>;
     }
   }
         
@@ -79,7 +82,7 @@ function App() {
 
   return (
     <>
-      <Navbar code={code} layoutRef={layoutRef}/>
+      <Navbar code={code}/>
       <Layout
         realtimeResize
         ref={layoutRef}
