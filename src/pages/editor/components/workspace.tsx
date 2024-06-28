@@ -3,11 +3,11 @@ import Graplet from '../../../scripts/graplet';
 
 const WorkspaceComponent = () => {
   useEffect(() => {
-    const manager = Graplet.getInstance();
-    manager.initialize('blocklyArea', 'blocklyDiv');
+    const graplet = Graplet.getInstance();
+    graplet.initialize('blocklyArea', 'blocklyDiv');
     
     return () => {
-      manager.dispose();
+      graplet.dispose();
     };
   }, []);
 

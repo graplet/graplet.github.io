@@ -9,23 +9,23 @@ const CodeOutputComponent = ({code,setCode} : {code:string,setCode: React.Dispat
   const {theme} = useContext(ThemeContext);
 
   useEffect(() => {
-    const manager = Graplet.getInstance();
+    const graplet = Graplet.getInstance();
 
     const updateCode = () => {
-      if (manager.workspace) {
-        const generatedCode = javascriptGenerator.workspaceToCode(manager.workspace);
+      if (graplet.workspace) {
+        const generatedCode = javascriptGenerator.workspaceToCode(graplet.workspace);
         setCode(generatedCode);
       }
     };
 
     updateCode();
-    if (manager.workspace) {
-      manager.workspace.addChangeListener(updateCode);
+    if (graplet.workspace) {
+      graplet.workspace.addChangeListener(updateCode);
     }
 
     return () => {
-      if (manager.workspace) {
-        manager.workspace.removeChangeListener(updateCode);
+      if (graplet.workspace) {
+        graplet.workspace.removeChangeListener(updateCode);
       }
     };
   }, []);

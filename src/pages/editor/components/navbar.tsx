@@ -1,14 +1,40 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faPlay, faRotate, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faPlay, faRotate, faShuffle, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { ThemeContext } from '../../../theme';
 import Graplet from '../../../scripts/graplet';
+import toolbox from '../../../scripts/toolbox';
+
+const simpleToolbox = {
+  kind: 'categoryToolbox',
+  contents: [
+    {
+      kind: 'category',
+      name: 'Noot',
+      categorystyle: 'logic_category',
+      contents: [
+        {
+          type: 'logic_null',
+          kind: 'block',
+        },
+        {
+          type: 'text',
+          kind: 'block',
+          fields: {
+            TEXT: 'noot noot 🐧',
+          },
+        },
+      ],
+    }
+  ],
+};
 
 const Navbar = ({ code }: { code: string }) => {
   const projectNameRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isSimpleToolbox, setIsSimpleToolbox] = useState(false);
   const { theme } = useContext(ThemeContext);
-  const manager = Graplet.getInstance();
+  const graplet = Graplet.getInstance();
 
   function runCode() {
     try {
@@ -33,7 +59,7 @@ const Navbar = ({ code }: { code: string }) => {
         const fileContent = await file.text();
         projectNameRef.current!.value = file.name.replace('.json', '');
         const parsedJson = JSON.parse(fileContent);
-        manager.load(parsedJson);
+        graplet.load(parsedJson);
         console.info('Loaded Blocks:', parsedJson);
       } catch (error) {
         console.error('Error parsing JSON file:', error);
@@ -42,7 +68,7 @@ const Navbar = ({ code }: { code: string }) => {
   };
 
   function downloadJson() {
-    const json = manager.save();
+    const json = graplet.save();
     const blob = new Blob([JSON.stringify(json)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -52,6 +78,15 @@ const Navbar = ({ code }: { code: string }) => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  };
+
+  function switchToolbox() {
+    if (isSimpleToolbox) {
+      graplet.workspace?.updateToolbox(toolbox);
+    } else {
+      graplet.workspace?.updateToolbox(simpleToolbox);
+    }
+    setIsSimpleToolbox(!isSimpleToolbox);
   };
 
   return (
@@ -76,6 +111,7 @@ const Navbar = ({ code }: { code: string }) => {
       <button onClick={downloadJson}><FontAwesomeIcon icon={faDownload} />Download</button>
       <button onClick={saveCode}><FontAwesomeIcon icon={faRotate} />Save Local</button>
       <button style={{ color: '#62db77' }} onClick={runCode}><FontAwesomeIcon icon={faPlay} />Run</button>
+      <button onClick={switchToolbox}><FontAwesomeIcon icon={faShuffle}/>Switch toolbox</button>
     </nav>
   );
 };
