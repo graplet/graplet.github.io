@@ -115,3 +115,16 @@ nav a{
   color: rgb(var(--text-rgb));
   text-decoration: none;
 }
+
+.extension-card{
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: var(--background-primary);
+}
+
+.extension-card h3, .extension-card p{
+  margin: 0;
+}
