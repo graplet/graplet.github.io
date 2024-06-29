@@ -13,8 +13,7 @@ interface IExtension {
 // At least one of component, useDefaultToolbox, or customToolbox must be defined
 type ExtensionType = {
   component?: React.FC;
-  useDefaultToolbox?: true;
-  customToolbox?: string | Blockly.utils.toolbox.ToolboxDefinition | Element;
+  toolbox?: string | Blockly.utils.toolbox.ToolboxDefinition | Element;
 };
 
 const ExtensionArray: IExtension[] = [
@@ -22,6 +21,13 @@ const ExtensionArray: IExtension[] = [
     name: 'HTML & CSS Pages',
     description: 'Create a webpage using HTML and CSS Blocks',
     folder: 'html-css-pages',
+    iconUrl: '',
+    thumbnailUrls: [''],
+  },
+  {
+    name: 'Dummy Extension',
+    description: 'Lorem ipsum dolor sit amet',
+    folder: 'lorem',
     iconUrl: '',
     thumbnailUrls: [''],
   }

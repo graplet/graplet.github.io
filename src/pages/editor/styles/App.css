@@ -118,11 +118,9 @@ nav a{
 
 .extension-card{
   padding: 20px;
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
   border-radius: 5px;
   background-color: var(--background-primary);
+  margin-bottom: 20px;
 }
 
 .extension-card h3, .extension-card p{
