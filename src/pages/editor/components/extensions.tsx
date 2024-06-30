@@ -1,5 +1,5 @@
 import { Switch } from "@mui/material";
-import { useState } from "react";
+import { FC, useState } from "react";
 import ExtensionArray from "../../../scripts/extension";
 import { Extension } from "../../../scripts/extension";
 
@@ -42,7 +42,11 @@ const ExtensionsComponent = () => {
                     <em>{extension.description}</em>
                 </div>
             ))}
-
+            <p>Component Testing</p>
+              {Object.keys(activeExtensions).map((key, index) => {
+                const ActiveComponent = activeExtensions[key].component as FC;
+                return <ActiveComponent key={index} />;
+            })}
         </div>
     );
 }
