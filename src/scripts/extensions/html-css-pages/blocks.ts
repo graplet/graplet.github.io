@@ -1,4 +1,4 @@
-import Blockly from 'blockly';
+import * as  Blockly from 'blockly';
 
 Blockly.Blocks['button'] = {
   init: function (this: Blockly.Block) {

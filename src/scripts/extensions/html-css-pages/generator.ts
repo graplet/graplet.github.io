@@ -1,4 +1,4 @@
-import Blockly from 'blockly';
+import * as Blockly from 'blockly';
 
 export const htmlGenerator = new Blockly.Generator('HTML');
 
