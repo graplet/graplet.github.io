@@ -1,4 +1,4 @@
-import Graplet from "../../../scripts/graplet";
+import MainWorkspace from "../../../scripts/workspace";
 
 interface Sample {
   name: string;
@@ -12,7 +12,7 @@ interface SampleLoaderProps {
 const SampleLoader = ({ samples }: SampleLoaderProps) => {
   const loadSample = async (path: string) => {
       const data = await import(`../../../samples/${path}.json`);
-      Graplet.getInstance().load(data.default)
+      MainWorkspace.load(data.default)
       // TODO: use ref from ProjecName to update project name in the editor
       console.log('Loaded sample:', data);
   };

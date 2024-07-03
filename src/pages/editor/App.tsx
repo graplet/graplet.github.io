@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   const factory = (node: TabNode) => {
-    var component = node.getComponent();
+    const component = node.getComponent();
     switch (component) {
       case "workspace":
         return <WorkspaceComponent />

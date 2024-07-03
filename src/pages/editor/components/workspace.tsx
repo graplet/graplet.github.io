@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
-import Graplet from '../../../scripts/graplet';
+import MainWorkspace from '../../../scripts/workspace';
 
 const WorkspaceComponent = () => {
   useEffect(() => {
-    const graplet = Graplet.getInstance();
-    graplet.initialize('blocklyArea', 'blocklyDiv');
+    MainWorkspace.initialize('blocklyArea', 'blocklyDiv');
     
     return () => {
-      graplet.dispose();
+      MainWorkspace.dispose();
     };
   }, []);
 

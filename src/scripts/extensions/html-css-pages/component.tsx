@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import Graplet from '../../graplet';
+import Graplet from '../../workspace';
 import { vs, vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { htmlGenerator } from './generator';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight';

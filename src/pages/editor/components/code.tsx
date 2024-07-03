@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import Graplet from "../../../scripts/graplet";
+import MainWorkspace from "../../../scripts/workspace";
 import { vs, vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { ThemeContext } from "../../../theme";
 import { javascriptGenerator } from "blockly/javascript";
@@ -9,26 +9,26 @@ const CodeOutputComponent = ({code,setCode} : {code:string,setCode: React.Dispat
   const {theme} = useContext(ThemeContext);
 
   useEffect(() => {
-    const graplet = Graplet.getInstance();
+    const workspace = MainWorkspace.getInstance();
 
     const updateCode = () => {
-      if (graplet.workspace) {
-        const generatedCode = javascriptGenerator.workspaceToCode(graplet.workspace);
+      if (workspace) {
+        const generatedCode = javascriptGenerator.workspaceToCode(workspace);
         setCode(generatedCode);
       }
     };
 
     updateCode();
-    if (graplet.workspace) {
-      graplet.workspace.addChangeListener(updateCode);
+    if (workspace) {
+      workspace.addChangeListener(updateCode);
     }
 
     return () => {
-      if (graplet.workspace) {
-        graplet.workspace.removeChangeListener(updateCode);
+      if (workspace) {
+        workspace.removeChangeListener(updateCode);
       }
     };
-  }, []);
+  }, [setCode]);
 
   return (
     <>

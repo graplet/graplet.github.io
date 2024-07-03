@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faPlay, faRotate, faShuffle, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { ThemeContext } from '../../../theme';
-import Graplet from '../../../scripts/graplet';
+import MainWorkspace from '../../../scripts/workspace';
 import toolbox from '../../../scripts/toolbox';
 
 const simpleToolbox = {
@@ -34,7 +34,6 @@ const Navbar = ({ code }: { code: string }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isSimpleToolbox, setIsSimpleToolbox] = useState(false);
   const { theme } = useContext(ThemeContext);
-  const graplet = Graplet.getInstance();
 
   function runCode() {
     try {
@@ -42,15 +41,15 @@ const Navbar = ({ code }: { code: string }) => {
     } catch (error) {
       console.error('Error executing code:', error);
     }
-  };
+  }
 
   function saveCode() {
     alert('This feature is not implemented yet');
-  };
+  }
 
   function uploadFile() {
     fileInputRef.current?.click();
-  };
+  }
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -59,7 +58,7 @@ const Navbar = ({ code }: { code: string }) => {
         const fileContent = await file.text();
         projectNameRef.current!.value = file.name.replace('.json', '');
         const parsedJson = JSON.parse(fileContent);
-        graplet.load(parsedJson);
+        MainWorkspace.load(parsedJson);
         console.info('Loaded Blocks:', parsedJson);
       } catch (error) {
         console.error('Error parsing JSON file:', error);
@@ -68,7 +67,7 @@ const Navbar = ({ code }: { code: string }) => {
   };
 
   function downloadJson() {
-    const json = graplet.save();
+    const json = MainWorkspace.save();
     const blob = new Blob([JSON.stringify(json)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -78,16 +77,17 @@ const Navbar = ({ code }: { code: string }) => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  };
+  }
 
   function switchToolbox() {
+    const workspace = MainWorkspace.getInstance();
     if (isSimpleToolbox) {
-      graplet.workspace?.updateToolbox(toolbox);
+      workspace.updateToolbox(toolbox);
     } else {
-      graplet.workspace?.updateToolbox(simpleToolbox);
+      workspace.updateToolbox(simpleToolbox);
     }
     setIsSimpleToolbox(!isSimpleToolbox);
-  };
+  }
 
   return (
     <nav>
