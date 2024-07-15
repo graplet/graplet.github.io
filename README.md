@@ -1,5 +1,5 @@
 # Graplet
-## App & Program Creator for Learning Individuals
+## App & Program Creator
 
 ### Installation
 to install all dependecies, run
