@@ -1,24 +1,24 @@
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import { ThemeContext } from "../../../theme";
+import { ChangeEvent, useContext, useEffect, useState } from "react"
+import { ThemeContext } from "../../../theme"
 
 const SettingsComponent = () => {
-  const { setTheme } = useContext(ThemeContext);
-  const [localTheme, setLocalTheme] = useState<string | undefined>(localStorage.getItem('theme') || undefined);
+  const { setTheme } = useContext(ThemeContext)
+  const [localTheme, setLocalTheme] = useState<string | undefined>(localStorage.getItem('theme') || undefined)
 
   useEffect(() => {
     if (localTheme === 'system') {
-      const matchMediaDark = window.matchMedia('(prefers-color-scheme: dark)');
-      setTheme(matchMediaDark.matches ? 'dark' : 'light');
+      const matchMediaDark = window.matchMedia('(prefers-color-scheme: dark)')
+      setTheme(matchMediaDark.matches ? 'dark' : 'light')
     } else if (localTheme) {
-      setTheme(localTheme);
+      setTheme(localTheme)
     }
-  }, [localTheme, setTheme]);
+  }, [localTheme, setTheme])
 
 
   const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedTheme = event.target.value;
-    setLocalTheme(selectedTheme);
-  };
+    const selectedTheme = event.target.value
+    setLocalTheme(selectedTheme)
+  }
   return (
     <>
       <p>Theme: </p>
@@ -28,7 +28,7 @@ const SettingsComponent = () => {
         <option value="system">System</option>
       </select>
     </>
-  );
-};
+  )
+}
 
-export default SettingsComponent;
+export default SettingsComponent

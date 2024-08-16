@@ -1,9 +1,10 @@
-import React, { useContext, useRef, useState, useCallback } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faPlay, faRotate, faShuffle, faUpload } from '@fortawesome/free-solid-svg-icons';
-import { ThemeContext } from '../../../theme';
-import MainWorkspace from '../../../scripts/workspace';
-import toolbox from '../../../scripts/toolbox';
+import React, { useContext, useRef, useState, useCallback, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDownload, faPlay, faRotate, faShuffle, faUpload } from '@fortawesome/free-solid-svg-icons'
+import { ThemeContext } from '../../../theme'
+import MainWorkspace from '../../../scripts/workspace'
+import toolbox from '../../../scripts/toolbox'
+import { GrapletLocalStorage } from '../../../scripts/storage' 
 
 const simpleToolbox = {
   kind: 'categoryToolbox',
@@ -22,67 +23,139 @@ const simpleToolbox = {
       ],
     },
   ],
-};
+}
 
 const Navbar: React.FC<{ code: string }> = ({ code }) => {
-  const projectNameRef = useRef<HTMLInputElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isSimpleToolbox, setIsSimpleToolbox] = useState(false);
-  const { theme } = useContext(ThemeContext);
+  const projectNameRef = useRef<HTMLInputElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [projectId, setProjectId] = useState<string | null>(null)
+  const [isSimpleToolbox, setIsSimpleToolbox] = useState(false)
+  const { theme } = useContext(ThemeContext)
+
+  useEffect(() => {
+    const loadProjectFromHash = async () => {
+      const hash = window.location.hash.slice(1) 
+      if (hash) {
+        try {
+          const project = await GrapletLocalStorage.getProject(hash)
+          if (project) {
+            projectNameRef.current!.value = project.name
+            MainWorkspace.load(project.blocks)
+            setProjectId(hash)
+          } else {
+            console.warn('Project not found for the provided hash.')
+            setProjectId(null) 
+          }
+        } catch (error) {
+          console.error('Failed to load project from hash:', error)
+          setProjectId(null)
+        }
+      }
+    }
+
+    loadProjectFromHash()
+  }, [])
 
   const runCode = useCallback(() => {
     try {
-      new Function(code)();
+      new Function(code)()
     } catch (error) {
-      console.error('Error executing code:', error);
+      console.error('Error executing code:', error)
     }
-  }, [code]);
+  }, [code])
 
-  const saveCode = useCallback(() => {
-    alert('This feature is not implemented yet');
-  }, []);
+  const saveCode = useCallback(async () => {
+    try {
+      const projectName = projectNameRef.current?.value || 'Untitled Project'
+      const blocks = MainWorkspace.save()
+      const extensions: string[] = [] // TODO: Add extension support
+      const icon = null // TODO: Add icon support
+  
+      const newProjectId = projectName.toLowerCase().replace(/\s+/g, '-')
+  
+      if (projectId) {
+        if (newProjectId !== projectId) {
+          await GrapletLocalStorage.addProject({
+            id: newProjectId,
+            name: projectName,
+            blocks,
+            extensions,
+            icon,
+          })
+  
+          await GrapletLocalStorage.deleteProject(projectId)
+          setProjectId(newProjectId)
+          window.location.hash = newProjectId
+  
+          console.info('Project renamed and updated:', newProjectId)
+        } else {
+          await GrapletLocalStorage.updateProject(projectId, {
+            name: projectName,
+            blocks,
+            extensions,
+            icon,
+          })
+          console.info('Project updated:', projectId)
+        }
+      } else {
+        const createdProjectId = await GrapletLocalStorage.addProject({
+          id: '',
+          name: projectName,
+          blocks,
+          extensions,
+          icon,
+        })
+  
+        setProjectId(createdProjectId)
+        window.location.hash = createdProjectId
+        console.info('New project created with id:', createdProjectId)
+      }
+    } catch (error) {
+      console.error('Failed to save project:', error)
+    }
+  }, [projectId])
 
   const uploadFile = useCallback(() => {
-    fileInputRef.current?.click();
-  }, []);
+    fileInputRef.current?.click()
+  }, [])
 
   const handleFileChange = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const file = event.target.files?.[0]
     if (file) {
       try {
-        const fileContent = await file.text();
-        const parsedJson = JSON.parse(fileContent);
-        projectNameRef.current!.value = file.name.replace('.json', '');
-        MainWorkspace.load(parsedJson);
-        console.info('Loaded Blocks:', parsedJson);
+        const fileContent = await file.text()
+        const parsedJson = JSON.parse(fileContent)
+        projectNameRef.current!.value = file.name.replace('.json', '')
+        MainWorkspace.load(parsedJson)
+        console.info('Loaded Blocks:', parsedJson)
       } catch (error) {
-        console.error('Error parsing JSON file:', error);
+        console.error('Error parsing JSON file:', error)
       }
     }
-  }, []);
+  }, [])
 
   const downloadJson = useCallback(() => {
     try {
-      const json = MainWorkspace.save();
-      const blob = new Blob([JSON.stringify(json)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${projectNameRef.current?.value || 'project'}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const json = MainWorkspace.save()
+      const blob = new Blob([JSON.stringify(json)], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `${projectNameRef.current?.value || 'project'}.json`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
     } catch (error) {
-      console.error('Error downloading JSON file:', error);
+      console.error('Error downloading JSON file:', error)
     }
-  }, []);
+  }, [])
 
   const switchToolbox = useCallback(() => {
-    const workspace = MainWorkspace.getInstance();
-    workspace.updateToolbox(isSimpleToolbox ? toolbox : simpleToolbox);
-    setIsSimpleToolbox(!isSimpleToolbox);
-  }, [isSimpleToolbox]);
+    const workspace = MainWorkspace.getInstance()
+    workspace.updateToolbox(isSimpleToolbox ? toolbox : simpleToolbox)
+    setIsSimpleToolbox(!isSimpleToolbox)
+  }, [isSimpleToolbox])
 
   return (
     <nav>
@@ -108,7 +181,7 @@ const Navbar: React.FC<{ code: string }> = ({ code }) => {
       <button style={{ color: '#62db77' }} onClick={runCode}><FontAwesomeIcon icon={faPlay} />Run</button>
       <button onClick={switchToolbox}><FontAwesomeIcon icon={faShuffle} />Switch toolbox</button>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

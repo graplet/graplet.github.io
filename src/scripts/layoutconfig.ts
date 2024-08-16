@@ -1,4 +1,4 @@
-import { IJsonModel } from "flexlayout-react";
+import { IJsonModel } from "flexlayout-react"
 
 export const layoutJsonConfig: IJsonModel = {
   global: { legacyOverflowMenu: false, tabEnableRename: false },
@@ -52,4 +52,4 @@ export const layoutJsonConfig: IJsonModel = {
       },
     ],
   },
-};
+}

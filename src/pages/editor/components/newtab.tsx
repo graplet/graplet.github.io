@@ -1,25 +1,25 @@
-import { Layout } from 'flexlayout-react';
-import { useContext, FC } from 'react';
-import { ThemeContext } from '../../../theme';
+import { Layout } from 'flexlayout-react'
+import { useContext, FC } from 'react'
+import { ThemeContext } from '../../../theme'
 
 interface LayoutRefProps {
-    layoutRef: React.MutableRefObject<Layout | null>;
-    name?: string;
+    layoutRef: React.MutableRefObject<Layout | null>
+    name?: string
 }
 
 const NewTabBox: FC<LayoutRefProps> = ({ layoutRef, name }) => {
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext)
 
-    const icon = `/tabs/${name?.toLowerCase()}.svg`;
-    const component = name?.toLowerCase();
+    const icon = `/tabs/${name?.toLowerCase()}.svg`
+    const component = name?.toLowerCase()
 
     const openTab = () => {
         layoutRef.current?.addTabToActiveTabSet({
             icon,
             component,
             name,
-        });
-    };
+        })
+    }
 
     return (
         <div className='newtab-box' onClick={openTab}>
@@ -30,11 +30,11 @@ const NewTabBox: FC<LayoutRefProps> = ({ layoutRef, name }) => {
             />
             <p>{name}</p>
         </div>
-    );
-};
+    )
+}
 
 const NewTabComponent: FC<{ layoutRef: React.MutableRefObject<Layout | null> }> = ({ layoutRef }) => {
-    const tabs = ['Code', 'Console', 'Extensions', 'Samples', 'Settings'];
+    const tabs = ['Code', 'Console', 'Extensions', 'Samples', 'Settings']
 
     return (
         <>
@@ -45,7 +45,7 @@ const NewTabComponent: FC<{ layoutRef: React.MutableRefObject<Layout | null> }> 
                 ))}
             </div>
         </>
-    );
-};
+    )
+}
 
-export default NewTabComponent;
+export default NewTabComponent

@@ -792,4 +792,4 @@ export default {
       categorystyle: 'procedure_category',
     },
   ],
-};
+}

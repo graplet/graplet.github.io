@@ -1,20 +1,20 @@
-import * as Blockly from 'blockly';
+import * as Blockly from 'blockly'
 
 /* Represents metadata for an extension, used for display purposes */
 interface IExtension {
-  name: string;
-  description?: string;
-  folder: string;
-  iconUrl?: string;
-  thumbnailUrls?: string[];
+  name: string
+  description?: string
+  folder: string
+  iconUrl?: string
+  thumbnailUrls?: string[]
 }
 
 /* Represents the actual extension object, used for loading the extension */
 // At least one of component, useDefaultToolbox, or customToolbox must be defined
 type ExtensionType = {
-  component?: React.FC;
-  toolbox?: string | Blockly.utils.toolbox.ToolboxDefinition | Element;
-};
+  component?: React.FC
+  toolbox?: string | Blockly.utils.toolbox.ToolboxDefinition | Element
+}
 
 const ExtensionArray: IExtension[] = [
   {
@@ -31,7 +31,7 @@ const ExtensionArray: IExtension[] = [
     iconUrl: '',
     thumbnailUrls: [''],
   }
-];
+]
 
-export type { ExtensionType as Extension };
-export default ExtensionArray;
+export type { ExtensionType as Extension }
+export default ExtensionArray

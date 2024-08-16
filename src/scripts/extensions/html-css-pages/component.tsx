@@ -1,29 +1,29 @@
-import React, { useContext, useEffect } from 'react';
-import MainWorkspace from '../../workspace';
-import { vs, vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { htmlGenerator } from './generator';
-import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight';
-import { ThemeContext } from '../../../theme';
+import React, { useContext, useEffect } from 'react'
+import MainWorkspace from '../../workspace'
+import { vs, vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs"
+import { htmlGenerator } from './generator'
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight'
+import { ThemeContext } from '../../../theme'
 
 const HTMLCSSPagesComponent: React.FC = () => {
-  const [HTMLCodeOutput, setCode] = React.useState<string>('');
-  const {theme} = useContext(ThemeContext);
+  const [HTMLCodeOutput, setCode] = React.useState<string>('')
+  const {theme} = useContext(ThemeContext)
   useEffect(() => {
-    const workspace = MainWorkspace.getInstance();
+    const workspace = MainWorkspace.getInstance()
     // This is outdated, will be using its own workspace soon. 
 
     const updateCode = () => {
-      const generatedCode = htmlGenerator.workspaceToCode(workspace);
-      setCode(generatedCode);
-    };
+      const generatedCode = htmlGenerator.workspaceToCode(workspace)
+      setCode(generatedCode)
+    }
 
-    updateCode();
-    workspace.addChangeListener(updateCode);
+    updateCode()
+    workspace.addChangeListener(updateCode)
 
     return () => {
-      workspace.removeChangeListener(updateCode);
-    };
-  }, []);
+      workspace.removeChangeListener(updateCode)
+    }
+  }, [])
   return (
     <html>
       <h1>HTML & CSS Pages</h1>
@@ -38,7 +38,7 @@ const HTMLCSSPagesComponent: React.FC = () => {
         {HTMLCodeOutput || ''}
       </SyntaxHighlighter>
     </html>
-  );
+  )
 }
 
-export default HTMLCSSPagesComponent;
+export default HTMLCSSPagesComponent
