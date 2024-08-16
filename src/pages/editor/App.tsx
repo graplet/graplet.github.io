@@ -1,19 +1,30 @@
-import './styles/App.css';
-import { BorderNode, ITabSetRenderValues, Layout, Model, TabNode, TabSetNode } from 'flexlayout-react';
-import { layoutJsonConfig } from '../../scripts/layoutconfig';
-import WorkspaceComponent from './components/workspace';
-import {useContext, useEffect, useRef, useState } from 'react';
-import CodeOutputComponent from './components/code';
-import Navbar from './components/navbar';
-import './styles/layout.css';
-import { Message } from 'console-feed/lib/definitions/Component';
+import {
+  BorderNode,
+  ITabSetRenderValues,
+  Layout,
+  Model,
+  TabNode,
+  TabSetNode
+} from 'flexlayout-react';
 import { Console, Unhook } from 'console-feed';
-import { ThemeContext } from '../../theme';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { Message } from 'console-feed/lib/definitions/Component';
 import Hook from '../../scripts/overrides/hook';
-import NewTabComponent from './components/newtab';
-import SettingsComponent from './components/settings';
+import { layoutJsonConfig } from '../../scripts/layoutconfig';
+import { ThemeContext } from '../../theme';
+
+import CodeOutputComponent from './components/code';
 import ExtensionsComponent from './components/extensions';
+import Navbar from './components/navbar';
+import NewTabComponent from './components/newtab';
 import SamplesComponent from './components/samples';
+import SettingsComponent from './components/settings';
+import WorkspaceComponent from './components/workspace';
+
+import './styles/App.css';
+import './styles/layout.css';
+
+
 const model = Model.fromJson(layoutJsonConfig);
 
 function App() {
@@ -36,26 +47,19 @@ function App() {
   }, []);
 
   const factory = (node: TabNode) => {
-    const component = node.getComponent();
-    switch (component) {
-      case "workspace":
-        return <WorkspaceComponent />
-      case "code":
-          return <CodeOutputComponent code={code} setCode={setCode}/>
-      case "console":
-          return <Console logGrouping={false} logs={logs} variant={theme == "dark" ? "dark": "light"} />;
-      case "extensions":
-          return <div className='tab-wrapper'><ExtensionsComponent /></div>;
-      case "newtab":
-          return <div className='tab-wrapper'><NewTabComponent layoutRef={layoutRef}/></div>;
-      case "settings":
-          return <div className='tab-wrapper'><SettingsComponent /></div>;
-      case "samples":
-          return <div className='tab-wrapper'><SamplesComponent /></div>;
-      default:
-          return <div className='tab-wrapper'><p>{node.getName()} are work in progress.</p></div>;
-    }
-  }
+    const component: string = node.getComponent()!;
+    const componentsMap: Record<string, JSX.Element> = {
+      "workspace": <WorkspaceComponent />,
+      "code": <CodeOutputComponent code={code} setCode={setCode} />,
+      "console": <Console logGrouping={false} logs={logs} variant={theme === "dark" ? "dark" : "light"} />,
+      "extensions": <div className='tab-wrapper'><ExtensionsComponent /></div>,
+      "newtab": <div className='tab-wrapper'><NewTabComponent layoutRef={layoutRef} /></div>,
+      "settings": <div className='tab-wrapper'><SettingsComponent /></div>,
+      "samples": <div className='tab-wrapper'><SamplesComponent /></div>,
+    };
+    return componentsMap[component] || <div className='tab-wrapper'><p>{node.getName()} are work in progress.</p></div>;
+  };
+  
         
   const newTabButton = (node: (TabSetNode | BorderNode), renderValues: ITabSetRenderValues) => {
     if (node instanceof TabSetNode) {
