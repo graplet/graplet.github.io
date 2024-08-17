@@ -11,7 +11,7 @@ interface SampleLoaderProps {
 
 const SampleLoader = ({ samples }: SampleLoaderProps) => {
   const loadSample = async (path: string) => {
-      const data = await import(`../../../samples/${path}.json`)
+      const data = await import(`../../samples/${path}.json`)
       MainWorkspace.load(data.default)
       // TODO: use ref from ProjecName to update project name in the editor
       console.log('Loaded sample:', data)
