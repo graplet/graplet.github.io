@@ -1,6 +1,6 @@
 import { Layout } from 'flexlayout-react'
 import { useContext, FC } from 'react'
-import { ThemeContext } from '../../../theme'
+import { ThemeContext } from '../../theme'
 
 interface LayoutRefProps {
     layoutRef: React.MutableRefObject<Layout | null>

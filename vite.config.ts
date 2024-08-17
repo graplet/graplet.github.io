@@ -9,7 +9,6 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         editor: resolve(__dirname, 'editor/index.html'),
-        mystuff: resolve(__dirname, 'mystuff/index.html'),
       },
     },
     chunkSizeWarningLimit: 2500

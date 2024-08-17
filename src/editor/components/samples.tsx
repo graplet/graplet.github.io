@@ -1,4 +1,4 @@
-import MainWorkspace from "../../../scripts/workspace"
+import MainWorkspace from "../../scripts/workspace"
 
 interface Sample {
   name: string

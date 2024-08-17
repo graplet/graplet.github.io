@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react"
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import MainWorkspace from "../../../scripts/workspace"
+import MainWorkspace from "../../scripts/workspace"
 import { vs, vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs"
-import { ThemeContext } from "../../../theme"
+import { ThemeContext } from "../../theme"
 import { javascriptGenerator } from "blockly/javascript"
 
 const CodeOutputComponent = ({code,setCode} : {code:string,setCode: React.Dispatch<React.SetStateAction<string>>}) => {

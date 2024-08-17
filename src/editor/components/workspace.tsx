@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import MainWorkspace from '../../../scripts/workspace'
+import MainWorkspace from '../../scripts/workspace'
 
 const WorkspaceComponent = () => {
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { Switch, SwitchProps } from "@mui/material"
 import { FC, useState, useCallback } from "react"
-import ExtensionArray from "../../../scripts/extension"
-import { Extension } from "../../../scripts/extension"
+import ExtensionArray from "../../scripts/extension"
+import { Extension } from "../../scripts/extension"
 
 const ExtensionsComponent: FC = () => {
     const [activeExtensions, setActiveExtensions] = useState<Record<string, Extension>>({})

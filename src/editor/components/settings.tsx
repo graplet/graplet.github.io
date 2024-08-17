@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react"
-import { ThemeContext } from "../../../theme"
+import { ThemeContext } from "../../theme"
 
 const SettingsComponent = () => {
   const { setTheme } = useContext(ThemeContext)

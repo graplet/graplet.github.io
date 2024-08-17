@@ -11,20 +11,7 @@ const ThemeContext = createContext<ThemeContextType>({
   setTheme: () => {},
 });
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const darkThemeColors = {
-    backgroundPrimary: '#141414',
-    backgroundSecondary: '#1E1E1E',
-    primaryRGB: '203, 41, 100',
-    textRGB: '240, 240, 240',
-  };
-
-  const lightThemeColors = {
-    backgroundPrimary: 'white',
-    backgroundSecondary: '#E5E5E5',
-    primaryRGB: '159, 19, 57',
-    textRGB: '20, 20, 20',
-  };
-
+  
   const getInitialTheme = () => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -47,8 +34,22 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     matchMediaDark.addEventListener('change', handleChange);
     return () => matchMediaDark.removeEventListener('change', handleChange);
   }, [theme]);
-
+  
   useEffect(() => {
+    const darkThemeColors = {
+      backgroundPrimary: '#141414',
+      backgroundSecondary: '#1E1E1E',
+      primaryRGB: '203, 41, 100',
+      textRGB: '240, 240, 240',
+    };
+  
+    const lightThemeColors = {
+      backgroundPrimary: 'white',
+      backgroundSecondary: '#E5E5E5',
+      primaryRGB: '159, 19, 57',
+      textRGB: '20, 20, 20',
+    };
+    
     if (theme !== 'system') {
       localStorage.setItem('theme', theme);
     } else {
