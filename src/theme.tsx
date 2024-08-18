@@ -1,27 +1,26 @@
 import { useEffect, useState } from 'react';
 import { createContext, ReactNode } from 'react';
+import { darkThemeColors, lightThemeColors } from './themecolors'; // Adjust the import path
+
+type Theme = 'light' | 'dark' | 'system';
 
 interface ThemeContextType {
-  theme: string;
-  setTheme: (theme: string) => void;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: 'system',
   setTheme: () => {},
 });
+
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  
-  const getInitialTheme = () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme;
-    } else {
-      return 'system';
-    }
+  const getInitialTheme = (): Theme => {
+    const savedTheme = localStorage.getItem('theme') as Theme;
+    return savedTheme || 'system';
   };
 
-  const [theme, setTheme] = useState<string>(getInitialTheme);
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
     const matchMediaDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -34,22 +33,8 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     matchMediaDark.addEventListener('change', handleChange);
     return () => matchMediaDark.removeEventListener('change', handleChange);
   }, [theme]);
-  
+
   useEffect(() => {
-    const darkThemeColors = {
-      backgroundPrimary: '#141414',
-      backgroundSecondary: '#1E1E1E',
-      primaryRGB: '203, 41, 100',
-      textRGB: '240, 240, 240',
-    };
-  
-    const lightThemeColors = {
-      backgroundPrimary: 'white',
-      backgroundSecondary: '#E5E5E5',
-      primaryRGB: '159, 19, 57',
-      textRGB: '20, 20, 20',
-    };
-    
     if (theme !== 'system') {
       localStorage.setItem('theme', theme);
     } else {
@@ -65,7 +50,6 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-
   const contextValue: ThemeContextType = {
     theme,
     setTheme,
@@ -77,6 +61,5 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     </ThemeContext.Provider>
   );
 };
-
 
 export { ThemeProvider, ThemeContext };
