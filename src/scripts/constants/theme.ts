@@ -9,10 +9,10 @@ export const grapletBlocklyTheme: Blockly.Theme = Blockly.Theme.defineTheme('gra
   'name': 'graplet',
   'base': Blockly.Themes.Classic,
   'componentStyles': {
-    'workspaceBackgroundColour': 'var(--background-primary)',
-    'toolboxBackgroundColour': 'var(--background-secondary)',
-    'flyoutBackgroundColour': 'var(--background-secondary)',
-    'scrollbarColour': 'var(--background-secondary)',
+    'workspaceBackgroundColour': 'var(--bg-1)',
+    'toolboxBackgroundColour': 'var(--bg-2)',
+    'flyoutBackgroundColour': 'var(--bg-2)',
+    'scrollbarColour': 'var(--bg-2)',
   }
 })
 

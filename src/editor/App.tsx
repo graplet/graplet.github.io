@@ -22,8 +22,8 @@ import SamplesComponent from './components/samples'
 import SettingsComponent from './components/settings'
 import WorkspaceComponent from './components/workspace'
 
-import './styles/App.css'
 import './styles/layout.css'
+import './styles/blockly.css'
 
 
 const model = Model.fromJson(layoutJsonConfig)
@@ -53,13 +53,13 @@ function App() {
       "workspace": <WorkspaceComponent />,
       "code": <CodeOutputComponent code={code} setCode={setCode} />,
       "console": <Console logGrouping={false} logs={logs} variant={theme === "dark" ? "dark" : "light"} />,
-      "extensions": <div className='tab-wrapper'><ExtensionsComponent /></div>,
-      "newtab": <div className='tab-wrapper'><NewTabComponent layoutRef={layoutRef} tabNode={node} /></div>,
-      "settings": <div className='tab-wrapper'><SettingsComponent /></div>,
-      "samples": <div className='tab-wrapper'><SamplesComponent /></div>,
+      "extensions": <div className='px-4'><ExtensionsComponent /></div>,
+      "newtab": <div className='px-4'><NewTabComponent layoutRef={layoutRef} tabNode={node} /></div>,
+      "settings": <div className='px-4'><SettingsComponent /></div>,
+      "samples": <div className='px-4'><SamplesComponent /></div>,
     }
     Actions.setActiveTabset(node.getParent()!.getId())
-    return componentsMap[component] || <div className='tab-wrapper'><p>{node.getName()} are work in progress.</p></div>
+    return componentsMap[component] || <div className='px-4'><p>{node.getName()} are work in progress.</p></div>
   }
   
         

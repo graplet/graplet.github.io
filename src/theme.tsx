@@ -43,10 +43,11 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
     const root = document.documentElement
     const colors = theme === 'dark' ? darkThemeColors : lightThemeColors
-    root.style.setProperty('--background-primary', colors.backgroundPrimary)
-    root.style.setProperty('--background-secondary', colors.backgroundSecondary)
-    root.style.setProperty('--primary-rgb', colors.primaryRGB)
-    root.style.setProperty('--text-rgb', colors.textRGB)
+    root.style.setProperty('--bg-1', colors.backgroundPrimary)
+    root.style.setProperty('--bg-2', colors.backgroundSecondary)
+    root.style.setProperty('--rgb-color', colors.primaryRGB)
+    root.style.setProperty('--rgb-text', colors.textRGB)
+    root.style.setProperty('--green', colors.green)
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 

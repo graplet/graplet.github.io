@@ -36,7 +36,7 @@ class Category extends Blockly.ToolboxCategory {
   addColourBorder_(colour: string): void {
     const labelDom = this.getLabelDom()
     if (this.rowDiv_ && labelDom){
-      this.rowDiv_.style.backgroundColor = 'var(--background-primary)'
+      this.rowDiv_.style.backgroundColor = 'var(--bg-1)'
       labelDom.style.color = colour
     }
   }
@@ -65,10 +65,10 @@ class Category extends Blockly.ToolboxCategory {
     if (this.rowDiv_ && labelDom && iconDom) {
       if (isSelected) {
         this.rowDiv_.style.backgroundColor = this.colour_
-        iconDom.style.color = 'rgb(var(--text-rgb))'
-        labelDom.style.color = 'rgb(var(--text-rgb))'
+        iconDom.style.color = 'rgb(var(--rgb-text))'
+        labelDom.style.color = 'rgb(var(--rgb-text))'
       } else {
-        this.rowDiv_.style.backgroundColor = 'var(--background-primary)'
+        this.rowDiv_.style.backgroundColor = 'var(--bg-1)'
         labelDom.style.color = this.colour_
         iconDom.style.color = this.colour_
       }

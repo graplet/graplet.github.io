@@ -11,9 +11,9 @@ const ExtensionsComponent: FC = () => {
     <div>
       <p>Extensions are work in progress</p>
       {ExtensionCatalog.map(({ name, folder, description }, index) => (
-        <div className="extension-card" key={index}>
+        <div className="extension-card mb-5" key={index}>
           <p>{name}</p>
-          <button onClick={() => installExtension(folder)}>install</button>
+          <button className='mr-3' onClick={() => installExtension(folder)}>install</button>
           <em>{description}</em>
         </div>
       ))}

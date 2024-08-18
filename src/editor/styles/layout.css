@@ -1,8 +1,8 @@
 .flexlayout__layout {
-  --color-text: rgb(var(--text-rgb));
-  --color-base: var(--background-secondary);;
-  --color-drag-background: rgba(var(--primary-rgb), 0.05);
-  --color-drag: rgba(var(--primary-rgb),0.1);
+  --color-text: rgb(var(--rgb-text));
+  --color-base: var(--bg-2);;
+  --color-drag-background: rgba(var(--rgb-color), 0.05);
+  --color-drag: rgba(var(--rgb-color),0.1);
   --font-size: medium;
   --font-family: Roboto, Arial, sans-serif;
   --color-overflow: gray;
@@ -42,7 +42,7 @@
 
 .flexlayout__layout {
   left: 0;
-  top: 0;
+  top: 45px;
   right: 0;
   bottom: 0;
   position: absolute;
@@ -288,6 +288,7 @@
   padding-right: 0.3em;
 }
 .flexlayout__tab_toolbar_button {
+  cursor: pointer;
   border: none;
   outline: none;
   font-size: inherit;
@@ -546,4 +547,16 @@
   padding-bottom: 5px;
   font-size: var(--font-size);
   font-family: var(--font-family);
+}
+
+html[data-theme="light"] .flexlayout__tab_button_leading img{
+  filter: invert(1);
+}
+
+.flexlayout__tab:has(> #blocklyArea) {
+  overflow: hidden;
+}
+
+.flexlayout__tab_button--unselected img{
+  opacity: 0.5;
 }

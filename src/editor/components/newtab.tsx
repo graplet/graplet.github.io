@@ -31,13 +31,13 @@ const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, tabNode }) => {
   }
 
   return (
-    <div className='newtab-box' onClick={openTab}>
+    <div style={{ background: 'var(--bg-1)'}} className='cursor-pointer items-center flex flex-col justify-center w-24 h-24 rounded' onClick={openTab}>
       <img
         style={{ width: 25, filter: theme === 'light' ? 'invert(1)' : 'none' }}
         src={icon}
         alt={name}
       />
-      <p>{name}</p>
+      <p className='m-2'>{name}</p>
     </div>
   )
 }

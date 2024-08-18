@@ -6,7 +6,6 @@ import defaultImage from '/project.svg'
 import WorkspaceManager from '../../scripts/models/workspacemanager'
 import { GrapletLocalStorage } from '../../scripts/models/storage'
 import { Layout } from 'flexlayout-react'
-import { colors } from '../../scripts/constants/colors'
 
 const getMainWorkspace = () => {
   const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
@@ -139,8 +138,8 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
   }, [])
 
   return (
-    <nav>
-      <a href='/' className='logo-sign'>
+    <nav className='h-11 flex items-center px-3 gap-3'>
+      <a style={{ color: 'rgb(var(--rgb-text))'}} href='/' className='inline-flex cursor-pointer gap-3 no-underline'>
         <img
           src='/fill.svg'
           alt='Graplet Logo'
@@ -148,12 +147,12 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
         />
         <h3 className='m-0'>Graplet</h3>
       </a>
-      <button style={{ color: theme == 'light' ? colors.GREEN_DARK : colors.GREEN_LIGHT }} onClick={runCode}>
+      <button style={{ color: 'var(--green)' }} onClick={runCode}>
         <FontAwesomeIcon icon={faPlay} /> Run
       </button>
       <button
         onClick={saveCode}
-        style={saveStatus === 'saved' ? { color: theme == 'light' ? colors.GREEN_DARK : colors.GREEN_LIGHT } : {}}
+        style={saveStatus === 'saved' ? { color: 'var(-green) '} : {}}
       >
         {saveStatus === 'saved' ? (
           <>
@@ -189,7 +188,7 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
         onClick={() => imageInputRef.current?.click()}
         src={projectImage}
         alt="Project"
-        className='project-image'
+        className='w-5 h-5 rounded-full cursor-pointer'
       />
       <input ref={projectNameRef} type='text' placeholder='Project Name' />
       <button onClick={launchSettings} className='ml-auto'>
