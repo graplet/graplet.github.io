@@ -1,31 +1,42 @@
 import { useContext, useEffect } from "react"
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import MainWorkspace from "../../scripts/workspace"
 import { vs, vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs"
 import { ThemeContext } from "../../theme"
 import { javascriptGenerator } from "blockly/javascript"
+import WorkspaceManager from "../../scripts/models/workspacemanager"
+
+const getMainWorkspace = () => {
+  const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
+  if (!mainWorkspace) throw new Error('Main Workspace not initialized')
+  return mainWorkspace
+}
+
+const getWorkspaceSVG = () => {
+  const workspaceSVG = getMainWorkspace().getComponent()
+  if (!workspaceSVG) throw new Error('Workspace component not found')
+  return workspaceSVG
+}
+
 
 const CodeOutputComponent = ({code,setCode} : {code:string,setCode: React.Dispatch<React.SetStateAction<string>>}) => {
   const {theme} = useContext(ThemeContext)
 
   useEffect(() => {
-    const workspace = MainWorkspace.getInstance()
-
     const updateCode = () => {
-      if (workspace) {
-        const generatedCode = javascriptGenerator.workspaceToCode(workspace)
+      if (getWorkspaceSVG) {
+        const generatedCode = javascriptGenerator.workspaceToCode(getWorkspaceSVG())
         setCode(generatedCode)
       }
     }
 
     updateCode()
-    if (workspace) {
-      workspace.addChangeListener(updateCode)
+    if (getWorkspaceSVG) {
+      getWorkspaceSVG().addChangeListener(updateCode)
     }
 
     return () => {
-      if (workspace) {
-        workspace.removeChangeListener(updateCode)
+      if (getWorkspaceSVG) {
+        getWorkspaceSVG().removeChangeListener(updateCode)
       }
     }
   }, [setCode])

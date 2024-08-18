@@ -1,33 +1,41 @@
 import React, { useContext, useEffect } from 'react'
-import MainWorkspace from '../../workspace'
 import { vs, vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs"
 import { htmlGenerator } from './generator'
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight'
 import { ThemeContext } from '../../../theme'
+import WorkspaceManager from '../../models/workspacemanager'
 
 const HTMLCSSPagesComponent: React.FC = () => {
   const [HTMLCodeOutput, setCode] = React.useState<string>('')
   const {theme} = useContext(ThemeContext)
+  const [workspaceID, setWorkspaceID] = React.useState<string>('')
+
   useEffect(() => {
-    const workspace = MainWorkspace.getInstance()
-    // This is outdated, will be using its own workspace soon. 
+    setWorkspaceID(WorkspaceManager.getInstance().register('htmlCSSPages'))
+    const workspaceSVG = WorkspaceManager.getInstance().getWorkspaceByID(workspaceID)?.getComponent()
+    if (!workspaceSVG) {
+      throw new Error('Main workspace not found')
+    }
 
     const updateCode = () => {
-      const generatedCode = htmlGenerator.workspaceToCode(workspace)
+      const generatedCode = htmlGenerator.workspaceToCode(workspaceSVG)
       setCode(generatedCode)
     }
 
     updateCode()
-    workspace.addChangeListener(updateCode)
+    workspaceSVG.addChangeListener(updateCode)
 
     return () => {
-      workspace.removeChangeListener(updateCode)
+      workspaceSVG.removeChangeListener(updateCode)
     }
-  }, [])
+  }, [workspaceID])
   return (
     <html>
       <h1>HTML & CSS Pages</h1>
       <p>Create a webpage using HTML and CSS Blocks</p>
+      <div style={{ width: '100%', height: '100%' }}>
+        <div id='htmlCSSPages'></div>
+      </div>
       <SyntaxHighlighter
         showLineNumbers
         wrapLongLines

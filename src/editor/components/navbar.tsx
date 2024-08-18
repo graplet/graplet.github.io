@@ -2,9 +2,9 @@ import React, { useContext, useRef, useState, useCallback, useEffect } from 'rea
 import { faDownload, faPlay, faRotate, faShuffle, faUpload, faTriangleExclamation, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ThemeContext } from '../../theme'
-import MainWorkspace from '../../scripts/workspace'
-import toolbox from '../../scripts/toolbox'
-import { GrapletLocalStorage } from '../../scripts/storage' 
+import { GrapletLocalStorage } from '../../scripts/models/storage' 
+import { defaultToolbox } from '../../scripts/constants/toolbox'
+import WorkspaceManager from '../../scripts/models/workspacemanager'
 
 const simpleToolbox = {
   kind: 'categoryToolbox',
@@ -20,6 +20,20 @@ const simpleToolbox = {
     },
   ],
 }
+
+const getMainWorkspace = () => {
+  const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
+  if (!mainWorkspace) throw new Error('Main Workspace not initialized')
+  return mainWorkspace
+}
+
+const getWorkspaceSVG = () => {
+  const workspaceSVG = getMainWorkspace().getComponent()
+  if (!workspaceSVG) throw new Error('Workspace component not found')
+  return workspaceSVG
+}
+
+
 
 const Navbar: React.FC<{ code: string }> = ({ code }) => {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'error' | 'saved'>('idle')
@@ -40,7 +54,7 @@ const Navbar: React.FC<{ code: string }> = ({ code }) => {
         if (!project) throw new Error('Project not found')
 
         projectNameRef.current!.value = project.name
-        MainWorkspace.load(project.blocks)
+        getMainWorkspace().load(project.blocks)
         setProjectId(hash)
       } catch (error) {
         console.error('Failed to load project:', error)
@@ -63,7 +77,7 @@ const Navbar: React.FC<{ code: string }> = ({ code }) => {
     try {
       const projectName = projectNameRef.current?.value || 'Untitled Project'
       projectNameRef.current!.value = projectName
-      const blocks = MainWorkspace.save()
+      const blocks = getMainWorkspace().save()
       const newProjectId = projectName.toLowerCase().replace(/\s+/g, '-')
       const projectData = { name: projectName, blocks, extensions: [], icon: null }
 
@@ -98,7 +112,7 @@ const Navbar: React.FC<{ code: string }> = ({ code }) => {
       const fileContent = await file.text()
       const parsedJson = JSON.parse(fileContent)
       projectNameRef.current!.value = file.name.replace('.json', '')
-      MainWorkspace.load(parsedJson)
+      getMainWorkspace().load(parsedJson)
       console.info('Loaded Blocks:', parsedJson)
     } catch (error) {
       console.error('Error parsing JSON file:', error)
@@ -107,7 +121,7 @@ const Navbar: React.FC<{ code: string }> = ({ code }) => {
 
   const downloadJson = useCallback(() => {
     try {
-      const json = MainWorkspace.save()
+      const json = getMainWorkspace().save()
       const blob = new Blob([JSON.stringify(json)], { type: 'application/json' })
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
@@ -121,8 +135,7 @@ const Navbar: React.FC<{ code: string }> = ({ code }) => {
   }, [])
 
   const switchToolbox = useCallback(() => {
-    const workspace = MainWorkspace.getInstance()
-    workspace.updateToolbox(isSimpleToolbox ? toolbox : simpleToolbox)
+    getWorkspaceSVG().updateToolbox(isSimpleToolbox ? defaultToolbox : simpleToolbox)
     setIsSimpleToolbox(prev => !prev)
   }, [isSimpleToolbox])
 

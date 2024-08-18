@@ -10,7 +10,7 @@ import { Console, Unhook } from 'console-feed'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { Message } from 'console-feed/lib/definitions/Component'
 import Hook from '../scripts/overrides/hook'
-import { layoutJsonConfig } from '../scripts/layoutconfig'
+import { layoutJsonConfig } from '../scripts/constants/layoutconfig'
 import { ThemeContext } from '../theme'
 
 import CodeOutputComponent from './components/code'

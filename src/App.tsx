@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GrapletLocalStorage, Project } from './scripts/storage'; // Adjust the import path as necessary
+import { GrapletLocalStorage, Project } from './scripts/models/storage'; // Adjust the import path as necessary
 
 function App() {
   const [projects, setProjects] = useState<Array<Project>>([]);

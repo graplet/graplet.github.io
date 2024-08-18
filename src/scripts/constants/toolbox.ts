@@ -1,5 +1,4 @@
-
-export default {
+export const defaultToolbox = {
   kind: 'categoryToolbox',
   contents: [
     {

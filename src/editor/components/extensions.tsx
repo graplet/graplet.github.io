@@ -1,7 +1,7 @@
 import { Switch, SwitchProps } from "@mui/material"
 import { FC, useState, useCallback } from "react"
-import ExtensionArray from "../../scripts/extension"
-import { Extension } from "../../scripts/extension"
+import { Extension } from "../../scripts/models/extension"
+import { ExtensionArray as ExtensionCatalog } from "../../scripts/constants/extensions"
 
 const ExtensionsComponent: FC = () => {
     const [activeExtensions, setActiveExtensions] = useState<Record<string, Extension>>({})
@@ -11,7 +11,7 @@ const ExtensionsComponent: FC = () => {
             const { checked: isChecked } = event.target
 
             if (isChecked) {
-                const module = await import(`../../../scripts/extensions/${folder}/index.ts`)
+                const module = await import(`../../scripts/extensions/${folder}/index.ts`)
                 const extension = module.default as Extension
                 setActiveExtensions(prev => ({ ...prev, [folder]: extension }))
                 console.info(`Extension ${folder} activated`)
@@ -33,7 +33,7 @@ const ExtensionsComponent: FC = () => {
     return (
         <div>
             <p>Extensions are work in progress</p>
-            {ExtensionArray.map(({ name, folder, description }, index) => (
+            {ExtensionCatalog.map(({ name, folder, description }, index) => (
                 <div className="extension-card" key={index}>
                     <p>{name}</p>
                     <Switch

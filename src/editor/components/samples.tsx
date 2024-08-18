@@ -1,8 +1,7 @@
-import MainWorkspace from "../../scripts/workspace"
+import WorkspaceManager from "../../scripts/models/workspacemanager"
 
 interface Sample {
   name: string
-  // icon: string - not used yet
 }
 
 interface SampleLoaderProps {
@@ -12,8 +11,7 @@ interface SampleLoaderProps {
 const SampleLoader = ({ samples }: SampleLoaderProps) => {
   const loadSample = async (path: string) => {
       const data = await import(`../../samples/${path}.json`)
-      MainWorkspace.load(data.default)
-      // TODO: use ref from ProjecName to update project name in the editor
+      WorkspaceManager.getInstance().getMainWorkspace()?.load(data.default)
       console.log('Loaded sample:', data)
   }
 

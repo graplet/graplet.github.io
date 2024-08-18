@@ -1,17 +1,20 @@
 import { useEffect } from 'react'
-import MainWorkspace from '../../scripts/workspace'
+import WorkspaceManager from '../../scripts/models/workspacemanager'
 
 const WorkspaceComponent = () => {
   useEffect(() => {
-    MainWorkspace.initialize('blocklyArea', 'blocklyDiv')
+    WorkspaceManager.getInstance().register('blocklyDiv')
     
     return () => {
-      MainWorkspace.dispose()
+      WorkspaceManager
+        .getInstance()
+        .getMainWorkspace()!
+        .dispose()
     }
   }, [])
 
   return (
-    <div id='blocklyArea' style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: '100%' }}>
       <div id="blocklyDiv"></div>
     </div>
   )
