@@ -1,13 +1,19 @@
-import { Layout } from 'flexlayout-react'
+import { Actions, Layout, TabNode } from 'flexlayout-react'
 import { useContext, FC } from 'react'
 import { ThemeContext } from '../../theme'
 
-interface LayoutRefProps {
+interface TabBoxProps {
   layoutRef: React.MutableRefObject<Layout | null>
   name?: string
+  tabNode: TabNode
 }
 
-const NewTabBox: FC<LayoutRefProps> = ({ layoutRef, name }) => {
+interface TabComponentProps {
+  layoutRef: React.MutableRefObject<Layout | null>
+  tabNode: TabNode
+}
+
+const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, tabNode }) => {
   const { theme } = useContext(ThemeContext)
 
   const icon = `/tabicons/${name?.toLowerCase()}.svg`
@@ -21,6 +27,7 @@ const NewTabBox: FC<LayoutRefProps> = ({ layoutRef, name }) => {
         name,
       })
     }
+    tabNode.getModel().doAction(Actions.deleteTab(tabNode.getId()))
   }
 
   return (
@@ -35,7 +42,8 @@ const NewTabBox: FC<LayoutRefProps> = ({ layoutRef, name }) => {
   )
 }
 
-const NewTabComponent: FC<{ layoutRef: React.MutableRefObject<Layout | null> }> = ({ layoutRef }) => {
+
+const NewTabComponent: FC<TabComponentProps> = ({ layoutRef, tabNode }) => {
   const tabs = ['Code', 'Console', 'Extensions', 'Samples', 'Settings']
 
   return (
@@ -43,7 +51,7 @@ const NewTabComponent: FC<{ layoutRef: React.MutableRefObject<Layout | null> }> 
       <p>Choose a tab to open</p>
       <div style={{ display: 'flex', gap: 10 }}>
         {tabs.map((tab) => (
-          <NewTabBox key={tab} layoutRef={layoutRef} name={tab} />
+          <NewTabBox key={tab} layoutRef={layoutRef} name={tab} tabNode={tabNode}/>
         ))}
       </div>
     </>

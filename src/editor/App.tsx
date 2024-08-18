@@ -54,7 +54,7 @@ function App() {
       "code": <CodeOutputComponent code={code} setCode={setCode} />,
       "console": <Console logGrouping={false} logs={logs} variant={theme === "dark" ? "dark" : "light"} />,
       "extensions": <div className='tab-wrapper'><ExtensionsComponent /></div>,
-      "newtab": <div className='tab-wrapper'><NewTabComponent layoutRef={layoutRef} /></div>,
+      "newtab": <div className='tab-wrapper'><NewTabComponent layoutRef={layoutRef} tabNode={node} /></div>,
       "settings": <div className='tab-wrapper'><SettingsComponent /></div>,
       "samples": <div className='tab-wrapper'><SamplesComponent /></div>,
     }

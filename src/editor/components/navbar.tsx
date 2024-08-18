@@ -6,6 +6,7 @@ import defaultImage from '/project.svg'
 import WorkspaceManager from '../../scripts/models/workspacemanager'
 import { GrapletLocalStorage } from '../../scripts/models/storage'
 import { Layout } from 'flexlayout-react'
+import { colors } from '../../scripts/constants/colors'
 
 const getMainWorkspace = () => {
   const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
@@ -147,12 +148,12 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
         />
         <h3 className='m-0'>Graplet</h3>
       </a>
-      <button style={{ color: '#62db77' }} onClick={runCode}>
+      <button style={{ color: theme == 'light' ? colors.GREEN_DARK : colors.GREEN_LIGHT }} onClick={runCode}>
         <FontAwesomeIcon icon={faPlay} /> Run
       </button>
       <button
         onClick={saveCode}
-        style={saveStatus === 'saved' ? { color: 'rgb(98, 219, 119)' } : {}}
+        style={saveStatus === 'saved' ? { color: theme == 'light' ? colors.GREEN_DARK : colors.GREEN_LIGHT } : {}}
       >
         {saveStatus === 'saved' ? (
           <>
