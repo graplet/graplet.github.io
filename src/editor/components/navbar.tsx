@@ -1,10 +1,11 @@
 import React, { useContext, useRef, useState, useCallback, useEffect } from 'react'
-import { faDownload, faPlay, faRotate, faUpload, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faDownload, faPlay, faRotate, faUpload, faCheck, faCog } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ThemeContext } from '../../theme'
 import defaultImage from '/project.svg'
 import WorkspaceManager from '../../scripts/models/workspacemanager'
 import { GrapletLocalStorage } from '../../scripts/models/storage'
+import { Layout } from 'flexlayout-react'
 
 const getMainWorkspace = () => {
   const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
@@ -12,7 +13,7 @@ const getMainWorkspace = () => {
   return mainWorkspace
 }
 
-const Navbar: React.FC<{ code: string }> = ({ code }) => {
+const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout | null> }> = ({ code , layoutRef }) => {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saved'>('idle')
   const [projectId, setProjectId] = useState<string | null>(null)
   const [projectImage, setProjectImage] = useState<string>(defaultImage)
@@ -51,6 +52,11 @@ const Navbar: React.FC<{ code: string }> = ({ code }) => {
       console.error('Error executing code:', error)
     }
   }, [code])
+
+  const launchSettings = useCallback(() => {
+    
+    layoutRef.current?.addTabToActiveTabSet({icon: '/tabicons/settings.svg', component: 'settings', name: 'Settings'})
+  }, [layoutRef])
 
   const saveCode = useCallback(async () => {
     try {
@@ -185,6 +191,9 @@ const Navbar: React.FC<{ code: string }> = ({ code }) => {
         className='project-image'
       />
       <input ref={projectNameRef} type='text' placeholder='Project Name' />
+      <button onClick={launchSettings} className='ml-auto'>
+        <FontAwesomeIcon icon={faCog} /> Settings
+      </button>
     </nav>
   )
 }

@@ -51,7 +51,6 @@ export default class GenericWorkspace {
   public dispose(): void {
     if (this.workspace) {
       this.workspace.dispose()
-      this.workspace = null
     }
   }
 

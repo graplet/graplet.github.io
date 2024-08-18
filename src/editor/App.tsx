@@ -1,4 +1,5 @@
 import {
+  Actions,
   BorderNode,
   ITabSetRenderValues,
   Layout,
@@ -57,6 +58,7 @@ function App() {
       "settings": <div className='tab-wrapper'><SettingsComponent /></div>,
       "samples": <div className='tab-wrapper'><SamplesComponent /></div>,
     }
+    Actions.setActiveTabset(node.getParent()!.getId())
     return componentsMap[component] || <div className='tab-wrapper'><p>{node.getName()} are work in progress.</p></div>
   }
   
@@ -66,7 +68,7 @@ function App() {
         renderValues.stickyButtons.push(
             <img
                 key={`${node.getId()}-new-tab`}
-                src="/tabicons/add.svg"
+                src="/tabicons/plus.svg"
                 title='New tab'
                 style={{ width: "1.1em", height: "1.1em" }}
                 className="flexlayout__tab_toolbar_button"
@@ -78,7 +80,7 @@ function App() {
 
   function addNewTab(node: TabSetNode | BorderNode){
       layoutRef!.current!.addTabToTabSet(node.getId(), {
-          icon: "/outline.svg",
+          icon: "/tabicons/star.svg",
           component: "newtab",
           name: "New Tab"
       })
@@ -86,7 +88,7 @@ function App() {
 
   return (
     <>
-      <Navbar code={code}/>
+      <Navbar code={code} layoutRef={layoutRef}/>
       <Layout
         realtimeResize
         ref={layoutRef}
