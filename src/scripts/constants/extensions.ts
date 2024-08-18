@@ -1,6 +1,6 @@
-import { IExtension } from "../models/extension";
+import { IExtension } from "../models/extension"
 
-export const ExtensionArray: IExtension[] = [
+export const ExtensionCatalog: IExtension[] = [
   {
     name: 'HTML & CSS Pages',
     description: 'Create a webpage using HTML and CSS Blocks',

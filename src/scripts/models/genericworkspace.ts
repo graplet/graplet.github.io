@@ -26,16 +26,18 @@ export default class GenericWorkspace {
         throw new Error('Blockly Div must be a child of another element')
       }
 
-      this.workspace = Blockly.inject(blocklyDiv, this.injectOptions)
-      Blockly.svgResize(this.workspace)
+      const workspace = Blockly.inject(blocklyDiv, this.injectOptions)
+      Blockly.svgResize(workspace)
 
       const resize = () => {
         const width = blocklyArea.offsetWidth
         const height = blocklyArea.offsetHeight
         blocklyDiv.style.width = width + 'px'
         blocklyDiv.style.height = height + 'px'
-        Blockly.svgResize(this.workspace!)
+        Blockly.svgResize(workspace)
       }
+
+      this.workspace = workspace
 
       const resizeObserver = new ResizeObserver(resize)
       resizeObserver.observe(blocklyArea)

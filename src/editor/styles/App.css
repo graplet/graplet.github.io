@@ -90,6 +90,9 @@ input{
   cursor: pointer;
 }
 
+.blocklyTreeLabel{
+  font-family: 'fredoka';
+}
 
 .newtab-box{
   cursor: pointer;
@@ -125,4 +128,12 @@ nav a{
 
 .extension-card h3, .extension-card p{
   margin: 0;
+}
+
+.project-image{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
 }

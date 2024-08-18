@@ -66,7 +66,7 @@ function App() {
         renderValues.stickyButtons.push(
             <img
                 key={`${node.getId()}-new-tab`}
-                src="/tabs/add.svg"
+                src="/tabicons/add.svg"
                 title='New tab'
                 style={{ width: "1.1em", height: "1.1em" }}
                 className="flexlayout__tab_toolbar_button"

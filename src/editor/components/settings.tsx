@@ -1,9 +1,9 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react"
-import { ThemeContext } from "../../theme"
+import { ThemeOptions, ThemeContext } from "../../theme"
 
 const SettingsComponent = () => {
   const { setTheme } = useContext(ThemeContext)
-  const [localTheme, setLocalTheme] = useState<string | undefined>(localStorage.getItem('theme') || undefined)
+  const [localTheme, setLocalTheme] = useState<ThemeOptions>(localStorage.getItem('theme') as ThemeOptions || 'system')
 
   useEffect(() => {
     if (localTheme === 'system') {
@@ -17,7 +17,7 @@ const SettingsComponent = () => {
 
   const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedTheme = event.target.value
-    setLocalTheme(selectedTheme)
+    setLocalTheme(selectedTheme as ThemeOptions)
   }
   return (
     <>

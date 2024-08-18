@@ -18,8 +18,13 @@ const getWorkspaceSVG = () => {
 }
 
 
-const CodeOutputComponent = ({code,setCode} : {code:string,setCode: React.Dispatch<React.SetStateAction<string>>}) => {
-  const {theme} = useContext(ThemeContext)
+interface CodeOutputComponentProps {
+  code: string
+  setCode: React.Dispatch<React.SetStateAction<string>>
+}
+
+const CodeOutputComponent: React.FC<CodeOutputComponentProps> = ({ code, setCode }) => {
+  const { theme } = useContext(ThemeContext)
 
   useEffect(() => {
     const updateCode = () => {
@@ -42,17 +47,15 @@ const CodeOutputComponent = ({code,setCode} : {code:string,setCode: React.Dispat
   }, [setCode])
 
   return (
-    <>
     <SyntaxHighlighter
       showLineNumbers
       wrapLongLines
       language="javascript"
-      style={theme == 'light' ? vs : vs2015}
-      customStyle={{margin:0,height:'100%',padding:0}}
+      style={theme === 'light' ? vs : vs2015}
+      customStyle={{ margin: 0, height: '100%', padding: 0 }}
     >
       {code || '// code will appear here'}
     </SyntaxHighlighter>
-    </>
   )
 }
 
