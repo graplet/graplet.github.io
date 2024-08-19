@@ -1,6 +1,6 @@
 import { Actions, Layout, TabNode } from 'flexlayout-react'
 import { useContext, FC } from 'react'
-import { ThemeContext } from '../../theme'
+import { ThemeContext } from '../../scripts/models/themeprovider'
 
 interface TabBoxProps {
   layoutRef: React.MutableRefObject<Layout | null>

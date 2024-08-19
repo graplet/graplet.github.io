@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState, useCallback, useEffect } from 'react'
 import { faDownload, faPlay, faRotate, faUpload, faCheck, faCog } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ThemeContext } from '../../theme'
+import { ThemeContext } from '../../scripts/models/themeprovider'
 import defaultImage from '/project.svg'
 import WorkspaceManager from '../../scripts/models/workspacemanager'
 import { GrapletLocalStorage } from '../../scripts/models/storage'
@@ -152,7 +152,7 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
       </button>
       <button
         onClick={saveCode}
-        style={saveStatus === 'saved' ? { color: 'var(-green) '} : {}}
+        style={saveStatus === 'saved' ? { color: 'var(--green) '} : {}}
       >
         {saveStatus === 'saved' ? (
           <>

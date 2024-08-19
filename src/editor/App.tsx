@@ -12,7 +12,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { Message } from 'console-feed/lib/definitions/Component'
 import Hook from '../scripts/overrides/hook'
 import { layoutJsonConfig } from '../scripts/constants/layoutconfig'
-import { ThemeContext } from '../theme'
+import { ThemeContext } from '../scripts/models/themeprovider'
 
 import CodeOutputComponent from './components/code'
 import ExtensionsComponent from './components/extensions'

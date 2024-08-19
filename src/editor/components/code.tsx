@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react"
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { vs, vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs"
-import { ThemeContext } from "../../theme"
+import { ThemeContext } from "../../scripts/models/themeprovider"
 import { javascriptGenerator } from "blockly/javascript"
 import WorkspaceManager from "../../scripts/models/workspacemanager"
 

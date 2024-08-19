@@ -11,6 +11,7 @@ export class GrapletLocalStorage {
   private static dbName: string = "GrapletDB"
   private static dbVersion: number = 1
   private static storeName: string = "projects"
+  public static currentProjectId: string | null = null
 
   private constructor() {}
 
@@ -62,6 +63,8 @@ export class GrapletLocalStorage {
 
   public static async getProject(id: string): Promise<Project | undefined> {
     await this.init()
+
+    GrapletLocalStorage.currentProjectId = id
 
     return new Promise<Project | undefined>((resolve, reject) => {
       const transaction = this.db!.transaction(this.storeName, "readonly")

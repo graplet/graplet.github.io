@@ -1,4 +1,4 @@
-import { grapletBlocklyTheme } from "./theme"
+import { grapletBlocklyTheme } from "./blocklytheme"
 import { defaultToolbox } from "./toolbox"
 
 export const defaultConfig = {

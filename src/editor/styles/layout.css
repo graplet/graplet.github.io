@@ -1,8 +1,8 @@
 .flexlayout__layout {
   --color-text: rgb(var(--rgb-text));
   --color-base: var(--bg-2);;
-  --color-drag-background: rgba(var(--rgb-color), 0.05);
-  --color-drag: rgba(var(--rgb-color),0.1);
+  --color-drag-background: rgba(var(--red), 0.05);
+  --color-drag: rgba(var(--red),0.1);
   --font-size: medium;
   --font-family: Roboto, Arial, sans-serif;
   --color-overflow: gray;

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import '../index.css'
-import { ThemeProvider } from '../theme.tsx'
+import { ThemeProvider } from '../scripts/models/themeprovider.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

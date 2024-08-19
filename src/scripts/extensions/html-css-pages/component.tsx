@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { vs, vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs"
 import { htmlGenerator } from './generator'
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight'
-import { ThemeContext } from '../../../theme'
+import { ThemeContext } from '../../models/themeprovider'
 import WorkspaceManager from '../../models/workspacemanager'
 
 const HTMLCSSPagesComponent: React.FC = () => {
