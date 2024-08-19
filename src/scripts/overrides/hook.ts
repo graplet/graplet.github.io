@@ -21,14 +21,19 @@ function Hook(
     const NativeMethod = TargetConsole[method]
     TargetConsole[method] = function () {
       NativeMethod.apply(this, arguments)
-      const args = structuredClone([].slice.call(arguments))
-      setTimeout(() => {
-        const parsed = Parse(method as ConsoleMethods, args)
-        if (parsed) {
-          const encoded: Message = parsed as Message
-          callback(encoded, parsed)
-        }
-      })
+      try{
+        const args = structuredClone([].slice.call(arguments))
+        setTimeout(() => {
+          const parsed = Parse(method as ConsoleMethods, args)
+          if (parsed) {
+            const encoded: Message = parsed as Message
+            callback(encoded, parsed)
+          }
+        })
+      }
+      catch(e){
+        console.info('Could not parse console message')
+      }
     }
     Storage.pointers[method] = NativeMethod
   }

@@ -4,7 +4,7 @@ import { defaultConfig } from '../constants/wsconfig'
 
 export default class WorkspaceManager {
   private static instance: WorkspaceManager | null = null
-  private workspaces: Map<string, GenericWorkspace> = new Map()
+  public workspaces: Map<string, GenericWorkspace> = new Map()
   private mainWorkspaceId: string | null = null
 
   private constructor() {}
@@ -24,7 +24,6 @@ export default class WorkspaceManager {
       throw new Error('Blockly Div not found')
     }
 
-    const isMain = this.workspaces.size === 0
     const workspaceId = workspace.initialize(blocklyDivId)
     
     if (this.workspaces.has(workspaceId)) {
@@ -32,11 +31,8 @@ export default class WorkspaceManager {
     }
     
     this.workspaces.set(workspaceId, workspace)
-    
-    if (isMain) {
-      this.mainWorkspaceId = workspaceId
-    }
-    
+
+    this.mainWorkspaceId = workspaceId
     return workspaceId
   }
 
@@ -53,9 +49,9 @@ export default class WorkspaceManager {
 
   public disposeWorkspace(id: string): void {
     const workspace = this.workspaces.get(id)
+    this.workspaces.delete(id)
     if (workspace) {
       workspace.dispose()
-      this.workspaces.delete(id)
     }
   }
 }

@@ -31,7 +31,11 @@ const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, tabNode }) => {
   }
 
   return (
-    <div style={{ background: 'var(--bg-1)'}} className='cursor-pointer items-center flex flex-col justify-center w-24 h-24 rounded' onClick={openTab}>
+    <div
+      style={{ background: 'var(--bg-1)' }}
+      className='cursor-pointer items-center flex flex-col justify-center w-24 h-24 rounded'
+      onClick={openTab}
+    >
       <img
         style={{ width: 25, filter: theme === 'light' ? 'invert(1)' : 'none' }}
         src={icon}
@@ -42,16 +46,15 @@ const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, tabNode }) => {
   )
 }
 
-
 const NewTabComponent: FC<TabComponentProps> = ({ layoutRef, tabNode }) => {
   const tabs = ['Code', 'Console', 'Extensions', 'Samples', 'Settings']
 
   return (
     <>
       <p>Choose a tab to open</p>
-      <div style={{ display: 'flex', gap: 10 }}>
+      <div className="flex flex-wrap gap-4">
         {tabs.map((tab) => (
-          <NewTabBox key={tab} layoutRef={layoutRef} name={tab} tabNode={tabNode}/>
+          <NewTabBox key={tab} layoutRef={layoutRef} name={tab} tabNode={tabNode} />
         ))}
       </div>
     </>

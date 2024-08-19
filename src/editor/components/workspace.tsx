@@ -3,12 +3,12 @@ import WorkspaceManager from '../../scripts/models/workspacemanager'
 
 const WorkspaceComponent = () => {
   useEffect(() => {
-    WorkspaceManager.getInstance().register('blocklyDiv')
+    const workspaceManager = WorkspaceManager.getInstance();
 
-    return () => {
-      WorkspaceManager.getInstance().getMainWorkspace()?.dispose()
+    if (!workspaceManager.getMainWorkspace()) {
+      workspaceManager.register('blocklyDiv');
     }
-  }, [])
+  }, []);
   
   return (
     <div style={{ width: '100%', height: '100%' }}>
