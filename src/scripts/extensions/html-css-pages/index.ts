@@ -1,9 +1,9 @@
 import HTMLCSSPagesComponent from './component.tsx'
 import { toolbox } from './toolbox'
 import './blocks'
-import { Extension } from '../../models/extension.ts'
 
-const extension: Extension = {
+// structure needs to be reworked
+const extension = {
   component: HTMLCSSPagesComponent,
   toolbox: toolbox,
 }
