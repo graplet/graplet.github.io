@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { DisplayExtension } from '../../scripts/models/extensiontypes'
+import { ExtensionManager } from '../../scripts/models/extensionmanager'
 
 interface ExtensionEntry {
   folder: string
@@ -39,8 +40,7 @@ const ExtensionsComponent: FC = () => {
 
   const installExtension = async (folder: string) => {
     const module = await import(`../../scripts/extensions/${folder}/main.ts`)
-    console.log('Installed', folder)
-    console.log(module.default)
+    ExtensionManager.getInstance().register(module.default, folder)
 
     setInstalledExtensions(prev => [...prev, folder])
     setJustInstalled(folder)
@@ -53,6 +53,7 @@ const ExtensionsComponent: FC = () => {
 
   const uninstallExtension = (folder: string) => {
     setInstalledExtensions(prev => prev.filter(ext => ext !== folder))
+    ExtensionManager.getInstance().unregister(folder)
   }
 
   return (

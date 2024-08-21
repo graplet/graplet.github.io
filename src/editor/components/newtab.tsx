@@ -1,10 +1,13 @@
 import { Actions, Layout, TabNode } from 'flexlayout-react'
 import { useContext, FC } from 'react'
 import { ThemeContext } from '../../scripts/models/themeprovider'
+import { ExtensionManager } from '../../scripts/models/extensionmanager'
 
 interface TabBoxProps {
   layoutRef: React.MutableRefObject<Layout | null>
-  name?: string
+  name: string
+  component?: string
+  icon?: string
   tabNode: TabNode
 }
 
@@ -13,17 +16,17 @@ interface TabComponentProps {
   tabNode: TabNode
 }
 
-const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, tabNode }) => {
+const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, component, icon, tabNode }) => {
   const { theme } = useContext(ThemeContext)
 
-  const icon = `/tabicons/${name?.toLowerCase()}.svg`
-  const component = name?.toLowerCase()
+  const tabIcon = icon || `/tabicons/${name?.toLowerCase()}.svg`
+  const tabComponent = component || name?.toLowerCase()
 
   const openTab = () => {
     if (layoutRef.current) {
       layoutRef.current.addTabToActiveTabSet({
-        icon,
-        component,
+        icon: tabIcon,
+        component: tabComponent,
         name,
       })
     }
@@ -38,7 +41,7 @@ const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, tabNode }) => {
     >
       <img
         style={{ width: 25, filter: theme === 'light' ? 'invert(1)' : 'none' }}
-        src={icon}
+        src={tabIcon}
         alt={name}
       />
       <p className='m-2'>{name}</p>
@@ -55,6 +58,9 @@ const NewTabComponent: FC<TabComponentProps> = ({ layoutRef, tabNode }) => {
       <div className="flex flex-wrap gap-4">
         {tabs.map((tab) => (
           <NewTabBox key={tab} layoutRef={layoutRef} name={tab} tabNode={tabNode} />
+        ))}
+        {Array.from(ExtensionManager.getInstance().tabs.entries()).map(([key, tab]) => (
+          <NewTabBox key={key} layoutRef={layoutRef} name={tab.name} component={tab.component} icon={tab.icon} tabNode={tabNode} />
         ))}
       </div>
     </>

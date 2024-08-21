@@ -24,6 +24,7 @@ import WorkspaceComponent from './components/workspace'
 
 import './styles/layout.css'
 import './styles/blockly.css'
+import { ExtensionManager } from '../scripts/models/extensionmanager'
 
 
 const model = Model.fromJson(layoutJsonConfig)
@@ -31,8 +32,8 @@ const model = Model.fromJson(layoutJsonConfig)
 function App() {
   const layoutRef = useRef<Layout | null>(null)
   const [code, setCode] = useState("")
-  const [logs,setLogs ] = useState<Message[]>([])
-  const {theme} = useContext(ThemeContext)
+  const [logs, setLogs] = useState<Message[]>([])
+  const { theme } = useContext(ThemeContext)
 
   useEffect(() => {
     const hookedConsole = Hook(
@@ -59,42 +60,43 @@ function App() {
       "samples": <div className='px-4'><SamplesComponent /></div>,
     }
     Actions.setActiveTabset(node.getParent()!.getId())
-    return componentsMap[component] || <div className='px-4'><p>{node.getName()} are work in progress.</p></div>
+    const ExtensionComponent = ExtensionManager.getInstance().getComponent(component)
+    return componentsMap[component] || <ExtensionComponent />
   }
-  
-        
+
+
   const newTabButton = (node: (TabSetNode | BorderNode), renderValues: ITabSetRenderValues) => {
     if (node instanceof TabSetNode) {
-        renderValues.stickyButtons.push(
-            <img
-                key={`${node.getId()}-new-tab`}
-                src="/tabicons/plus.svg"
-                title='New tab'
-                style={{ width: "1.1em", height: "1.1em" }}
-                className="flexlayout__tab_toolbar_button"
-                onClick={() => addNewTab(node)}
-            />
-        )
+      renderValues.stickyButtons.push(
+        <img
+          key={`${node.getId()}-new-tab`}
+          src="/tabicons/plus.svg"
+          title='New tab'
+          style={{ width: "1.1em", height: "1.1em" }}
+          className="flexlayout__tab_toolbar_button"
+          onClick={() => addNewTab(node)}
+        />
+      )
     }
   }
 
-  function addNewTab(node: TabSetNode | BorderNode){
-      layoutRef!.current!.addTabToTabSet(node.getId(), {
-          icon: "/tabicons/star.svg",
-          component: "newtab",
-          name: "New Tab"
-      })
+  function addNewTab(node: TabSetNode | BorderNode) {
+    layoutRef!.current!.addTabToTabSet(node.getId(), {
+      icon: "/tabicons/star.svg",
+      component: "newtab",
+      name: "New Tab"
+    })
   }
 
   return (
     <>
-      <Navbar code={code} layoutRef={layoutRef}/>
+      <Navbar code={code} layoutRef={layoutRef} />
       <Layout
         realtimeResize
         ref={layoutRef}
         model={model}
         factory={factory}
-        onRenderTabSet={newTabButton} /> 
+        onRenderTabSet={newTabButton} />
     </>
   )
 }

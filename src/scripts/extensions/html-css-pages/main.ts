@@ -1,10 +1,12 @@
 import { Extension } from '../../models/extensiontypes.ts'
 import HTMLCSSPagesComponent from './component.tsx'
+import plane from './assets/plane.svg'
 
 const extension: Extension = {
   tabs: [
     { 
-      name: 'HTML',
+      name: 'Pages',
+      icon: plane,
       suffix: 'html',
       component: HTMLCSSPagesComponent
     },

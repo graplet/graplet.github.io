@@ -7,7 +7,7 @@ import WorkspaceManager from '../../models/workspacemanager'
 
 const HTMLCSSPagesComponent: React.FC = () => {
   const [HTMLCodeOutput, setCode] = React.useState<string>('')
-  const {theme} = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
   const [workspaceID, setWorkspaceID] = React.useState<string>('')
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const HTMLCSSPagesComponent: React.FC = () => {
         wrapLongLines
         language="javascript"
         style={theme == 'light' ? vs : vs2015}
-        customStyle={{margin:0,height:'100%',padding:0}}
+        customStyle={{ margin: 0, height: '100%', padding: 0 }}
       >
         {HTMLCodeOutput || ''}
       </SyntaxHighlighter>
