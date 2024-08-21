@@ -1,33 +1,47 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { DisplayExtension } from '../../scripts/models/extensiontypes'
 
-
-// Temporary, entire extension system will be reworked - this is just a placeholder
-const ExtensionCatalog = [
-  {
-    name: 'HTML & CSS Pages',
-    description: 'Create a webpage using HTML and CSS Blocks',
-    folder: 'html-css-pages',
-    iconUrl: '',
-    thumbnailUrls: [''],
-  },
-  {
-    name: 'Dummy Extension',
-    description: 'Lorem ipsum dolor sit amet',
-    folder: 'lorem',
-    iconUrl: '',
-    thumbnailUrls: [''],
-  }
-]
+interface ExtensionEntry {
+  folder: string
+  extension: DisplayExtension
+}
 
 const ExtensionsComponent: FC = () => {
   const [installedExtensions, setInstalledExtensions] = useState<string[]>([])
   const [justInstalled, setJustInstalled] = useState<string | null>(null)
+  const [ExtensionCatalog, setExtensionCatalog] = useState<ExtensionEntry[]>([])
+
+  useEffect(() => {
+    const loadExtensions = async () => {
+      const modules = import.meta.glob('../../scripts/extensions/*/index.ts')
+      const extensions: ExtensionEntry[] = []
+
+      for (const path in modules) {
+        const module = (await modules[path]()) as { default: DisplayExtension }
+        const folder = path.match(/\/extensions\/(.*?)\/index\.ts$/)?.[1] || ''
+
+        if (folder) {
+          extensions.push({
+            folder,
+            extension: module.default,
+          })
+        }
+      }
+
+      setExtensionCatalog(extensions)
+    }
+
+    loadExtensions()
+  }, [])
+
 
   const installExtension = async (folder: string) => {
-    //const module = await import(`../../scripts/extensions/${folder}/index.ts`)
+    const module = await import(`../../scripts/extensions/${folder}/main.ts`)
     console.log('Installed', folder)
+    console.log(module.default)
+
     setInstalledExtensions(prev => [...prev, folder])
     setJustInstalled(folder)
     setTimeout(() => setJustInstalled(null), 1000)
@@ -44,13 +58,14 @@ const ExtensionsComponent: FC = () => {
   return (
     <div>
       <p>Extensions are work in progress</p>
-      {ExtensionCatalog.map(({ name, folder, description }, index) => {
+      {ExtensionCatalog.map((entry, index) => {
+        const { folder, extension } = entry
         const isInstalled = installedExtensions.includes(folder)
         const isJustInstalled = justInstalled === folder
 
         return (
           <div className="extension-card mb-5" key={index}>
-            <p>{name}</p>
+            <p>{extension.name}</p>
             <button
               className='mr-2'
               style={{ color: isJustInstalled ? 'var(--green)' : '' }}
@@ -68,7 +83,7 @@ const ExtensionsComponent: FC = () => {
                 'Install'
               )}
             </button>
-            <em>{description}</em>
+            <em>{extension.description}</em>
           </div>
         )
       })}

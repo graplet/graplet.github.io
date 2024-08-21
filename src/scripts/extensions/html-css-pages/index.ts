@@ -1,11 +1,8 @@
-import HTMLCSSPagesComponent from './component.tsx'
-import { toolbox } from './toolbox'
-import './blocks'
+import { DisplayExtension } from "../../models/extensiontypes";
 
-// structure needs to be reworked
-const extension = {
-  component: HTMLCSSPagesComponent,
-  toolbox: toolbox,
+const display : DisplayExtension = {
+  name : 'HTML/CSS Pages',
+  description : 'Create HTML and CSS pages',
 }
 
-export default extension
+export default display;
