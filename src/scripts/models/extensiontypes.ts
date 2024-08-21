@@ -6,5 +6,10 @@ export type DisplayExtension = {
 }
 
 export type Extension = {
-  tabs : { name : string, component: FC ,suffix : string, icon: string}[]
+  tabs : { 
+    name : string,
+    component: FC ,
+    suffix : string, // unique
+    icon: string
+  }[]
 }

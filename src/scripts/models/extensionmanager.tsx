@@ -11,7 +11,7 @@ export class ExtensionManager {
   private static instance: ExtensionManager
 
   private components: Map<string, Map<string, FC>> = new Map()
-  public tabs: Map<string, TabProps> = new Map()
+  public tabs: Map<string, TabProps[]> = new Map()
 
   private constructor() { }
 
@@ -25,16 +25,19 @@ export class ExtensionManager {
 
   public register(extension: Extension, path: string): void {
     extension.tabs.forEach((tab) => {
-      const components = this.components.get(path) || new Map();
-      components.set(tab.name, tab.component);
-      this.components.set(path, components);
+      const tabPath = path + tab.suffix
+      const components = this.components.get(path) || new Map()
+      components.set(tabPath, tab.component)
+      this.components.set(path, components)
 
-      this.tabs.set(path, {
+      const tabs = this.tabs.get(path) || []
+      tabs.push({
         name: tab.name,
-        component: path + tab.suffix,
+        component: tabPath,
         icon: tab.icon
-      });
-    });
+      })
+      this.tabs.set(path, tabs)
+    })
   }
 
 
@@ -44,7 +47,6 @@ export class ExtensionManager {
   }
 
   public getComponent(name: string): FC {
-    console.log(this.components)
     for (const components of this.components.values()) {
       const component = components.get(name)
       if (component) {
@@ -54,4 +56,7 @@ export class ExtensionManager {
     return () => <>Not Found</>
   }
 
+  public getAllTabs(): TabProps[] {
+    return Array.from(this.tabs.values()).flat()
+  }
 }

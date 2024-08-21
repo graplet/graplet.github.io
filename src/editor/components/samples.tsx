@@ -10,9 +10,8 @@ interface SampleLoaderProps {
 
 const SampleLoader = ({ samples }: SampleLoaderProps) => {
   const loadSample = async (path: string) => {
-      const data = await import(`../../samples/${path}.json`)
-      WorkspaceManager.getInstance().getMainWorkspace()?.load(data.default)
-      console.log('Loaded sample:', data)
+    const data = await import(`../../samples/${path}.json`)
+    WorkspaceManager.getInstance().getMainWorkspace()?.load(data.default)
   }
 
   return (

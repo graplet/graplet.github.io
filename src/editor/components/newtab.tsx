@@ -48,19 +48,30 @@ const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, component, icon, tabNode 
     </div>
   )
 }
-
 const NewTabComponent: FC<TabComponentProps> = ({ layoutRef, tabNode }) => {
   const tabs = ['Code', 'Console', 'Extensions', 'Samples', 'Settings']
-
   return (
     <>
       <p>Choose a tab to open</p>
       <div className="flex flex-wrap gap-4">
         {tabs.map((tab) => (
-          <NewTabBox key={tab} layoutRef={layoutRef} name={tab} tabNode={tabNode} />
+          <NewTabBox
+            key={tab}
+            layoutRef={layoutRef}
+            name={tab}
+            tabNode={tabNode}
+          />
         ))}
-        {Array.from(ExtensionManager.getInstance().tabs.entries()).map(([key, tab]) => (
-          <NewTabBox key={key} layoutRef={layoutRef} name={tab.name} component={tab.component} icon={tab.icon} tabNode={tabNode} />
+
+        {ExtensionManager.getInstance().getAllTabs().map((tab) => (
+          <NewTabBox
+            key={tab.name}
+            layoutRef={layoutRef}
+            name={tab.name}
+            icon={tab.icon}
+            component={tab.component}
+            tabNode={tabNode}
+          />
         ))}
       </div>
     </>
