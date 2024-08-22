@@ -1,0 +1,349 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "procedures_defnoreturn",
+        "id": "pEm}f1.5[q0elbx{wK`$",
+        "x": -570,
+        "y": 130,
+        "fields": {
+          "NAME": "main loop"
+        },
+        "inputs": {
+          "STACK": {
+            "block": {
+              "type": "clearconsole",
+              "id": "g$d@tOdtFGXfo67Oa/l#",
+              "next": {
+                "block": {
+                  "type": "controls_if",
+                  "id": ",+L7`rOFgike]W@g?`Y3",
+                  "inputs": {
+                    "IF0": {
+                      "block": {
+                        "type": "logic_compare",
+                        "id": "[zIZ}^a;H=Dav,-^;tE8",
+                        "fields": {
+                          "OP": "EQ"
+                        },
+                        "inputs": {
+                          "A": {
+                            "block": {
+                              "type": "variables_get",
+                              "id": "|r=]dt$~N?D_5P%uCOzR",
+                              "fields": {
+                                "VAR": {
+                                  "id": "QUY/+qkcN-fbK}`n98/@"
+                                }
+                              }
+                            }
+                          },
+                          "B": {
+                            "block": {
+                              "type": "lists_length",
+                              "id": "t{KOdS(i[7XFI*~^NpMX",
+                              "inputs": {
+                                "VALUE": {
+                                  "block": {
+                                    "type": "variables_get",
+                                    "id": "_;=i)EXi1k0{61z#imt+",
+                                    "fields": {
+                                      "VAR": {
+                                        "id": "N5S}^ujTEIFSxR2SfR{u"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DO0": {
+                      "block": {
+                        "type": "variables_set",
+                        "id": "ZZZel_xCP,-Vmnr+pj(a",
+                        "fields": {
+                          "VAR": {
+                            "id": "QUY/+qkcN-fbK}`n98/@"
+                          }
+                        },
+                        "inputs": {
+                          "VALUE": {
+                            "block": {
+                              "type": "math_number",
+                              "id": "g2Ra$GJ9#^@[IcJIKbdZ",
+                              "fields": {
+                                "NUM": 0
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "next": {
+                    "block": {
+                      "type": "math_change",
+                      "id": "+R1zfqKic*T[/*F[CwyZ",
+                      "fields": {
+                        "VAR": {
+                          "id": "QUY/+qkcN-fbK}`n98/@"
+                        }
+                      },
+                      "inputs": {
+                        "DELTA": {
+                          "shadow": {
+                            "type": "math_number",
+                            "id": ":*_D/jG~QMCXwT%y`eZ,",
+                            "fields": {
+                              "NUM": 1
+                            }
+                          }
+                        }
+                      },
+                      "next": {
+                        "block": {
+                          "type": "console",
+                          "id": "Y~G4+A):skA)i]T$(6](",
+                          "fields": {
+                            "TYPE": "LOG"
+                          },
+                          "inputs": {
+                            "INPUT": {
+                              "shadow": {
+                                "type": "text",
+                                "id": "|plYkQ4=gO4G`t_cIUYI",
+                                "fields": {
+                                  "TEXT": "hello game"
+                                }
+                              },
+                              "block": {
+                                "type": "text_join",
+                                "id": "@vkyKJ8Y~WJ?dhY+CzwH",
+                                "inline": true,
+                                "extraState": {
+                                  "itemCount": 2
+                                },
+                                "inputs": {
+                                  "ADD0": {
+                                    "block": {
+                                      "type": "text",
+                                      "id": "=VLrV_3#IGz[tjCvQJ.W",
+                                      "fields": {
+                                        "TEXT": "current frame: "
+                                      }
+                                    }
+                                  },
+                                  "ADD1": {
+                                    "block": {
+                                      "type": "lists_getIndex",
+                                      "id": "rr3|GEmWaGRt1XE5[J$p",
+                                      "fields": {
+                                        "MODE": "GET",
+                                        "WHERE": "FROM_START"
+                                      },
+                                      "inputs": {
+                                        "VALUE": {
+                                          "block": {
+                                            "type": "variables_get",
+                                            "id": "pf?M(-@-)jt1atAXZ@h:",
+                                            "fields": {
+                                              "VAR": {
+                                                "id": "N5S}^ujTEIFSxR2SfR{u"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "AT": {
+                                          "block": {
+                                            "type": "variables_get",
+                                            "id": "@SzH_P{G,PRwx@j9W!X0",
+                                            "fields": {
+                                              "VAR": {
+                                                "id": "QUY/+qkcN-fbK}`n98/@"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "next": {
+                            "block": {
+                              "type": "procedures_callnoreturn",
+                              "id": "WYiX.A^B(%i_b6PFNLab",
+                              "extraState": {
+                                "name": "tick"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "procedures_defnoreturn",
+        "id": "~Oy6ov[5d)lXG5@0[V|W",
+        "x": -130,
+        "y": 70,
+        "fields": {
+          "NAME": "tick"
+        },
+        "inputs": {
+          "STACK": {
+            "block": {
+              "type": "wait_seconds",
+              "id": ")uBKf)qcnD*jP?_GLn+d",
+              "inputs": {
+                "SECONDS": {
+                  "shadow": {
+                    "type": "math_number",
+                    "id": "m?U?}pS=kgh(%CPIdw?~",
+                    "fields": {
+                      "NUM": 0.1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "variables_set",
+        "id": "Sh|n))qZb^^evBY)0Co,",
+        "x": -530,
+        "y": -170,
+        "fields": {
+          "VAR": {
+            "id": "QUY/+qkcN-fbK}`n98/@"
+          }
+        },
+        "inputs": {
+          "VALUE": {
+            "block": {
+              "type": "math_number",
+              "id": "U0=m[fHldXa{07+a|d5J",
+              "fields": {
+                "NUM": 0
+              }
+            }
+          }
+        },
+        "next": {
+          "block": {
+            "type": "variables_set",
+            "id": "3hQ=TCc`3[M_oyatX0l0",
+            "fields": {
+              "VAR": {
+                "id": "N5S}^ujTEIFSxR2SfR{u"
+              }
+            },
+            "inputs": {
+              "VALUE": {
+                "block": {
+                  "type": "lists_create_with",
+                  "id": "`Nw{S7?I2[6y]y/,2([-",
+                  "inline": true,
+                  "extraState": {
+                    "itemCount": 4
+                  },
+                  "inputs": {
+                    "ADD0": {
+                      "block": {
+                        "type": "text",
+                        "id": "yX!3mNn.^3Okk[XLAE;1",
+                        "fields": {
+                          "TEXT": "/"
+                        }
+                      }
+                    },
+                    "ADD1": {
+                      "block": {
+                        "type": "text",
+                        "id": "!swrvuRS2zk^JZg!P{ah",
+                        "fields": {
+                          "TEXT": "-"
+                        }
+                      }
+                    },
+                    "ADD2": {
+                      "block": {
+                        "type": "text",
+                        "id": "(|7X=LJI7Eny58W8^[3e",
+                        "fields": {
+                          "TEXT": "\\"
+                        }
+                      }
+                    },
+                    "ADD3": {
+                      "block": {
+                        "type": "text",
+                        "id": "0Ms.w[+0++KEW~9OOE3|",
+                        "fields": {
+                          "TEXT": "-"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "next": {
+              "block": {
+                "type": "controls_whileUntil",
+                "id": "Qr|f+G+t0g%xTm2=2jbV",
+                "fields": {
+                  "MODE": "WHILE"
+                },
+                "inputs": {
+                  "BOOL": {
+                    "block": {
+                      "type": "logic_boolean",
+                      "id": "K{re()Gtj]V/x;,OF(.n",
+                      "fields": {
+                        "BOOL": "TRUE"
+                      }
+                    }
+                  },
+                  "DO": {
+                    "block": {
+                      "type": "procedures_callnoreturn",
+                      "id": "6xXo_AJ^E^#DO}epPYv~",
+                      "extraState": {
+                        "name": "main loop"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "variables": [
+    {
+      "name": "frames",
+      "id": "N5S}^ujTEIFSxR2SfR{u"
+    },
+    {
+      "name": "index",
+      "id": "QUY/+qkcN-fbK}`n98/@"
+    }
+  ]
+}

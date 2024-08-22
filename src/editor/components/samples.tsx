@@ -1,17 +1,35 @@
 import WorkspaceManager from "../../scripts/models/workspacemanager"
+import { useState, useEffect } from "react"
 
 interface Sample {
   name: string
 }
 
-interface SampleLoaderProps {
-  samples: Sample[]
-}
+const SampleLoader = () => {
+  const [samples, setSamples] = useState<Sample[]>([])
 
-const SampleLoader = ({ samples }: SampleLoaderProps) => {
+  useEffect(() => {
+    // Dynamically import all JSON files from the samples directory
+    const modules = import.meta.glob("../../samples/*.json")
+
+    const sampleNames = Object.keys(modules).map((filePath) => {
+      // Extract the file name without the path and extension
+      const name = filePath.split("/").pop()?.replace(".json", "")
+      return { name: name || "" }
+    })
+
+    setSamples(sampleNames)
+  }, [])
+
   const loadSample = async (path: string) => {
-    const data = await import(`../../samples/${path}.json`)
-    WorkspaceManager.getInstance().getMainWorkspace()?.load(data.default)
+    const modules = import.meta.glob("../../samples/*.json")
+    const module = modules[`../../samples/${path}.json`]
+    if (module) {
+      const data = await module() as { default: { [key: string]: unknown; } }
+      WorkspaceManager.getInstance().getMainWorkspace()?.load(data.default)
+    } else {
+      console.error(`Module for ${path} not found`)
+    }
   }
 
   return (
@@ -33,16 +51,7 @@ const SampleLoader = ({ samples }: SampleLoaderProps) => {
 }
 
 const SamplesComponent = () => {
-  return (
-    <SampleLoader
-      samples={[
-        { name: 'Collatz Conjecture' },
-        { name: 'Shopping Cart' },
-        { name: 'Guess The Number' },
-        { name: 'Rock Paper Scissors' },
-      ]}
-    />
-  )
+  return <SampleLoader />
 }
 
 export default SamplesComponent

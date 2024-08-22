@@ -1,1 +1,183 @@
-{"blocks":{"languageVersion":0,"blocks":[{"type":"procedures_defnoreturn","id":"an:g9K6`{!PR`y%P|ojP","x":-450,"y":170,"icons":{"comment":{"text":"Describe this function...","pinned":false,"height":80,"width":160}},"fields":{"NAME":"buy"},"inputs":{"STACK":{"block":{"type":"lists_setIndex","id":"o2alAoAw.FW,mPWe-q31","fields":{"MODE":"INSERT","WHERE":"LAST"},"inputs":{"LIST":{"block":{"type":"variables_get","id":"fYLtt~Eh|kG.nf:^f*{^","fields":{"VAR":{"id":"H_quv87%4W|f~4e7?c(_"}}}},"TO":{"block":{"type":"text_prompt_ext","id":"}OZYpDNb*iHh0bUMIbX7","extraState":"<mutation type=\"TEXT\"></mutation>","fields":{"TYPE":"TEXT"},"inputs":{"TEXT":{"shadow":{"type":"text","id":"gNy)]QkKMo)t79g$-*pm","fields":{"TEXT":"Add a fruit:"}}}}}}},"next":{"block":{"type":"controls_if","id":"xg=6=(=d`pkL1p;Yf5}q","extraState":{"hasElse":true},"inputs":{"IF0":{"block":{"type":"confirm","id":"f^[_E#xV|fS`J=XDO%[L","inputs":{"TEXT":{"shadow":{"type":"text","id":"$:1,-`KP^6BDCs2ZwPdK","fields":{"TEXT":"Do you wish to add another Fruit?"}}}}}},"DO0":{"block":{"type":"procedures_callnoreturn","id":"GoA?_=s?z!?VxJ(MPV5N","extraState":{"name":"buy"}}},"ELSE":{"block":{"type":"alert","id":"2T2pc;4;JW_(Pmj,HTy?","inputs":{"TEXT":{"shadow":{"type":"text","id":"tV|AS`vf^`^SS/0Il2-p","fields":{"TEXT":"abc"}},"block":{"type":"text_join","id":"Z4{o#/PZ2#}1VEmfb?T7","inline":true,"extraState":{"itemCount":2},"inputs":{"ADD0":{"block":{"type":"text","id":"5`mmIHJu}VU/G9Nn2ruV","fields":{"TEXT":"You bought: "}}},"ADD1":{"block":{"type":"variables_get","id":"X]xvvisc8-tIxJNx:4~v","fields":{"VAR":{"id":"H_quv87%4W|f~4e7?c(_"}}}}}}}}}}}}}}}}},{"type":"variables_set","id":"JT/0kUy[jFm*L0^@;4Um","x":-450,"y":-10,"fields":{"VAR":{"id":"H_quv87%4W|f~4e7?c(_"}},"inputs":{"VALUE":{"block":{"type":"lists_create_with","id":"~]SY#GHzU]*Y;$Te%#5d","extraState":{"itemCount":0}}}},"next":{"block":{"type":"procedures_callnoreturn","id":"i/3tyy5U@3.yOt5,l^Zx","extraState":{"name":"buy"}}}}]},"variables":[{"name":"fruits","id":"H_quv87%4W|f~4e7?c(_"}]}
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "procedures_defnoreturn",
+        "id": "an:g9K6`{!PR`y%P|ojP",
+        "x": -450,
+        "y": 170,
+        "fields": {
+          "NAME": "buy"
+        },
+        "inputs": {
+          "STACK": {
+            "block": {
+              "type": "lists_setIndex",
+              "id": "o2alAoAw.FW,mPWe-q31",
+              "fields": {
+                "MODE": "INSERT",
+                "WHERE": "LAST"
+              },
+              "inputs": {
+                "LIST": {
+                  "block": {
+                    "type": "variables_get",
+                    "id": "fYLtt~Eh|kG.nf:^f*{^",
+                    "fields": {
+                      "VAR": {
+                        "id": "H_quv87%4W|f~4e7?c(_"
+                      }
+                    }
+                  }
+                },
+                "TO": {
+                  "block": {
+                    "type": "text_prompt_ext",
+                    "id": "}OZYpDNb*iHh0bUMIbX7",
+                    "extraState": "\u003Cmutation type=\"TEXT\"\u003E\u003C/mutation\u003E",
+                    "fields": {
+                      "TYPE": "TEXT"
+                    },
+                    "inputs": {
+                      "TEXT": {
+                        "shadow": {
+                          "type": "text",
+                          "id": "gNy)]QkKMo)t79g$-*pm",
+                          "fields": {
+                            "TEXT": "Add a fruit:"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "next": {
+                "block": {
+                  "type": "controls_if",
+                  "id": "xg=6=(=d`pkL1p;Yf5}q",
+                  "extraState": {
+                    "hasElse": true
+                  },
+                  "inputs": {
+                    "IF0": {
+                      "block": {
+                        "type": "confirm",
+                        "id": "f^[_E#xV|fS`J=XDO%[L",
+                        "inputs": {
+                          "TEXT": {
+                            "shadow": {
+                              "type": "text",
+                              "id": "$:1,-`KP^6BDCs2ZwPdK",
+                              "fields": {
+                                "TEXT": "Do you wish to add another Fruit?"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DO0": {
+                      "block": {
+                        "type": "procedures_callnoreturn",
+                        "id": "GoA?_=s?z!?VxJ(MPV5N",
+                        "extraState": {
+                          "name": "buy"
+                        }
+                      }
+                    },
+                    "ELSE": {
+                      "block": {
+                        "type": "alert",
+                        "id": "2T2pc;4;JW_(Pmj,HTy?",
+                        "inputs": {
+                          "TEXT": {
+                            "shadow": {
+                              "type": "text",
+                              "id": "tV|AS`vf^`^SS/0Il2-p",
+                              "fields": {
+                                "TEXT": "abc"
+                              }
+                            },
+                            "block": {
+                              "type": "text_join",
+                              "id": "Z4{o#/PZ2#}1VEmfb?T7",
+                              "inline": true,
+                              "extraState": {
+                                "itemCount": 2
+                              },
+                              "inputs": {
+                                "ADD0": {
+                                  "block": {
+                                    "type": "text",
+                                    "id": "5`mmIHJu}VU/G9Nn2ruV",
+                                    "fields": {
+                                      "TEXT": "You bought: "
+                                    }
+                                  }
+                                },
+                                "ADD1": {
+                                  "block": {
+                                    "type": "variables_get",
+                                    "id": "X]xvvisc8-tIxJNx:4~v",
+                                    "fields": {
+                                      "VAR": {
+                                        "id": "H_quv87%4W|f~4e7?c(_"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "variables_set",
+        "id": "JT/0kUy[jFm*L0^@;4Um",
+        "x": -450,
+        "y": -10,
+        "fields": {
+          "VAR": {
+            "id": "H_quv87%4W|f~4e7?c(_"
+          }
+        },
+        "inputs": {
+          "VALUE": {
+            "block": {
+              "type": "lists_create_with",
+              "id": "~]SY#GHzU]*Y;$Te%#5d",
+              "extraState": {
+                "itemCount": 0
+              }
+            }
+          }
+        },
+        "next": {
+          "block": {
+            "type": "procedures_callnoreturn",
+            "id": "i/3tyy5U@3.yOt5,l^Zx",
+            "extraState": {
+              "name": "buy"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "variables": [
+    {
+      "name": "fruits",
+      "id": "H_quv87%4W|f~4e7?c(_"
+    }
+  ]
+}
