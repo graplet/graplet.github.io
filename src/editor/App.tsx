@@ -25,6 +25,7 @@ import WorkspaceComponent from './components/workspace'
 import './styles/layout.css'
 import './styles/blockly.css'
 import { ExtensionManager } from '../scripts/models/extensionmanager'
+import { TutorialComponent } from './components/tutorial'
 
 
 const model = Model.fromJson(layoutJsonConfig)
@@ -54,10 +55,11 @@ function App() {
       "workspace": <WorkspaceComponent />,
       "code": <CodeOutputComponent code={code} setCode={setCode} />,
       "console": <Console logGrouping={false} logs={logs} variant={theme === "dark" ? "dark" : "light"} />,
-      "extensions": <div className='px-4'><ExtensionsComponent /></div>,
-      "newtab": <div className='px-4'><NewTabComponent layoutRef={layoutRef} tabNode={node} /></div>,
-      "settings": <div className='px-4'><SettingsComponent /></div>,
-      "samples": <div className='px-4'><SamplesComponent /></div>,
+      "extensions": <ExtensionsComponent />,
+      "newtab": <NewTabComponent layoutRef={layoutRef} tabNode={node} />,
+      "settings": <SettingsComponent />,
+      "samples": <SamplesComponent />,
+      "tutorial": <TutorialComponent />,
     }
     Actions.setActiveTabset(node.getParent()!.getId())
     const ExtensionComponent = ExtensionManager.getInstance().getComponent(component)

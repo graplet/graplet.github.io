@@ -15,8 +15,7 @@ const SampleLoader = ({ samples }: SampleLoaderProps) => {
   }
 
   return (
-    <div>
-      <br />
+    <div className="m-4">
       {samples.map((sample) => (
         <div style={{ marginBottom: 10 }} key={sample.name}>
           <label htmlFor={`load-sample-${sample.name}`}>{sample.name}</label>

@@ -54,7 +54,7 @@ const SettingsComponent = () => {
   }
 
   return (
-    <div className="mt-4 max-w-80">
+    <div className="m-4 max-w-80">
       <div className="flex justify-between text-nowrap mb-4">
         <p className="m-0">Theme</p>
         <button onClick={handleThemeChange}>

@@ -57,8 +57,7 @@ const ExtensionsComponent: FC = () => {
   }
 
   return (
-    <div>
-      <p>Extensions are work in progress</p>
+    <div className='mx-4'>
       {ExtensionCatalog.map((entry, index) => {
         const { folder, extension } = entry
         const isInstalled = installedExtensions.includes(folder)

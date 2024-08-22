@@ -21,6 +21,11 @@ h1,h2,h3{
 ::-webkit-scrollbar{
   background: transparent;
   width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-corner{
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb{

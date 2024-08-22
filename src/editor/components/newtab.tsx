@@ -49,9 +49,9 @@ const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, component, icon, tabNode 
   )
 }
 const NewTabComponent: FC<TabComponentProps> = ({ layoutRef, tabNode }) => {
-  const tabs = ['Code', 'Console', 'Extensions', 'Samples', 'Settings']
+  const tabs = ['Code', 'Console', 'Extensions', 'Samples', 'Settings', 'Tutorial']
   return (
-    <>
+    <div className='mx-4'>
       <p>Choose a tab to open</p>
       <div className="flex flex-wrap gap-4">
         {tabs.map((tab) => (
@@ -74,7 +74,7 @@ const NewTabComponent: FC<TabComponentProps> = ({ layoutRef, tabNode }) => {
           />
         ))}
       </div>
-    </>
+    </div>
   )
 }
 

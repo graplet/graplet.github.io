@@ -9,7 +9,7 @@ export const layoutJsonConfig: IJsonModel = {
     children: [
       {
         type: "tabset",
-        weight: 70,
+        weight: 40,
         children: [
           {
             type: "tab",
@@ -17,6 +17,12 @@ export const layoutJsonConfig: IJsonModel = {
             icon: "/tabicons/blocks.svg",
             component: "workspace",
             enableClose: false,
+          },
+          {
+            type: "tab",
+            name: "Code",
+            icon: "/tabicons/code.svg",
+            component: "code",
           },
         ],
       },
@@ -30,9 +36,9 @@ export const layoutJsonConfig: IJsonModel = {
             children: [
               {
                 type: "tab",
-                name: "Code",
-                icon: "/tabicons/code.svg",
-                component: "code",
+                name: "Tutorial",
+                icon: "/tabicons/tutorial.svg",
+                component: "tutorial",
               },
             ],
           },
