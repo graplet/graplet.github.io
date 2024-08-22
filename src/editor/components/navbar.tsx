@@ -13,7 +13,7 @@ const getMainWorkspace = () => {
   return mainWorkspace
 }
 
-const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout | null> }> = ({ code , layoutRef }) => {
+const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout | null> }> = ({ code, layoutRef }) => {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saved'>('idle')
   const [projectId, setProjectId] = useState<string | null>(null)
   const [projectImage, setProjectImage] = useState<string>(defaultImage)
@@ -54,8 +54,8 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
   }, [code])
 
   const launchSettings = useCallback(() => {
-    
-    layoutRef.current?.addTabToActiveTabSet({icon: '/tabicons/settings.svg', component: 'settings', name: 'Settings'})
+
+    layoutRef.current?.addTabToActiveTabSet({ icon: '/tabicons/settings.svg', component: 'settings', name: 'Settings' })
   }, [layoutRef])
 
   const saveCode = useCallback(async () => {
@@ -139,7 +139,7 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
 
   return (
     <nav className='h-11 flex items-center px-3 gap-3'>
-      <a style={{ color: 'rgb(var(--rgb-text))'}} href='/' className='inline-flex cursor-pointer gap-3 no-underline'>
+      <a style={{ color: 'rgb(var(--rgb-text))' }} href='/' className='inline-flex cursor-pointer gap-3 no-underline'>
         <img
           src='/fill.svg'
           alt='Graplet Logo'
@@ -152,7 +152,7 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
       </button>
       <button
         onClick={saveCode}
-        style={saveStatus === 'saved' ? { color: 'var(--green) '} : {}}
+        style={saveStatus === 'saved' ? { color: 'var(--green) ' } : {}}
       >
         {saveStatus === 'saved' ? (
           <>

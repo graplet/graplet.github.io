@@ -26,7 +26,8 @@ import './styles/layout.css'
 import './styles/blockly.css'
 import { ExtensionManager } from '../scripts/models/extensionmanager'
 import { TutorialComponent } from './components/tutorial'
-
+import WorkspaceManager from '../scripts/models/workspacemanager'
+import { javascriptGenerator } from 'blockly/javascript'
 
 const model = Model.fromJson(layoutJsonConfig)
 
@@ -34,6 +35,7 @@ function App() {
   const layoutRef = useRef<Layout | null>(null)
   const [code, setCode] = useState("")
   const [logs, setLogs] = useState<Message[]>([])
+  const [isWorkspaceReady, setWorkspaceReady] = useState<boolean>(false);
   const { theme } = useContext(ThemeContext)
 
   useEffect(() => {
@@ -49,10 +51,39 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!isWorkspaceReady) return;
+
+    const getMainWorkspace = () => {
+      const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace();
+      if (!mainWorkspace) throw new Error('Main Workspace not initialized');
+      return mainWorkspace;
+    };
+
+    const getWorkspaceSVG = () => {
+      const workspaceSVG = getMainWorkspace().getComponent();
+      if (!workspaceSVG) throw new Error('Workspace component not found');
+      return workspaceSVG;
+    };
+
+    const updateCode = () => {
+      const generatedCode = javascriptGenerator.workspaceToCode(getWorkspaceSVG());
+      setCode(generatedCode);
+    };
+
+    updateCode();
+    getWorkspaceSVG().addChangeListener(updateCode);
+
+    return () => {
+      getWorkspaceSVG().removeChangeListener(updateCode);
+    };
+  }, [isWorkspaceReady, setCode]);
+
+
   const factory = (node: TabNode) => {
     const component: string = node.getComponent()!
     const componentsMap: Record<string, JSX.Element> = {
-      "workspace": <WorkspaceComponent />,
+      "workspace": <WorkspaceComponent onWorkspaceReady={() => setWorkspaceReady(true)} />,
       "code": <CodeOutputComponent code={code} setCode={setCode} />,
       "console": <Console logGrouping={false} logs={logs} variant={theme === "dark" ? "dark" : "light"} />,
       "extensions": <ExtensionsComponent />,
@@ -65,7 +96,6 @@ function App() {
     const ExtensionComponent = ExtensionManager.getInstance().getComponent(component)
     return componentsMap[component] || <ExtensionComponent />
   }
-
 
   const newTabButton = (node: (TabSetNode | BorderNode), renderValues: ITabSetRenderValues) => {
     if (node instanceof TabSetNode) {
