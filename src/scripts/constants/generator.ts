@@ -58,3 +58,24 @@ javascriptGenerator.forBlock['procedures_defreturn'] = function(block: Block, ge
   const code = `async function ${funcName}() {\n${branch}return ${returnValue};\n}\n`;
   return code;
 };
+
+javascriptGenerator.forBlock['procedures_callnoreturn'] = function(block: Block, generator: JavascriptGenerator) {
+  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE');
+  const args = block.inputList
+    .filter(input => input.connection && input.connection.targetBlock())
+    .map(input => generator.valueToCode(block, input.name, Order.NONE))
+    .join(', ');
+  const code = `await ${funcName}(${args});\n`;
+  return code;
+};
+
+javascriptGenerator.forBlock['procedures_callreturn'] = function(block: Block, generator: JavascriptGenerator) {
+  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE');
+  const args = block.inputList
+    .filter(input => input.connection && input.connection.targetBlock())
+    .map(input => generator.valueToCode(block, input.name, Order.NONE))
+    .join(', ');
+
+  const code = `await ${funcName}(${args})`;
+  return [code, Order.FUNCTION_CALL];
+};
