@@ -1,7 +1,7 @@
 import * as Blockly from 'blockly'
 import { CrossTabCopyPaste } from '@blockly/plugin-cross-tab-copy-paste'
 import '../constants/blocks'
-import '../generators/js'
+import '../constants/generator'
 import '../overrides/category'
 
 const plugin = new CrossTabCopyPaste()

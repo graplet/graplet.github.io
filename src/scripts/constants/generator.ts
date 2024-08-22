@@ -39,3 +39,22 @@ javascriptGenerator.forBlock['list_remove_by_index'] = function(block:Block,gene
   return `${list}.splice(${index},1)\n`
 }
 
+javascriptGenerator.forBlock['wait_seconds'] = function(block:Block,generator:JavascriptGenerator) {
+  const seconds: string = generator.valueToCode(block, 'SECONDS', Order.ATOMIC)
+  return `await new Promise(resolve => setTimeout(resolve, ${seconds} * 1000))\n`
+}
+
+javascriptGenerator.forBlock['procedures_defnoreturn'] = function(block: Block, generator: JavascriptGenerator) {
+  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE');
+  const branch = generator.statementToCode(block, 'STACK');
+  const code = `async function ${funcName}() {\n${branch}}\n`;
+  return code;
+};
+
+javascriptGenerator.forBlock['procedures_defreturn'] = function(block: Block, generator: JavascriptGenerator) {
+  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE');
+  const branch = generator.statementToCode(block, 'STACK');
+  const returnValue = generator.valueToCode(block, 'RETURN', Order.NONE) || 'null';
+  const code = `async function ${funcName}() {\n${branch}return ${returnValue};\n}\n`;
+  return code;
+};

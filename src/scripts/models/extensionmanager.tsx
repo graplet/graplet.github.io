@@ -40,7 +40,6 @@ export class ExtensionManager {
     })
   }
 
-
   public unregister(path: string): void {
     this.components.delete(path)
     this.tabs.delete(path)

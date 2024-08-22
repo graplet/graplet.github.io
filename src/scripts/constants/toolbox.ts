@@ -11,6 +11,20 @@ export const defaultToolbox = {
           kind: 'block',
         },
         {
+          type: 'wait_seconds',
+          kind: 'block',
+          inputs : {
+            SECONDS: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 1,
+                },
+              },
+            },
+          },
+        },
+        {
           type: 'logic_compare',
           kind: 'block',
           fields: {

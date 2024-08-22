@@ -58,3 +58,17 @@ Blockly.Blocks['confirm'] = {
     this.setTooltip('Display a confirmation dialog')
   }
 }
+
+Blockly.Blocks['wait_seconds'] = {
+  init: function (this: Blockly.Block) {
+    this.appendValueInput('SECONDS')
+        .appendField('wait')
+        .setCheck('Number')
+    this.appendDummyInput()
+        .appendField('seconds')
+    this.setColour(210)
+    this.setPreviousStatement(true)
+    this.setNextStatement(true)
+    this.setTooltip('Wait for a number of seconds')
+  }
+}
