@@ -1,11 +1,12 @@
-import { IconDefinition, faCircleNodes, faCode, faCogs, faList, faSquareRootAlt, faSyncAlt, faTextWidth } from '@fortawesome/free-solid-svg-icons'
+import { IconDefinition, faCircleNodes, faCode, faCogs, faList, faLocationArrow, faSquareRootAlt, faSyncAlt, faTextWidth } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Blockly from 'blockly'
 import { renderToString } from 'react-dom/server'
 
-type CategoryName = 'Logic' | 'Loops' | 'Math' | 'Text' | 'List' | 'Variables' | 'Functions'
+type CategoryName = 'Events' | 'Loops' | 'Text' | 'Logic' | 'Math' | 'List' | 'Variables' | 'Functions'
 
 const categoryIcons: Record<CategoryName, IconDefinition> = {
+  Events: faLocationArrow,
   Logic: faCircleNodes,
   Loops: faSyncAlt,
   Math: faSquareRootAlt,
@@ -35,7 +36,7 @@ class Category extends Blockly.ToolboxCategory {
 
   addColourBorder_(colour: string): void {
     const labelDom = this.getLabelDom()
-    if (this.rowDiv_ && labelDom){
+    if (this.rowDiv_ && labelDom) {
       this.rowDiv_.style.backgroundColor = 'var(--bg-1)'
       labelDom.style.color = colour
     }
@@ -75,7 +76,7 @@ class Category extends Blockly.ToolboxCategory {
     }
 
     Blockly.utils.aria.setState((this.htmlDiv_ as HTMLElement),
-    Blockly.utils.aria.State.SELECTED, isSelected)
+      Blockly.utils.aria.State.SELECTED, isSelected)
   }
 }
 

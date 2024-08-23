@@ -13,6 +13,11 @@ export const grapletBlocklyTheme: Blockly.Theme = Blockly.Theme.defineTheme('gra
     'toolboxBackgroundColour': 'var(--bg-2)',
     'flyoutBackgroundColour': 'var(--bg-2)',
     'scrollbarColour': 'var(--bg-2)',
-  }
+  },
+  'categoryStyles': {
+    'event_category': {
+       'colour': '#a5865b'
+    },
+ }
 })
 

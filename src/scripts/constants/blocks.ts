@@ -72,3 +72,30 @@ Blockly.Blocks['wait_seconds'] = {
     this.setTooltip('Wait for a number of seconds')
   }
 }
+
+Blockly.Blocks['key_event'] = {
+  init: function() {
+    const keys = [
+      'ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft',
+      'Space', 'Enter', 'Escape', 'Shift', 'Backspace', 'Tab', 'CapsLock'
+    ]
+
+    Array.from({ length: 26 }).forEach((_, i) => {
+      keys.push(String.fromCharCode(97 + i))
+    })
+
+    Array.from({ length: 10 }).forEach((_, i) => {
+      keys.push(String.fromCharCode(48 + i))
+    })
+    const dropdownOptions: Blockly.MenuGenerator = keys.map(key => [key, key])
+    this.appendDummyInput('NAME')
+      .appendField('listen to')
+      .appendField(new Blockly.FieldDropdown(dropdownOptions), 'KEY')
+    this.appendStatementInput('DO')
+      .setCheck(null)
+      .appendField('do')
+    this.setColour(35)
+    this.setTooltip('Run the following blocks when a specific key is pressed')
+    this.setHelpUrl('')
+  }
+}

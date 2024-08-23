@@ -35,7 +35,7 @@ function App() {
   const layoutRef = useRef<Layout | null>(null)
   const [code, setCode] = useState("")
   const [logs, setLogs] = useState<Message[]>([])
-  const [isWorkspaceReady, setWorkspaceReady] = useState<boolean>(false);
+  const [isWorkspaceReady, setWorkspaceReady] = useState<boolean>(false)
   const { theme } = useContext(ThemeContext)
 
   useEffect(() => {
@@ -52,32 +52,32 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!isWorkspaceReady) return;
+    if (!isWorkspaceReady) return
 
     const getMainWorkspace = () => {
-      const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace();
-      if (!mainWorkspace) throw new Error('Main Workspace not initialized');
-      return mainWorkspace;
-    };
+      const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
+      if (!mainWorkspace) throw new Error('Main Workspace not initialized')
+      return mainWorkspace
+    }
 
     const getWorkspaceSVG = () => {
-      const workspaceSVG = getMainWorkspace().getComponent();
-      if (!workspaceSVG) throw new Error('Workspace component not found');
-      return workspaceSVG;
-    };
+      const workspaceSVG = getMainWorkspace().getComponent()
+      if (!workspaceSVG) throw new Error('Workspace component not found')
+      return workspaceSVG
+    }
 
     const updateCode = () => {
-      const generatedCode = javascriptGenerator.workspaceToCode(getWorkspaceSVG());
-      setCode(generatedCode);
-    };
+      const generatedCode = javascriptGenerator.workspaceToCode(getWorkspaceSVG())
+      setCode(generatedCode)
+    }
 
-    updateCode();
-    getWorkspaceSVG().addChangeListener(updateCode);
+    updateCode()
+    getWorkspaceSVG().addChangeListener(updateCode)
 
     return () => {
-      getWorkspaceSVG().removeChangeListener(updateCode);
-    };
-  }, [isWorkspaceReady, setCode]);
+      getWorkspaceSVG().removeChangeListener(updateCode)
+    }
+  }, [isWorkspaceReady, setCode])
 
 
   const factory = (node: TabNode) => {

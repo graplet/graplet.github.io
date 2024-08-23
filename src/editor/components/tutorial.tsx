@@ -1,20 +1,20 @@
-import { faVideo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC, useState, useRef, useEffect } from "react";
+import { faVideo } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FC, useState, useRef, useEffect } from "react"
 
 export const TutorialComponent: FC = () => {
-  const [isVideoVisible, setIsVideoVisible] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoVisible, setIsVideoVisible] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const handleWatchClick = () => {
-    setIsVideoVisible(true);
-  };
+    setIsVideoVisible(true)
+  }
 
   useEffect(() => {
     if (isVideoVisible && videoRef.current) {
-      videoRef.current.play();
+      videoRef.current.play()
     }
-  }, [isVideoVisible]);
+  }, [isVideoVisible])
 
   return (
     <div className="h-full flex justify-center items-center w-full" style={{ backgroundImage: !isVideoVisible ? 'url("/thumbnail.png")' : undefined }}>
@@ -34,5 +34,5 @@ export const TutorialComponent: FC = () => {
         </video>
       )}
     </div>
-  );
-};
+  )
+}

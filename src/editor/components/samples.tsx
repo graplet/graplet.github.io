@@ -9,11 +9,9 @@ const SampleLoader = () => {
   const [samples, setSamples] = useState<Sample[]>([])
 
   useEffect(() => {
-    // Dynamically import all JSON files from the samples directory
     const modules = import.meta.glob("../../samples/*.json")
 
     const sampleNames = Object.keys(modules).map((filePath) => {
-      // Extract the file name without the path and extension
       const name = filePath.split("/").pop()?.replace(".json", "")
       return { name: name || "" }
     })
@@ -25,7 +23,7 @@ const SampleLoader = () => {
     const modules = import.meta.glob("../../samples/*.json")
     const module = modules[`../../samples/${path}.json`]
     if (module) {
-      const data = await module() as { default: { [key: string]: unknown; } }
+      const data = await module() as { default: { [key: string]: unknown } }
       WorkspaceManager.getInstance().getMainWorkspace()?.load(data.default)
     } else {
       console.error(`Module for ${path} not found`)

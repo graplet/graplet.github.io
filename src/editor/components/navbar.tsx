@@ -47,11 +47,11 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
 
   const runCode = useCallback(async () => {
     try {
-      await new Function(`"use strict"; (async () => { ${code} })()`)();
+      await new Function(`(async () => { ${code} })()`)()
     } catch (error) {
-      console.error('Error executing code:', error);
+      console.error('Error executing code:', error)
     }
-  }, [code]);
+  }, [code])
 
 
   const launchSettings = useCallback(() => {

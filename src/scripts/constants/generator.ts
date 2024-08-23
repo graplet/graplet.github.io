@@ -45,37 +45,50 @@ javascriptGenerator.forBlock['wait_seconds'] = function(block:Block,generator:Ja
 }
 
 javascriptGenerator.forBlock['procedures_defnoreturn'] = function(block: Block, generator: JavascriptGenerator) {
-  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE');
-  const branch = generator.statementToCode(block, 'STACK');
-  const code = `async function ${funcName}() {\n${branch}}\n`;
-  return code;
-};
+  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE')
+  const branch = generator.statementToCode(block, 'STACK')
+  const code = `async function ${funcName}() {\n${branch}}\n`
+  return code
+}
 
 javascriptGenerator.forBlock['procedures_defreturn'] = function(block: Block, generator: JavascriptGenerator) {
-  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE');
-  const branch = generator.statementToCode(block, 'STACK');
-  const returnValue = generator.valueToCode(block, 'RETURN', Order.NONE) || 'null';
-  const code = `async function ${funcName}() {\n${branch}return ${returnValue};\n}\n`;
-  return code;
-};
+  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE')
+  const branch = generator.statementToCode(block, 'STACK')
+  const returnValue = generator.valueToCode(block, 'RETURN', Order.NONE) || 'null'
+  const code = `async function ${funcName}() {\n${branch}return ${returnValue}\n}\n`
+  return code
+}
 
 javascriptGenerator.forBlock['procedures_callnoreturn'] = function(block: Block, generator: JavascriptGenerator) {
-  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE');
+  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE')
   const args = block.inputList
     .filter(input => input.connection && input.connection.targetBlock())
     .map(input => generator.valueToCode(block, input.name, Order.NONE))
-    .join(', ');
-  const code = `await ${funcName}(${args});\n`;
-  return code;
-};
+    .join(', ')
+  const code = `await ${funcName}(${args})\n`
+  return code
+}
 
 javascriptGenerator.forBlock['procedures_callreturn'] = function(block: Block, generator: JavascriptGenerator) {
-  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE');
+  const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE')
   const args = block.inputList
     .filter(input => input.connection && input.connection.targetBlock())
     .map(input => generator.valueToCode(block, input.name, Order.NONE))
-    .join(', ');
+    .join(', ')
 
-  const code = `await ${funcName}(${args})`;
-  return [code, Order.FUNCTION_CALL];
+  const code = `await ${funcName}(${args})`
+  return [code, Order.FUNCTION_CALL]
+}
+
+javascriptGenerator.forBlock['key_event'] = function(block) {
+  const key = block.getFieldValue('KEY');
+  const statements = javascriptGenerator.statementToCode(block, 'DO');
+  
+  const code = 
+`document.addEventListener('keydown', function(event) {
+  if (event.key === '${key}') {
+    ${statements}
+  }});`;
+  
+  return code;
 };
