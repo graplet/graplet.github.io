@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createContext, ReactNode } from 'react'
 import { darkThemeColors, lightThemeColors } from '../constants/colors'
-import { GrapletLocalStorage } from './storage'
 
 export type ThemeOptions = 'light' | 'dark' | 'system'
 
@@ -16,25 +15,12 @@ const ThemeContext = createContext<ThemeContextType>({
 })
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const getInitialTheme = async (): Promise<ThemeOptions> => {
-    try {
-      const savedTheme = await GrapletLocalStorage.getTheme() as ThemeOptions
-      return savedTheme || 'system'
-    } catch {
-      return 'system'
-    }
+  const getInitialTheme = (): ThemeOptions => {
+    const savedTheme = localStorage.getItem('theme') as ThemeOptions
+    return savedTheme || 'system'
   }
 
-  const [theme, setTheme] = useState<ThemeOptions>('system')
-
-  useEffect(() => {
-    const initializeTheme = async () => {
-      const initialTheme = await getInitialTheme()
-      setTheme(initialTheme)
-    }
-
-    initializeTheme()
-  }, [])
+  const [theme, setTheme] = useState<ThemeOptions>(getInitialTheme)
 
   useEffect(() => {
     const matchMediaDark = window.matchMedia('(prefers-color-scheme: dark)')
@@ -49,26 +35,20 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, [theme])
 
   useEffect(() => {
-    const applyTheme = async () => {
-      if (theme !== 'system') {
-        await GrapletLocalStorage.setTheme(theme)
-      } else {
-        await GrapletLocalStorage.removeTheme()
-      }
-
-      const root = document.documentElement
-      const colors = theme === 'dark' ? darkThemeColors : lightThemeColors
-      root.style.setProperty('--bg-1', colors.backgroundPrimary)
-      root.style.setProperty('--bg-2', colors.backgroundSecondary)
-      root.style.setProperty('--red', colors.primaryRGB)
-      root.style.setProperty('--rgb-text', colors.textRGB)
-      root.style.setProperty('--green', colors.green)
-      document.documentElement.setAttribute('data-theme', theme)
+    if (theme !== 'system') {
+      localStorage.setItem('theme', theme)
+    } else {
+      localStorage.removeItem('theme')
     }
 
-    applyTheme().catch(error => {
-      console.error('Error applying theme:', error)
-    })
+    const root = document.documentElement
+    const colors = theme === 'dark' ? darkThemeColors : lightThemeColors
+    root.style.setProperty('--bg-1', colors.backgroundPrimary)
+    root.style.setProperty('--bg-2', colors.backgroundSecondary)
+    root.style.setProperty('--red', colors.primaryRGB)
+    root.style.setProperty('--rgb-text', colors.textRGB)
+    root.style.setProperty('--green', colors.green)
+    document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 
   const contextValue: ThemeContextType = {
