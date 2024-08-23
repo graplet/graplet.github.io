@@ -89,13 +89,82 @@ Blockly.Blocks['key_event'] = {
     })
     const dropdownOptions: Blockly.MenuGenerator = keys.map(key => [key, key])
     this.appendDummyInput('NAME')
-      .appendField('listen to')
+      .appendField('listen to key press')
       .appendField(new Blockly.FieldDropdown(dropdownOptions), 'KEY')
     this.appendStatementInput('DO')
       .setCheck(null)
       .appendField('do')
     this.setColour(35)
     this.setTooltip('Run the following blocks when a specific key is pressed')
+    this.setHelpUrl('')
+  }
+}
+
+Blockly.Blocks["mouse_event"] = {
+  init: function() {
+    const keys = ['click', 'dblclick', 'mousedown', 'mouseup', 'mousemove', 'contextmenu']
+    const dropdownOptions: Blockly.MenuGenerator = keys.map(key => [key, key])
+    this.appendDummyInput('NAME')
+      .appendField('listen to mouse event')
+      .appendField(new Blockly.FieldDropdown(dropdownOptions), 'EVENT')
+    this.appendStatementInput('DO')
+      .setCheck(null)
+      .appendField('do')
+    this.setColour(35)
+    this.setTooltip('Run the following blocks when a specific mouse event occurs')
+    this.setHelpUrl('')
+  }
+}
+
+Blockly.Blocks['storage_set'] = {
+  init: function() {
+    this.appendValueInput('KEY')
+        .setCheck('String')
+        .appendField('set storage key')
+    this.appendValueInput('VALUE')
+        .setCheck('String')
+        .appendField('to value')
+    this.setColour(345)
+    this.setPreviousStatement(true)
+    this.setNextStatement(true)
+    this.setTooltip('Sets the value for a given key in storage')
+    this.setHelpUrl('')
+  }
+}
+
+Blockly.Blocks['storage_get'] = {
+  init: function() {
+    this.appendValueInput('KEY')
+        .setCheck('String')
+        .appendField('get storage value for key')
+    this.setOutput(true, 'String')
+    this.setColour(345)
+    this.setTooltip('Gets the value for a given key from storage')
+    this.setHelpUrl('')
+  }
+}
+
+Blockly.Blocks['storage_remove'] = {
+  init: function() {
+    this.appendValueInput('KEY')
+        .setCheck('String')
+        .appendField('remove storage key')
+    this.setColour(345)
+    this.setPreviousStatement(true)
+    this.setNextStatement(true)
+    this.setTooltip('Removes the given key from storage')
+    this.setHelpUrl('')
+  }
+}
+
+Blockly.Blocks['storage_clear'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('clear all storage')
+    this.setColour(345)
+    this.setPreviousStatement(true)
+    this.setNextStatement(true)
+    this.setTooltip('Clears all storage keys and values')
     this.setHelpUrl('')
   }
 }

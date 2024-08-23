@@ -1,31 +1,37 @@
-import { IconDefinition, faCircleNodes, faCode, faCogs, faList, faLocationArrow, faSquareRootAlt, faSyncAlt, faTextWidth } from '@fortawesome/free-solid-svg-icons'
+import { IconDefinition, faCircleNodes, faCode, faCogs, faDatabase, faList, faLocationArrow, faSquareRootAlt, faSyncAlt, faTextWidth } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Blockly from 'blockly'
 import { renderToString } from 'react-dom/server'
 
-type CategoryName = 'Events' | 'Loops' | 'Text' | 'Logic' | 'Math' | 'List' | 'Variables' | 'Functions'
+enum CategoryName {
+  Events = 'Events',
+  Logic = 'Logic',
+  Loops = 'Loops',
+  Math = 'Math',
+  Text = 'Text',
+  List = 'List',
+  Functions = 'Functions',
+  Variables = 'Variables',
+  Storage = 'Storage',
+}
 
 const categoryIcons: Record<CategoryName, IconDefinition> = {
-  Events: faLocationArrow,
-  Logic: faCircleNodes,
-  Loops: faSyncAlt,
-  Math: faSquareRootAlt,
-  Text: faTextWidth,
-  List: faList,
-  Variables: faCode,
-  Functions: faCogs,
+  [CategoryName.Events]: faLocationArrow,
+  [CategoryName.Logic]: faCircleNodes,
+  [CategoryName.Loops]: faSyncAlt,
+  [CategoryName.Math]: faSquareRootAlt,
+  [CategoryName.Text]: faTextWidth,
+  [CategoryName.List]: faList,
+  [CategoryName.Functions]: faCogs,
+  [CategoryName.Variables]: faCode,
+  [CategoryName.Storage]: faDatabase,
 }
 
 function isCategoryName(name: string): name is CategoryName {
-  return Object.prototype.hasOwnProperty.call(categoryIcons, name)
+  return Object.values(CategoryName).includes(name as CategoryName)
 }
 
-
 class Category extends Blockly.ToolboxCategory {
-  /**
-   * Constructor for the customized toolbox.
-   * @override
-   */
   constructor(
     categoryDef: Blockly.utils.toolbox.CategoryInfo,
     toolbox: Blockly.IToolbox,
@@ -43,16 +49,13 @@ class Category extends Blockly.ToolboxCategory {
   }
 
   getLabelDom(): HTMLElement | null {
-    if (this.rowDiv_) {
-      return this.rowDiv_.getElementsByClassName('blocklyTreeLabel')[0] as HTMLElement | null
-    }
-    return null
+    return this.rowDiv_?.getElementsByClassName('blocklyTreeLabel')[0] as HTMLElement | null
   }
 
   createIconDom_(): HTMLElement {
-    const categoryName = this.name_
+    const categoryName = this.name_ as CategoryName
     const icon = isCategoryName(categoryName) ? categoryIcons[categoryName] : faCogs
-    const iconString = renderToString(<FontAwesomeIcon icon={icon} />)
+    const iconString = renderToString(<FontAwesomeIcon icon={icon} className='mr-1' />)
     const span = document.createElement('span')
     span.style.marginLeft = '5px'
     span.style.color = this.colour_
@@ -64,24 +67,20 @@ class Category extends Blockly.ToolboxCategory {
     const labelDom = this.getLabelDom()
     const iconDom = this.iconDom_ as HTMLElement
     if (this.rowDiv_ && labelDom && iconDom) {
-      if (isSelected) {
-        this.rowDiv_.style.backgroundColor = this.colour_
-        iconDom.style.color = 'rgb(var(--rgb-text))'
-        labelDom.style.color = 'rgb(var(--rgb-text))'
-      } else {
-        this.rowDiv_.style.backgroundColor = 'var(--bg-1)'
-        labelDom.style.color = this.colour_
-        iconDom.style.color = this.colour_
-      }
+      const backgroundColor = isSelected ? this.colour_ : 'var(--bg-1)'
+      const color = isSelected ? 'rgb(var(--rgb-text))' : this.colour_
+      this.rowDiv_.style.backgroundColor = backgroundColor
+      labelDom.style.color = color
+      iconDom.style.color = color
     }
 
-    Blockly.utils.aria.setState((this.htmlDiv_ as HTMLElement),
+    Blockly.utils.aria.setState(this.htmlDiv_ as HTMLElement,
       Blockly.utils.aria.State.SELECTED, isSelected)
   }
 }
 
-
 Blockly.registry.register(
   Blockly.registry.Type.TOOLBOX_ITEM,
   Blockly.ToolboxCategory.registrationName,
-  Category, true)
+  Category, true
+)

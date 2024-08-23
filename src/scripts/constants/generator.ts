@@ -81,14 +81,44 @@ javascriptGenerator.forBlock['procedures_callreturn'] = function(block: Block, g
 }
 
 javascriptGenerator.forBlock['key_event'] = function(block) {
-  const key = block.getFieldValue('KEY');
-  const statements = javascriptGenerator.statementToCode(block, 'DO');
+  const key = block.getFieldValue('KEY')
+  const statements = javascriptGenerator.statementToCode(block, 'DO')
   
   const code = 
 `document.addEventListener('keydown', function(event) {
   if (event.key === '${key}') {
     ${statements}
-  }});`;
+  }})`
   
-  return code;
-};
+  return code
+}
+
+javascriptGenerator.forBlock['mouse_event'] = function(block) {
+  const event = block.getFieldValue('EVENT')
+  const statements = javascriptGenerator.statementToCode(block, 'DO')
+  const code = 
+`document.addEventListener('${event}', function(event) {
+  ${statements}
+})`
+  return code
+}
+
+javascriptGenerator.forBlock['storage_set'] = function(block, generator) {
+  const key = generator.valueToCode(block, 'KEY', Order.ATOMIC)
+  const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC)
+  return `localStorage.setItem(${key}, ${value})\n`
+}
+
+javascriptGenerator.forBlock['storage_get'] = function(block, generator) {
+  const key = generator.valueToCode(block, 'KEY', Order.ATOMIC)
+  return [`localStorage.getItem(${key})`, Order.NONE]
+}
+
+javascriptGenerator.forBlock['storage_remove'] = function(block, generator) {
+  const key = generator.valueToCode(block, 'KEY', Order.ATOMIC)
+  return `localStorage.removeItem(${key})\n`
+}
+
+javascriptGenerator.forBlock['storage_clear'] = function() {
+  return `localStorage.clear()\n`
+}

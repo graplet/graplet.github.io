@@ -18,6 +18,9 @@ export const grapletBlocklyTheme: Blockly.Theme = Blockly.Theme.defineTheme('gra
     'event_category': {
        'colour': '#a5865b'
     },
+    'storage_category': {
+        'colour': '#a55b6d'
+      },
  }
 })
 

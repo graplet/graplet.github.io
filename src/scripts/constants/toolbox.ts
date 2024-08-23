@@ -9,6 +9,10 @@ export const defaultToolbox = {
         {
           type: 'key_event',
           kind: 'block',
+        },
+        {
+          type: 'mouse_event',
+          kind: 'block',
         }
       ]
     },
@@ -805,15 +809,76 @@ export const defaultToolbox = {
     },
     {
       kind: 'category',
+      name: 'Functions',
+      custom: 'PROCEDURE',
+      categorystyle: 'procedure_category',
+    },
+    {
+      kind: 'category',
       name: 'Variables',
       custom: 'VARIABLE',
       categorystyle: 'variable_category',
     },
     {
       kind: 'category',
-      name: 'Functions',
-      custom: 'PROCEDURE',
-      categorystyle: 'procedure_category',
-    },
+      name: 'Storage',
+      categorystyle: 'storage_category',
+      contents: [
+        {
+          type: 'storage_set',
+          kind: 'block',
+          inputs: {
+            KEY: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'key',
+                },
+              },
+            },
+            VALUE: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'value',
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'storage_get',
+          kind: 'block',
+          inputs: {
+            KEY: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'key',
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'storage_remove',
+          kind: 'block',
+          inputs: {
+            KEY: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'key',
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'storage_clear',
+          kind: 'block',
+        },
+      ],
+    }
   ],
 }

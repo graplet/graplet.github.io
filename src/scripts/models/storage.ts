@@ -11,6 +11,7 @@ export class GrapletLocalStorage {
   private static dbName: string = "GrapletDB"
   private static dbVersion: number = 1
   private static storeName: string = "projects"
+  private static settingsStoreName: string = "settings"
   public static currentProjectId: string | null = null
 
   private constructor() {}
@@ -26,6 +27,9 @@ export class GrapletLocalStorage {
         if (!db.objectStoreNames.contains(this.storeName)) {
           const store = db.createObjectStore(this.storeName, { keyPath: "id" })
           store.createIndex("name", "name", { unique: true })
+        }
+        if (!db.objectStoreNames.contains(this.settingsStoreName)) {
+          db.createObjectStore(this.settingsStoreName, { keyPath: "key" })
         }
       }
 
@@ -145,4 +149,63 @@ export class GrapletLocalStorage {
       }
     })
   }
+
+  public static async setTheme(theme: string): Promise<void> {
+    await this.init()
+
+    return new Promise<void>((resolve, reject) => {
+      const transaction = this.db!.transaction(this.settingsStoreName, "readwrite")
+      const store = transaction.objectStore(this.settingsStoreName)
+
+      const request = store.put({ key: 'theme', value: theme })
+
+      request.onsuccess = () => {
+        resolve()
+      }
+
+      request.onerror = (event) => {
+        reject((event.target as IDBRequest).error)
+      }
+    })
+  }
+
+  public static async removeTheme(): Promise<void> {
+    await this.init()
+
+    return new Promise<void>((resolve, reject) => {
+      const transaction = this.db!.transaction(this.settingsStoreName, "readwrite")
+      const store = transaction.objectStore(this.settingsStoreName)
+
+      const request = store.delete('theme')
+
+      request.onsuccess = () => {
+        resolve()
+      }
+
+      request.onerror = (event) => {
+        reject((event.target as IDBRequest).error)
+      }
+    })
+  }
+
+  public static async getTheme(): Promise<string | undefined> {
+    await this.init()
+
+    return new Promise<string | undefined>((resolve, reject) => {
+      const transaction = this.db!.transaction(this.settingsStoreName, "readonly")
+      const store = transaction.objectStore(this.settingsStoreName)
+
+      const request = store.get('theme')
+
+      request.onsuccess = (event) => {
+        const result = (event.target as IDBRequest).result as { key: string, value: string } | undefined
+        resolve(result?.value)
+      }
+
+      request.onerror = (event) => {
+        reject((event.target as IDBRequest).error)
+      }
+    })
+  }
 }
+
