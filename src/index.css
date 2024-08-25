@@ -38,6 +38,7 @@ nav button{
 }
 
 button{
+  user-select: none;
   background-color: var(--bg-1);
   font-family: 'fredoka';
   color: rgb(var(--rgb-text));
@@ -45,6 +46,10 @@ button{
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+img{
+  user-select: none;
 }
 
 input{

@@ -1,4 +1,4 @@
-import { IconDefinition, faCircleNodes, faCode, faCogs, faDatabase, faList, faLocationArrow, faSquareRootAlt, faSyncAlt, faTextWidth } from '@fortawesome/free-solid-svg-icons'
+import { IconDefinition, faCircleNodes, faCode, faCogs, faDatabase, faLocationArrow, faSyncAlt, faQuoteRight, faSquareRootVariable, faListUl } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Blockly from 'blockly'
 import { renderToString } from 'react-dom/server'
@@ -19,9 +19,9 @@ const categoryIcons: Record<CategoryName, IconDefinition> = {
   [CategoryName.Events]: faLocationArrow,
   [CategoryName.Logic]: faCircleNodes,
   [CategoryName.Loops]: faSyncAlt,
-  [CategoryName.Math]: faSquareRootAlt,
-  [CategoryName.Text]: faTextWidth,
-  [CategoryName.List]: faList,
+  [CategoryName.Math]: faSquareRootVariable,
+  [CategoryName.Text]: faQuoteRight,
+  [CategoryName.List]: faListUl,
   [CategoryName.Functions]: faCogs,
   [CategoryName.Variables]: faCode,
   [CategoryName.Storage]: faDatabase,
