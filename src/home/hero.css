@@ -1,0 +1,19 @@
+:root{
+  overflow: hidden;
+}
+
+button.hero {
+  background-color: rgb(var(--rgb-text));
+  color: var(--bg-1);
+  padding: 3px 8px;
+}
+
+
+.glowball {
+  position: absolute;
+  border-radius: 50%;
+  height: 15rem;
+  width: 15rem;
+  background-color: rgb(var(--rgb-text));
+  filter: blur(200px);
+}

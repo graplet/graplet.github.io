@@ -11,7 +11,6 @@ import { Console, Unhook } from 'console-feed'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { Message } from 'console-feed/lib/definitions/Component'
 import Hook from '../scripts/models/hook'
-import { layoutJsonConfig } from '../scripts/constants/layoutconfig'
 import { ThemeContext } from '../scripts/models/themeprovider'
 
 import CodeOutputComponent from './components/code'
@@ -28,8 +27,16 @@ import { ExtensionManager } from '../scripts/models/extensionmanager'
 import { TutorialComponent } from './components/tutorial'
 import WorkspaceManager from '../scripts/models/workspacemanager'
 import { javascriptGenerator } from 'blockly/javascript'
+import { getLayoutJsonConfig } from '../scripts/constants/layoutconfig'
 
-const model = Model.fromJson(layoutJsonConfig)
+const getTutorialParam = (): boolean => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.has('tutorial');
+};
+
+const tutorial = getTutorialParam();
+const model = Model.fromJson(getLayoutJsonConfig(tutorial))
+console.log(model)
 
 function App() {
   const layoutRef = useRef<Layout | null>(null)
@@ -53,7 +60,6 @@ function App() {
 
   useEffect(() => {
     if (!isWorkspaceReady) return
-
     const getMainWorkspace = () => {
       const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
       if (!mainWorkspace) throw new Error('Main Workspace not initialized')
