@@ -1,50 +1,14 @@
-import { useEffect, useState } from 'react'
-import { GrapletLocalStorage, Project } from './scripts/models/storage'
-import defaultImage from '/project.svg'
+import { Project } from './scripts/models/storage'
 import { HomePage } from './home/App'
+import { ProjectList } from './scripts/models/projectlist';
 
-const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
-  <div className='flex items-center'>
-    <img className='w-6' src={project.icon ?? defaultImage} alt="" />
-    <a href={`/editor/#${project.id}`}>{project.name}</a>
-  </div>
-)
+interface AppProps {
+  projects: Project[];
+}
 
-const ProjectList: React.FC<{ projects: Project[] }> = ({ projects }) => (
-  <div className='flex gap-4'>
-    {projects.map(project => (
-      <ProjectCard key={project.id} project={project} />
-    ))}
-  </div>
-)
-
-function App() {
-  const [projects, setProjects] = useState<Array<Project>>([])
-  const [loading, setLoading] = useState<boolean>(true)
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const allProjects = await GrapletLocalStorage.getAllProjects()
-        setProjects(allProjects)
-        if (allProjects.length > 0) {
-          document.title = "Graplet | Projects"
-        }
-      } catch (error) {
-        console.error('Error fetching projects:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchProjects()
-  }, [])
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
-
+const App: React.FC<AppProps> = ({ projects }) => {
   return (
-    <div className="app-container">
+    <>
       {projects.length > 0 ? (
         <div>
           <h3>Welcome Back!</h3>
@@ -56,8 +20,8 @@ function App() {
       ) : (
         <HomePage />
       )}
-    </div>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;

@@ -1,49 +1,50 @@
 import { Block } from "blockly"
 import { JavascriptGenerator, Order, javascriptGenerator } from "blockly/javascript"
 
-javascriptGenerator.forBlock['console'] = function(block:Block,generator:JavascriptGenerator) {
+javascriptGenerator.forBlock['console'] = function (block: Block, generator: JavascriptGenerator) {
   const input: string = generator.valueToCode(block, 'INPUT', Order.ATOMIC)
   const type: string = block.getFieldValue('TYPE')
   return `console.${type.toLocaleLowerCase()}(${input})\n`
 }
 
-javascriptGenerator.forBlock['alert'] = function(block:Block,generator:JavascriptGenerator) {
+javascriptGenerator.forBlock['alert'] = function (block: Block, generator: JavascriptGenerator) {
   const question: string = generator.valueToCode(block, 'TEXT', Order.ATOMIC)
   return `alert(${question})\n`
 }
 
-javascriptGenerator.forBlock['clearconsole'] = function() {
+javascriptGenerator.forBlock['clearconsole'] = function () {
   return `console.clear()\n`
 }
 
-javascriptGenerator.forBlock['confirm'] = function(block:Block,generator:JavascriptGenerator) {
+javascriptGenerator.forBlock['confirm'] = function (block: Block, generator: JavascriptGenerator) {
   const question: string = generator.valueToCode(block, 'TEXT', Order.ATOMIC)
-  return [`confirm(${question})\n`,Order.FUNCTION_CALL]
+  return [`confirm(${question})\n`, Order.FUNCTION_CALL]
 }
 
-javascriptGenerator.forBlock['list_append'] = function(block:Block,generator:JavascriptGenerator) {
+javascriptGenerator.forBlock['list_append'] = function (block: Block, generator: JavascriptGenerator) {
   const list: string = generator.valueToCode(block, 'LIST', Order.ATOMIC)
   const item: string = generator.valueToCode(block, 'ITEM', Order.ATOMIC)
   return `${list}.push(${item})\n`
 }
 
-javascriptGenerator.forBlock['list_remove'] = function(block:Block,generator:JavascriptGenerator) {
+javascriptGenerator.forBlock['list_remove'] = function (block: Block, generator: JavascriptGenerator) {
   const list: string = generator.valueToCode(block, 'LIST', Order.ATOMIC)
   const item: string = generator.valueToCode(block, 'ITEM', Order.ATOMIC)
   return `${list}.splice(${list}.indexOf(${item}),1)\n`
 }
 
-javascriptGenerator.forBlock['list_remove_by_index'] = function(block:Block,generator:JavascriptGenerator) {
+javascriptGenerator.forBlock['list_remove_by_index'] = function (block: Block, generator: JavascriptGenerator) {
   const list: string = generator.valueToCode(block, 'LIST', Order.ATOMIC)
   const index: string = generator.valueToCode(block, 'INDEX', Order.ATOMIC)
   return `${list}.splice(${index},1)\n`
 }
 
-javascriptGenerator.forBlock['wait_seconds'] = function(block:Block,generator:JavascriptGenerator) {
+javascriptGenerator.forBlock['wait_seconds'] = function (block: Block, generator: JavascriptGenerator) {
   const seconds: string = generator.valueToCode(block, 'SECONDS', Order.ATOMIC)
   return `await new Promise(resolve => setTimeout(resolve, ${seconds} * 1000))\n`
 }
 
+/* Needs rework, only wrap async if async logic is used
 javascriptGenerator.forBlock['procedures_defnoreturn'] = function(block: Block, generator: JavascriptGenerator) {
   const funcName = generator.nameDB_?.getName(block.getFieldValue('NAME'), 'PROCEDURE')
   const branch = generator.statementToCode(block, 'STACK')
@@ -79,46 +80,47 @@ javascriptGenerator.forBlock['procedures_callreturn'] = function(block: Block, g
   const code = `await ${funcName}(${args})`
   return [code, Order.FUNCTION_CALL]
 }
+*/
 
-javascriptGenerator.forBlock['key_event'] = function(block) {
+javascriptGenerator.forBlock['key_event'] = function (block) {
   const key = block.getFieldValue('KEY')
   const statements = javascriptGenerator.statementToCode(block, 'DO')
-  
-  const code = 
-`document.addEventListener('keydown', function(event) {
+
+  const code =
+    `document.addEventListener('keydown', function(event) {
   if (event.key === '${key}') {
     ${statements}
   }})`
-  
+
   return code
 }
 
-javascriptGenerator.forBlock['mouse_event'] = function(block) {
+javascriptGenerator.forBlock['mouse_event'] = function (block) {
   const event = block.getFieldValue('EVENT')
   const statements = javascriptGenerator.statementToCode(block, 'DO')
-  const code = 
-`document.addEventListener('${event}', function(event) {
+  const code =
+    `document.addEventListener('${event}', function(event) {
   ${statements}
 })`
   return code
 }
 
-javascriptGenerator.forBlock['storage_set'] = function(block, generator) {
+javascriptGenerator.forBlock['storage_set'] = function (block, generator) {
   const key = generator.valueToCode(block, 'KEY', Order.ATOMIC)
   const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC)
   return `localStorage.setItem(${key}, ${value})\n`
 }
 
-javascriptGenerator.forBlock['storage_get'] = function(block, generator) {
+javascriptGenerator.forBlock['storage_get'] = function (block, generator) {
   const key = generator.valueToCode(block, 'KEY', Order.ATOMIC)
   return [`localStorage.getItem(${key})`, Order.NONE]
 }
 
-javascriptGenerator.forBlock['storage_remove'] = function(block, generator) {
+javascriptGenerator.forBlock['storage_remove'] = function (block, generator) {
   const key = generator.valueToCode(block, 'KEY', Order.ATOMIC)
   return `localStorage.removeItem(${key})\n`
 }
 
-javascriptGenerator.forBlock['storage_clear'] = function() {
+javascriptGenerator.forBlock['storage_clear'] = function () {
   return `localStorage.clear()\n`
 }

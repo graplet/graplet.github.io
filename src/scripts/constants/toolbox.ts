@@ -129,7 +129,7 @@ export const defaultToolbox = {
           type: 'console',
           kind: 'block',
           inputs: {
-             INPUT: {
+            INPUT: {
               shadow: {
                 type: 'text',
                 fields: {
@@ -396,7 +396,8 @@ export const defaultToolbox = {
         {
           type: 'wait_seconds',
           kind: 'block',
-          inputs : {
+          disabled: true,
+          inputs: {
             SECONDS: {
               shadow: {
                 type: 'math_number',

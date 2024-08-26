@@ -13,7 +13,7 @@ export class GrapletLocalStorage {
   private static storeName: string = "projects"
   public static currentProjectId: string | null = null
 
-  private constructor() {}
+  private constructor() { }
 
   public static async init(): Promise<void> {
     if (this.db) return
@@ -145,4 +145,25 @@ export class GrapletLocalStorage {
       }
     })
   }
+
+  public static async hasAnyProjects(): Promise<boolean> {
+    await this.init();
+
+    return new Promise<boolean>((resolve, reject) => {
+      const transaction = this.db!.transaction(this.storeName, "readonly");
+      const store = transaction.objectStore(this.storeName);
+
+      const request = store.openCursor();
+
+      request.onsuccess = (event) => {
+        const cursor = (event.target as IDBRequest<IDBCursorWithValue | null>).result;
+        resolve(!!cursor);
+      };
+
+      request.onerror = (event) => {
+        reject((event.target as IDBRequest).error);
+      };
+    });
+  }
+
 }
