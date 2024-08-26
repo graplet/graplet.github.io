@@ -20,6 +20,7 @@ const ProjectList: React.FC<{ projects: Project[] }> = ({ projects }) => (
 
 function App() {
   const [projects, setProjects] = useState<Array<Project>>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -31,10 +32,16 @@ function App() {
         }
       } catch (error) {
         console.error('Error fetching projects:', error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchProjects()
   }, [])
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="app-container">
