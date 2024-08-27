@@ -1,11 +1,11 @@
-import React, { useContext, useRef, useState, useCallback, useEffect } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { faDownload, faPlay, faRotate, faUpload, faCheck, faCog } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ThemeContext } from '../../scripts/models/themeprovider'
 import defaultImage from '/project.svg'
 import WorkspaceManager from '../../scripts/models/workspacemanager'
 import { GrapletLocalStorage } from '../../scripts/models/storage'
 import { Layout } from 'flexlayout-react'
+import { PrimaryNav } from '../../scripts/models/primarynav'
 
 const getMainWorkspace = () => {
   const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
@@ -17,7 +17,6 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saved'>('idle')
   const [projectId, setProjectId] = useState<string | null>(null)
   const [projectImage, setProjectImage] = useState<string>(defaultImage)
-  const { theme } = useContext(ThemeContext)
 
   const projectNameRef = useRef<HTMLInputElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -139,15 +138,7 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
   }, [])
 
   return (
-    <nav className='h-11 flex items-center px-3 gap-3'>
-      <a style={{ color: 'rgb(var(--rgb-text))' }} href='/' className='inline-flex cursor-pointer gap-3 no-underline'>
-        <img
-          src='/fill.svg'
-          alt='Graplet Logo'
-          className={`self-center ${theme === 'light' ? 'invert' : ''}`}
-        />
-        <h3 className='m-0'>Graplet</h3>
-      </a>
+    <PrimaryNav>
       <button style={{ color: 'var(--green)' }} onClick={runCode}>
         <FontAwesomeIcon icon={faPlay} /> Run
       </button>
@@ -195,7 +186,7 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
       <button onClick={launchSettings} className='ml-auto'>
         <FontAwesomeIcon icon={faCog} /> Settings
       </button>
-    </nav>
+    </PrimaryNav>
   )
 }
 
