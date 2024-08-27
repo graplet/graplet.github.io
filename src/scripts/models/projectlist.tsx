@@ -3,7 +3,7 @@ import defaultImage from '/project.svg'
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
   <a href={`/editor/#${project.id}`} className='project-card'>
-    <img className='w-6' src={project.icon ?? defaultImage} alt="" /> {project.name}
+    <img className='w-6 h-6 rounded-full' src={project.icon ?? defaultImage} alt="" /> {project.name}
   </a>
 )
 

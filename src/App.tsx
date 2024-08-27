@@ -15,7 +15,7 @@ const App: React.FC<AppProps> = ({ projects }) => {
       {projects.length > 0 ? (
         <>
           <PrimaryNav />
-          <h3 className='ml-3'>What will you create today?</h3>
+          <h3 className='ml-3 mt-2'>What will you create today?</h3>
           <div className='flex m-3'>
             <SideBar />
             <ProjectList projects={projects} />
