@@ -8,7 +8,7 @@ import {
   TabSetNode
 } from 'flexlayout-react'
 import { Console, Unhook } from 'console-feed'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Message } from 'console-feed/lib/definitions/Component'
 import Hook from '../scripts/models/hook'
 import { ThemeContext } from '../scripts/models/themeprovider'
