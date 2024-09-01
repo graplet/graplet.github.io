@@ -1,9 +1,16 @@
-import { IJsonModel } from "flexlayout-react";
+import { IJsonModel } from "flexlayout-react"
 
 export const getLayoutJsonConfig = (tutorial: boolean = false): IJsonModel => {
   const layoutJsonConfig: IJsonModel = {
     global: { legacyOverflowMenu: false, tabEnableRename: false },
-    borders: [],
+    borders: [
+      {
+        type: "border",
+        location: "bottom",
+        children: []
+      },
+
+    ],
     layout: {
       type: "row",
       weight: 100,
@@ -78,6 +85,6 @@ export const getLayoutJsonConfig = (tutorial: boolean = false): IJsonModel => {
         },
       ],
     },
-  };
-  return layoutJsonConfig;
-};
+  }
+  return layoutJsonConfig
+}

@@ -1,12 +1,12 @@
 import { Project } from './scripts/models/storage'
 import { HomePage } from './home/App'
-import { ProjectList } from './scripts/models/projectlist';
-import { PrimaryNav } from './scripts/models/primarynav';
+import { ProjectList } from './scripts/models/projectlist'
+import { PrimaryNav } from './scripts/models/primarynav'
 import './home/projects.css'
-import { SideBar } from './scripts/models/sidebar';
+import { SideBar } from './scripts/models/sidebar'
 
 interface AppProps {
-  projects: Project[];
+  projects: Project[]
 }
 
 const App: React.FC<AppProps> = ({ projects }) => {
@@ -25,7 +25,7 @@ const App: React.FC<AppProps> = ({ projects }) => {
         <HomePage />
       )}
     </>
-  );
+  )
 }
 
-export default App;
+export default App

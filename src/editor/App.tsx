@@ -30,13 +30,12 @@ import { javascriptGenerator } from 'blockly/javascript'
 import { getLayoutJsonConfig } from '../scripts/constants/layoutconfig'
 
 const getTutorialParam = (): boolean => {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.has('tutorial');
-};
+  const urlParams = new URLSearchParams(window.location.search)
+  return urlParams.has('tutorial')
+}
 
-const tutorial = getTutorialParam();
+const tutorial = getTutorialParam()
 const model = Model.fromJson(getLayoutJsonConfig(tutorial))
-console.log(model)
 
 function App() {
   const layoutRef = useRef<Layout | null>(null)

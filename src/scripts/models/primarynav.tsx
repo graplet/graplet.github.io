@@ -1,5 +1,5 @@
-import { FC, useContext } from "react";
-import { ThemeContext } from "./themeprovider";
+import { FC, useContext } from "react"
+import { ThemeContext } from "./themeprovider"
 
 
 export interface PrimaryNavProps {
