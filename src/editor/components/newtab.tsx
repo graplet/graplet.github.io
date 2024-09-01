@@ -1,15 +1,16 @@
-import { Layout, TabNode } from 'flexlayout-react'
+import { TabNode } from 'flexlayout-react'
 import { FC } from 'react'
 import { ExtensionManager } from '../../scripts/models/extensionmanager'
 import { NewTabBox } from '../../scripts/models/tabbox'
+import LayoutManager from '../../scripts/models/layoutmanager'
 
 interface TabComponentProps {
-  layoutRef: React.MutableRefObject<Layout | null>
   tabNode: TabNode
 }
 
-const NewTabComponent: FC<TabComponentProps> = ({ layoutRef, tabNode }) => {
+const NewTabComponent: FC<TabComponentProps> = ({ tabNode }) => {
   const tabs = ['Code', 'Console', 'Extensions', 'Samples', 'Settings', 'Tutorial']
+  const layoutRef = LayoutManager.getLayoutRef()
   return (
     <div className='mx-4'>
       <p>Choose a tab to open</p>

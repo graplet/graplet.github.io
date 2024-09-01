@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import defaultImage from '/project.svg'
 import WorkspaceManager from '../../scripts/models/workspacemanager'
 import { GrapletLocalStorage } from '../../scripts/models/storage'
-import { Layout } from 'flexlayout-react'
 import { PrimaryNav } from '../../scripts/models/primarynav'
+import LayoutManager from '../../scripts/models/layoutmanager'
 
 const getMainWorkspace = () => {
   const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
@@ -13,7 +13,11 @@ const getMainWorkspace = () => {
   return mainWorkspace
 }
 
-const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout | null> }> = ({ code, layoutRef }) => {
+interface NavbarProps {
+  code: string
+}
+
+const Navbar: React.FC<NavbarProps> = ({ code }) => {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saved'>('idle')
   const [projectId, setProjectId] = useState<string | null>(null)
   const [projectImage, setProjectImage] = useState<string>(defaultImage)
@@ -54,9 +58,8 @@ const Navbar: React.FC<{ code: string, layoutRef: React.MutableRefObject<Layout 
 
 
   const launchSettings = useCallback(() => {
-
-    layoutRef.current?.addTabToActiveTabSet({ icon: '/tabicons/settings.svg', component: 'settings', name: 'Settings' })
-  }, [layoutRef])
+    LayoutManager.getLayoutRef().current?.addTabToActiveTabSet({ icon: '/tabicons/settings.svg', component: 'settings', name: 'Settings' })
+  }, [])
 
   const saveCode = useCallback(async () => {
     try {

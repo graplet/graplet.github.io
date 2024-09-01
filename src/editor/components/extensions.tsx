@@ -40,6 +40,7 @@ const ExtensionsComponent: FC = () => {
 
   const installExtension = async (folder: string) => {
     const module = await import(`../../scripts/extensions/${folder}/main.ts`)
+    module.default.init()
     ExtensionManager.getInstance().register(module.default, folder)
 
     setInstalledExtensions(prev => [...prev, folder])

@@ -28,6 +28,7 @@ import { TutorialComponent } from './components/tutorial'
 import WorkspaceManager from '../scripts/models/workspacemanager'
 import { javascriptGenerator } from 'blockly/javascript'
 import { getLayoutJsonConfig } from '../scripts/constants/layoutconfig'
+import LayoutManager from '../scripts/models/layoutmanager'
 
 const getTutorialParam = (): boolean => {
   const urlParams = new URLSearchParams(window.location.search)
@@ -38,7 +39,6 @@ const tutorial = getTutorialParam()
 const model = Model.fromJson(getLayoutJsonConfig(tutorial))
 
 function App() {
-  const layoutRef = useRef<Layout | null>(null)
   const [code, setCode] = useState("")
   const [logs, setLogs] = useState<Message[]>([])
   const [isWorkspaceReady, setWorkspaceReady] = useState<boolean>(false)
@@ -92,7 +92,7 @@ function App() {
       "code": <CodeOutputComponent code={code} setCode={setCode} />,
       "console": <Console logGrouping={false} logs={logs} variant={theme === "dark" ? "dark" : "light"} />,
       "extensions": <ExtensionsComponent />,
-      "newtab": <NewTabComponent layoutRef={layoutRef} tabNode={node} />,
+      "newtab": <NewTabComponent tabNode={node} />,
       "settings": <SettingsComponent />,
       "samples": <SamplesComponent />,
       "tutorial": <TutorialComponent />,
@@ -118,7 +118,7 @@ function App() {
   }
 
   function addNewTab(node: TabSetNode | BorderNode) {
-    layoutRef!.current!.addTabToTabSet(node.getId(), {
+    LayoutManager.getLayoutRef().current!.addTabToTabSet(node.getId(), {
       icon: "/tabicons/star.svg",
       component: "newtab",
       name: "New Tab"
@@ -127,10 +127,10 @@ function App() {
 
   return (
     <>
-      <Navbar code={code} layoutRef={layoutRef} />
+      <Navbar code={code} />
       <Layout
         realtimeResize
-        ref={layoutRef}
+        ref={LayoutManager.getLayoutRef()}
         model={model}
         factory={factory}
         onRenderTabSet={newTabButton} />
