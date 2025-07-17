@@ -1,4 +1,5 @@
 import { IJsonModel } from "flexlayout-react"
+const base = import.meta.env.BASE_URL
 
 export const getLayoutJsonConfig = (tutorial: boolean = false): IJsonModel => {
   const layoutJsonConfig: IJsonModel = {
@@ -23,14 +24,14 @@ export const getLayoutJsonConfig = (tutorial: boolean = false): IJsonModel => {
               {
                 type: "tab",
                 name: "Blocks",
-                icon: "/tabicons/blocks.svg",
+                icon: base + "/tabicons/blocks.svg",
                 component: "workspace",
                 enableClose: false,
               },
               {
                 type: "tab",
                 name: "Code",
-                icon: "/tabicons/code.svg",
+                icon: base + "/tabicons/code.svg",
                 component: "code",
               },
             ]
@@ -38,7 +39,7 @@ export const getLayoutJsonConfig = (tutorial: boolean = false): IJsonModel => {
               {
                 type: "tab",
                 name: "Blocks",
-                icon: "/tabicons/blocks.svg",
+                icon: base + "/tabicons/blocks.svg",
                 component: "workspace",
                 enableClose: false,
               },
@@ -56,7 +57,7 @@ export const getLayoutJsonConfig = (tutorial: boolean = false): IJsonModel => {
                   {
                     type: "tab",
                     name: "Tutorial",
-                    icon: "/tabicons/tutorial.svg",
+                    icon: base + "/tabicons/tutorial.svg",
                     component: "tutorial",
                   },
                 ]
@@ -64,7 +65,7 @@ export const getLayoutJsonConfig = (tutorial: boolean = false): IJsonModel => {
                   {
                     type: "tab",
                     name: "Code",
-                    icon: "/tabicons/code.svg",
+                    icon: base + "/tabicons/code.svg",
                     component: "code",
                   },
                 ],
@@ -76,7 +77,7 @@ export const getLayoutJsonConfig = (tutorial: boolean = false): IJsonModel => {
                 {
                   type: "tab",
                   name: "Console",
-                  icon: "/tabicons/console.svg",
+                  icon: base + "/tabicons/console.svg",
                   component: "console",
                 },
               ],

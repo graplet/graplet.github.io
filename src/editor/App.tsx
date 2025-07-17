@@ -30,6 +30,8 @@ import { javascriptGenerator } from 'blockly/javascript'
 import { getLayoutJsonConfig } from '../scripts/constants/layoutconfig'
 import LayoutManager from '../scripts/models/layoutmanager'
 
+const base = import.meta.env.BASE_URL
+
 const getTutorialParam = (): boolean => {
   const urlParams = new URLSearchParams(window.location.search)
   return urlParams.has('tutorial')
@@ -107,7 +109,7 @@ function App() {
       renderValues.stickyButtons.push(
         <img
           key={`${node.getId()}-new-tab`}
-          src="/tabicons/plus.svg"
+          src={`${base}/tabicons/plus.svg`}
           title='New tab'
           style={{ width: "1.1em", height: "1.1em" }}
           className="flexlayout__tab_toolbar_button"
@@ -119,7 +121,7 @@ function App() {
 
   function addNewTab(node: TabSetNode | BorderNode) {
     LayoutManager.getLayoutRef().current!.addTabToTabSet(node.getId(), {
-      icon: "/tabicons/star.svg",
+      icon: `${base}/tabicons/star.svg`,
       component: "newtab",
       name: "New Tab"
     })

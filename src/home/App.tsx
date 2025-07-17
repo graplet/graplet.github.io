@@ -14,6 +14,8 @@ interface HomePageProps {
   hasprojects?: boolean
 }
 
+const base = import.meta.env.BASE_URL
+
 export const HomePage: React.FC<HomePageProps> = ({ hasprojects }) => {
   const [projectsExist, setProjectsExist] = useState<boolean>(false)
   const { theme } = useContext(ThemeContext)
@@ -43,18 +45,18 @@ export const HomePage: React.FC<HomePageProps> = ({ hasprojects }) => {
           <h3 className="flex items-center gap-5 text-5xl">
             <img
               className={`w-12 ${theme === 'light' ? 'invert' : ''}`}
-              src="/fill.svg"
+              src={`${base}/fill.svg`}
               alt="Graplet Logo"
             /> Graplet
           </h3>
           <h3 className="text-3xl">Let's get creative</h3>
           <p className="text-lg">Programm Apps with blocks right out of the box</p>
           {projectsExist ? (
-            <button className="hero text-sm" onClick={() => { window.location.href = '/' }}>
+            <button className="hero text-sm" onClick={() => { window.location.href = base }}>
               <FontAwesomeIcon icon={faFolder} /> Open Projects
             </button>
           ) : (
-            <button className="hero text-sm" onClick={() => { window.location.href = '/editor/?tutorial' }}>
+              <button className="hero text-sm" onClick={() => { window.location.href = `${base}/editor/?tutorial` }}>
               <FontAwesomeIcon icon={faRocket} /> Get started
             </button>
           )}

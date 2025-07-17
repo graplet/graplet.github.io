@@ -2,6 +2,8 @@ import { Actions, Layout, TabNode } from "flexlayout-react"
 import { FC, useContext } from "react"
 import { ThemeContext } from "./themeprovider"
 
+const base = import.meta.env.BASE_URL
+
 interface TabBoxProps {
   layoutRef: React.MutableRefObject<Layout | null>
   name: string
@@ -14,7 +16,7 @@ interface TabBoxProps {
 export const NewTabBox: FC<TabBoxProps> = ({ layoutRef, name, component, icon, tabNode }) => {
   const { theme } = useContext(ThemeContext)
 
-  const tabIcon = icon || `/tabicons/${name?.toLowerCase()}.svg`
+  const tabIcon = icon || `${base}/tabicons/${name?.toLowerCase()}.svg`
   const tabComponent = component || name?.toLowerCase()
 
   const openTab = () => {

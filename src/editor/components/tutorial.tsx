@@ -2,6 +2,8 @@ import { faVideo } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { FC, useState, useRef, useEffect } from "react"
 
+const base = import.meta.env.BASE_URL
+
 export const TutorialComponent: FC = () => {
   const [isVideoVisible, setIsVideoVisible] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -17,7 +19,7 @@ export const TutorialComponent: FC = () => {
   }, [isVideoVisible])
 
   return (
-    <div className="h-full flex justify-center items-center w-full" style={{ backgroundImage: !isVideoVisible ? 'url("/thumbnail.png")' : undefined }}>
+    <div className="h-full flex justify-center items-center w-full" style={{ backgroundImage: !isVideoVisible ? `url("${base}/thumbnail.png")` : undefined }}>
       {!isVideoVisible && (
         <button onClick={handleWatchClick}>
           <FontAwesomeIcon icon={faVideo} /> Watch tutorial
@@ -30,7 +32,7 @@ export const TutorialComponent: FC = () => {
           className="w-full max-w-4xl"
           autoPlay
         >
-          <source src="/tutorial.mp4" type="video/mp4" />
+          <source src={`${base}/tutorial.mp4`} type="video/mp4" />
         </video>
       )}
     </div>

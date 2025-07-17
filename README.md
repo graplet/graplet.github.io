@@ -6,7 +6,7 @@
 ### V3 - *Current Version*
 Rebuilt with **Vite**, **React**, and **TypeScript**, Graplet V3 is a web tool where you can mess around with the console, play with inputs, and just have fun. It’s more about exploring than being feature-packed. Some features might not work as they should - like extensions 😅. It’s kind of an experiment.
 
-👉 **[Try it out here](https://graplet.github.io)**
+👉 **[Try it out here](https://graplet.github.io/graplet-v3)**
 
 ### 🚀 Looking Ahead: V4 in 2025
 V4 is where things get *really* exciting - a 3D code editor built with **Three.js**. Think [Scratch](https://scratch.mit.edu), but in 3D, where you can create models and interactive experiences. It’s all about making coding more creative and fun. I won’t be continuing the third version, even if I quite liked how it turned out - it was just too generalized. With the skills I’m currently learning, I’m sure I can level the fourth version up much more! 😄
