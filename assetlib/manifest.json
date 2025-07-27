@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Apple",
+    "file": "apple.glb",
+    "author": "Kenney"
+  },
+  {
+    "name": "Fish Bones",
+    "file": "fishbones.glb",
+    "author": "Kenney"
+  },
+  {
+    "name": "Pear",
+    "file": "pear.glb",
+    "author": "Kenney"
+  },
+  {
+    "name": "Pan",
+    "file": "pan.glb",
+    "author": "Kenney"
+  },
+  {
+    "name": "Pumpkin",
+    "file": "pumpkin.glb",
+    "author": "Kenney"
+  }
+]
