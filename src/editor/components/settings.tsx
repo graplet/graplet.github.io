@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDesktop, faMoon, faSun, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { GrapletLocalStorage } from "../../scripts/models/storage"
 
-const base = import.meta.env.BASE_URL
-
 const SettingsComponent = () => {
   const { setTheme } = useContext(ThemeContext)
   const [localTheme, setLocalTheme] = useState<ThemeOptions>(
@@ -35,7 +33,7 @@ const SettingsComponent = () => {
     if (window.confirm("Are you sure you want to delete this project?")) {
       GrapletLocalStorage.deleteProject(GrapletLocalStorage.currentProjectId!)
         .then(() => {
-          window.location.href = base
+          window.location.href = '/'
         })
         .catch((error) => {
           console.error("Failed to delete project:", error)

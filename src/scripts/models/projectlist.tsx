@@ -1,10 +1,8 @@
 import { Project } from './storage'
 import defaultImage from '/project.svg'
 
-const base = import.meta.env.BASE_URL
-
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
-  <a href={`${base}/editor/#${project.id}`} className='project-card'>
+  <a href={`/editor/#${project.id}`} className='project-card'>
     <img className='w-6 h-6 rounded-full' src={project.icon ?? defaultImage} alt="" /> {project.name}
   </a>
 )

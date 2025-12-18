@@ -7,8 +7,6 @@ import { GrapletLocalStorage } from '../../scripts/models/storage'
 import { PrimaryNav } from '../../scripts/models/primarynav'
 import LayoutManager from '../../scripts/models/layoutmanager'
 
-const base = import.meta.env.BASE_URL
-
 const getMainWorkspace = () => {
   const mainWorkspace = WorkspaceManager.getInstance().getMainWorkspace()
   if (!mainWorkspace) throw new Error('Main Workspace not initialized')
@@ -60,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ({ code }) => {
 
 
   const launchSettings = useCallback(() => {
-    LayoutManager.getLayoutRef().current?.addTabToActiveTabSet({ icon: `${base}/tabicons/settings.svg`, component: 'settings', name: 'Settings' })
+    LayoutManager.getLayoutRef().current?.addTabToActiveTabSet({ icon: '/tabicons/settings.svg', component: 'settings', name: 'Settings' })
   }, [])
 
   const saveCode = useCallback(async () => {
